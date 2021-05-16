@@ -1,0 +1,19 @@
+tags:
+  - NLP
+description: NER from files
+parameters:
+  - name: file
+    in: query
+    type: file
+    required: true
+    default: all
+consumes:
+  - multipart/form-data
+definitions:
+  File:
+    type: object
+responses:
+  200:
+    description: NER from files
+    schema:
+      $ref: '#/definitions/File'

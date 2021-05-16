@@ -1,0 +1,34 @@
+{% from "./dashboard/data_management/_formhelpers.html"
+                import render_field %}
+<form action="#" class="form-validate is-alter"
+      novalidate="novalidate" id="form-data-view">
+    {% for foo in form %}
+        {{ render_field(foo,class_="form-control") }}
+    {% endfor %}
+
+    {#    {{ render_field(form.bin_hid,class_="form-control") }}#}
+    {#    {{ render_field(form.s_name,class_="form-control") }}#}
+    {#    {{ render_field(form.s_en_name,class_="form-control") }}#}
+    {#    {{ render_field(form.s_latin_name,class_="form-control") }}#}
+    {#    {{ render_field(form.s_abbreviated_name,class_="form-control") }}#}
+    {#    {{ render_field(form.s_usage,class_="form-control") }}#}
+    {#    {{ render_field(form.s_herb_affiliate,class_="form-control") }}#}
+    {#    {{ render_field(form.s_origin,class_="form-control") }}#}
+    {#    {{ render_field(form.s_application,class_="form-control") }}#}
+    {#    {{ render_field(form.s_foundation,class_="form-control") }}#}
+    {#    {{ render_field(form.s_prison,class_="form-control") }}#}
+    {#    {{ render_field(form.s_ancient_literature,class_="form-control") }}#}
+    {#    {{ render_field(form.s_chemical,class_="form-control") }}#}
+    {#    {{ render_field(form.s_discussion,class_="form-control") }}#}
+    {#    {{ render_field(form.s_affiliate,class_="form-control") }}#}
+    {#    {{ render_field(form.s_pharmacological_action,class_="form-control") }}#}
+    {#    {{ render_field(form.s_untoward_effect,class_="form-control") }}#}
+    {#    {{ render_field(form.s_normal_remark,class_="form-control") }}#}
+    {#    {{ render_field(form.json_remark,class_="form-control") }}#}
+    {#    {{ render_field(form.four_natures,class_="form-control") }}#}
+    {#    {{ render_field(form.five_tastes,class_="form-control") }}#}
+    {#    {{ render_field(form.floating_and_sinking,class_="form-control") }}#}
+    {#    {{ render_field(form.meridians,class_="form-control") }}#}
+    {#    {{ render_field(form.herb_broad_heading,class_="form-control") }}#}
+    {#    {{ render_field(form.herb_subclass,class_="form-control") }}#}
+</form>

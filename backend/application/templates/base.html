@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Christin:多源异构数据提取&&知识图谱</title>
+
+    <script src="../static/js/b5js/bootstrap.min.js"></script>
+    {#    <script src="//cdnjs.cloudflare.com/ajax/libs/nanobar/0.2.1/nanobar.min.js"></script>#}
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="../static/js/myjs/myjs.js"></script>
+
+    <script type="text/javascript" src="../static/js/neovis/neovis.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../static/css/mycss/mycss.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/mycss/ent.css">
+    <link rel="stylesheet" type="text/css"
+          href="../static/css/b5css/bootstrap.min.css">
+    <link href="https://cdn.bootcdn.net/ajax/libs/toastr.js/latest/css/toastr.min.css"
+          rel="stylesheet">
+
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Christin</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav  me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="#"
+                       id="goto-new-project">新建项目</a>
+                </li>
+                <li class="nav-item float-md-right">
+                    <a class="nav-link" href="/dashboard/"
+                       id="goto-my-projects">我的项目</a>
+                </li>
+            </ul>
+        </div>
+        <div class="navbar-nav navbar-right">
+            <ul class="navbar-nav d-flex">
+                {% if current_user %}
+                    <li style="width: 100px">
+                        <a class="nav-link" aria-current="page"
+                           href="/dashboard/"
+                           id="goto-backend">后台管理</a>
+                    </li>
+                {% endif %}
+                <li style="width: 50px">
+                    <a class="nav-link" aria-current="page"
+                       href="/logout/"
+                       id="goto-logout">登出</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+{% block body_content %}
+
+{% endblock %}
+</body>
+</html>

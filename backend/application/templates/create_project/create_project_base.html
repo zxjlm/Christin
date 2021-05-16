@@ -1,0 +1,120 @@
+<div class="modal-header">
+    <h5 class="modal-title"
+        id="wizard-title">{{ _('Create New Project') }}</h5>
+    <button type="button" class="close" data-dismiss="modal"
+            aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab"
+               href="#infoPanel" role="tab"
+               id="step1">{{ _('Data Input') }}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disabled" data-toggle="tab"
+               href="#ads"
+               role="tab"
+               id="step2">{{ _('Knowledge Extraction Running') }}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disabled" data-toggle="tab"
+               id="step3"
+               href="#placementPanel"
+               role="tab">{{ _('Knowledge Extraction Result') }}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disabled" data-toggle="tab"
+               id="step4"
+               href="#schedulePanel"
+               role="tab">{{ _('KG Loading') }}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disabled" data-toggle="tab"
+               id="step5"
+               href="#reviewPanel"
+               role="tab">{{ _('KG Result') }}</a>
+        </li>
+    </ul>
+
+    <div class="tab-content mt-2">
+        <div class="tab-pane fade show active" id="infoPanel"
+             role="tabpanel">
+            <label for="new-project-name"
+                   style="color: #635d51">{{ _('Project Name') }}:</label>
+            <input id="new-project-name"
+                   placeholder="{{ _('Input Project Name') }}">
+            <br>
+            <label for="new-project-description"
+                   style="color: #635d51">{{ _('Project Description(limit in 500 words)') }}:</label>
+            <textarea id="new-project-description"
+                      placeholder="{{ _('Input Project Description') }}"
+                      style="width: 100%"></textarea>
+            {% block text_type %}
+
+            {% endblock %}
+        </div>
+
+
+        <div class="tab-pane fade" id="ads" role="tabpanel">
+            <h4>{{ _('Running') }}</h4>
+        </div>
+        <div class="tab-pane fade" id="placementPanel"
+             role="tabpanel">
+            <h4>{{ _('Revise Data') }}</h4>
+            <div id="show-res"></div>
+
+            <div class="form-group">
+                <div class="custom-control custom-switch">
+                    <input type="checkbox"
+                           class="custom-control-input"
+                           checked="" id="need-email"
+                           value="off"><label
+                        class="custom-control-label"
+                        for="need-email">{{ _('email notification after success') }}</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-secondary"
+                        id="placementContinue">{{ _('Generate Graph') }}
+                </button>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="schedulePanel"
+             role="tabpanel">
+            <h4>{{ _('KG Loading') }}</h4>
+            <div class="container-fluid" id="show-sandbox"
+                 style="margin-top: 30px">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated"
+                         data-progress="75"
+                         id="sandbox-progress"></div>
+                </div>
+                <div style="margin-top: 30px"
+                     id="progress-message">
+                </div>
+            </div>
+
+        </div>
+        <div class="tab-pane fade" id="reviewPanel"
+             role="tabpanel">
+            <h4>{{ _('Graph Result') }}</h4>
+            <div id="sandbox-config"></div>
+        </div>
+    </div>
+    <div class="progress mt-5">
+        <div class="progress-bar" role="progressbar"
+             style="width: 20%" aria-valuenow="20"
+             id="global-progress"
+             aria-valuemin="0" aria-valuemax="100">Step 1 of 5
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary"
+            data-dismiss="modal"
+            id="exit-modal">{{ _('Cancel') }}
+    </button>
+</div>

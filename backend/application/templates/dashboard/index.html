@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="zxx" class="js">
+
+<head>
+    <base href="../">
+    <meta charset="utf-8">
+    <meta name="author" content="Softnio">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description"
+          content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers.">
+    <!-- Fav Icon  -->
+    <link rel="shortcut icon" href="../../static/images/favicon.png">
+    <!-- Page Title  -->
+    <title>Christin</title>
+    <!-- StyleSheets  -->
+    <link rel="stylesheet"
+          href="../../static/css/dashlite/dashlite.css?ver=2.2.0">
+    <link id="skin-default" rel="stylesheet"
+          href="../../static/css/dashlite/theme.css?ver=2.2.0">
+    <link href="https://cdn.bootcdn.net/ajax/libs/toastr.js/latest/css/toastr.min.css"
+          rel="stylesheet">
+
+    <style>
+        .table td:first-child {
+            padding-left: 1.25rem;
+        }
+    </style>
+</head>
+
+<body class="nk-body bg-lighter npc-general has-sidebar ">
+<div class="nk-app-root">
+    <!-- main @s -->
+    <div class="nk-main ">
+        <!-- sidebar @s -->
+        <div class="nk-sidebar nk-sidebar-fixed is-dark "
+             data-content="sidebarMenu">
+            <div class="nk-sidebar-element nk-sidebar-head">
+                <div class="nk-sidebar-brand">
+                    <a href="/dashboard/" class="logo-link nk-sidebar-logo">
+                        Christin Dashboard
+                    </a>
+                </div>
+                <div class="nk-menu-trigger mr-n2">
+                    <a href="#"
+                       class="nk-nav-toggle nk-quick-nav-icon d-xl-none"
+                       data-target="sidebarMenu"><em
+                            class="icon ni ni-arrow-left"></em></a>
+                </div>
+            </div><!-- .nk-sidebar-element -->
+            <div class="nk-sidebar-element">
+                <div class="nk-sidebar-content">
+                    <div class="nk-sidebar-menu" data-simplebar>
+                        <ul class="nk-menu">
+                            <li class="nk-menu-item">
+                                <a href="/dashboard/" class="nk-menu-link">
+                                    <span class="nk-menu-icon"><em
+                                            class="icon ni ni-dashlite"></em></span>
+                                    <span class="nk-menu-text">{{ _('Dashboard') }}</span>
+                                </a>
+                            </li><!-- .nk-menu-item -->
+                            <li class="nk-menu-heading">
+                                <h6 class="overline-title text-primary-alt">
+                                    {{ _('Basic Data') }}</h6>
+                            </li><!-- .nk-menu-heading -->
+                            <li class="nk-menu-item has-sub">
+                                <a href="#" class="nk-menu-link nk-menu-toggle">
+                                    <span class="nk-menu-icon"><em
+                                            class="icon ni ni-tile-thumb"></em></span>
+                                    <span class="nk-menu-text">{{ _('Basic Data Management') }}</span>
+                                </a>
+                                <ul class="nk-menu-sub">
+                                    <li class="nk-menu-item">
+                                        <a href="javascript:"
+                                           class="nk-menu-link"
+                                           id="show-herb"><span
+                                                class="nk-menu-text">Herbs</span>
+                                        </a>
+                                    </li>
+                                    <li class="nk-menu-item">
+                                        <a href="javascript:"
+                                           class="nk-menu-link"
+                                           id="show-prescription"><span
+                                                class="nk-menu-text">Prescription</span>
+                                        </a>
+                                    </li>
+                                    <li class="nk-menu-item">
+                                        <a href="javascript:"
+                                           class="nk-menu-link"
+                                           id="show-disease"><span
+                                                class="nk-menu-text">Disease</span>
+                                        </a>
+                                    </li>
+                                    <li class="nk-menu-item">
+                                        <a href="javascript:"
+                                           class="nk-menu-link"
+                                           id="show-ingredient"><span
+                                                class="nk-menu-text">Ingredient</span>
+                                        </a>
+                                    </li>
+                                    <li class="nk-menu-item">
+                                        <a href="javascript:"
+                                           class="nk-menu-link"
+                                           id="show-mmsymptom"><span
+                                                class="nk-menu-text">MMSymptom</span>
+                                        </a>
+                                    </li>
+                                    <li class="nk-menu-item">
+                                        <a href="javascript:"
+                                           class="nk-menu-link"
+                                           id="show-tcmsymptom"><span
+                                                class="nk-menu-text">TCMSymptom</span>
+                                        </a>
+                                    </li>
+                                    <li class="nk-menu-item">
+                                        <a href="javascript:"
+                                           class="nk-menu-link"
+                                           id="show-target"><span
+                                                class="nk-menu-text">Target</span>
+                                        </a>
+                                    </li>
+                                </ul><!-- .nk-menu-sub -->
+                            </li><!-- .nk-menu-item -->
+                            <li class="nk-menu-item has-sub">
+                                <a href="#" class="nk-menu-link nk-menu-toggle">
+                                    <span class="nk-menu-icon"><em
+                                            class="icon ni ni-tile-thumb"></em></span>
+                                    <span class="nk-menu-text">{{ _('Dict Management') }}</span>
+                                </a>
+                                <ul class="nk-menu-sub">
+                                    <li class="nk-menu-item">
+                                        <a href="javascript:"
+                                           class="nk-menu-link"
+                                           id="show-dict-data"><span
+                                                class="nk-menu-text">Dict</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nk-menu-heading">
+                                <h6 class="overline-title text-primary-alt">
+                                    {{ _('User Data') }}</h6>
+                            </li>
+                            <li class="nk-menu-item has-sub">
+                                <a href="#" class="nk-menu-link nk-menu-toggle">
+                                    <span class="nk-menu-icon"><em
+                                            class="icon ni ni-tile-thumb"></em></span>
+                                    <span class="nk-menu-text">{{ _('User Data') }}</span>
+                                </a>
+                                <ul class="nk-menu-sub">
+                                    <li class="nk-menu-item">
+                                        <a href="javascript:"
+                                           class="nk-menu-link"
+                                           id="show-roles"><span
+                                                class="nk-menu-text">{{ _('Role') }}</span>
+                                        </a>
+                                    </li>
+                                    <li class="nk-menu-item">
+                                        <a href="javascript:"
+                                           class="nk-menu-link"
+                                           id="show-users"><span
+                                                class="nk-menu-text">{{ _('User') }}</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="nk-menu-heading">
+                                <h6 class="overline-title text-primary-alt">
+                                    {{ _('Log Data') }}</h6>
+                            </li>
+                            <li class="nk-menu-item has-sub">
+                                <a href="#" class="nk-menu-link nk-menu-toggle">
+                                    <span class="nk-menu-icon"><em
+                                            class="icon ni ni-tile-thumb"></em></span>
+                                    <span class="nk-menu-text">{{ _('User Log') }}</span>
+                                </a>
+                                <ul class="nk-menu-sub">
+                                    <li class="nk-menu-item">
+                                        <a href="javascript:"
+                                           class="nk-menu-link"
+                                           id="show-dict-data"><span
+                                                class="nk-menu-text">{{ _('Login') }}</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="nk-menu-heading">
+                                <h6 class="overline-title text-primary-alt">
+                                    {{ _('Sandbox Data') }}</h6>
+                            </li>
+                            <li class="nk-menu-item has-sub">
+                                <a href="#" class="nk-menu-link nk-menu-toggle">
+                                    <span class="nk-menu-icon"><em
+                                            class="icon ni ni-tile-thumb"></em></span>
+                                    <span class="nk-menu-text">{{ _('Container Management') }}</span>
+                                </a>
+                                <ul class="nk-menu-sub">
+                                    <li class="nk-menu-item">
+                                        <a href="javascript:"
+                                           class="nk-menu-link"
+                                           id="show-docker-container"><span
+                                                class="nk-menu-text">{{ _('Container') }}</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul><!-- .nk-menu -->
+                    </div><!-- .nk-sidebar-menu -->
+                </div><!-- .nk-sidebar-content -->
+            </div><!-- .nk-sidebar-element -->
+        </div>
+        <!-- sidebar @e -->
+        <!-- wrap @s -->
+        <div class="nk-wrap ">
+            <!-- main header @s -->
+            <div class="nk-header nk-header-fixed is-light">
+                <div class="container-fluid">
+                    <div class="nk-header-wrap">
+                        <div class="nk-menu-trigger d-xl-none ml-n1">
+                            <a href="#" class="nk-nav-toggle nk-quick-nav-icon"
+                               data-target="sidebarMenu"><em
+                                    class="icon ni ni-menu"></em></a>
+                        </div>
+                        <div class="nk-header-brand d-xl-none">
+                            <a href="/dashboard/" class="logo-link">
+                                <img class="logo-light logo-img"
+                                     src="../../static/images/logo.png"
+                                     srcset="../../static/images/logo2x.png 2x"
+                                     alt="logo">
+                                <img class="logo-dark logo-img"
+                                     src="../../static/images/logo-dark.png"
+                                     srcset="../../static/images/logo-dark2x.png 2x"
+                                     alt="logo-dark">
+                            </a>
+                        </div><!-- .nk-header-brand -->
+                        <div class="nk-header-news d-none d-xl-block">
+                            <div class="nk-news-list">
+                                <!--    <a class="nk-news-item" href="#">
+                                        <div class="nk-news-icon">
+                                            <em class="icon ni ni-card-view"></em>
+                                        </div>
+                                        <div class="nk-news-text">
+                                            <p>
+                                                placeholder
+                                            </p>
+                                            <em class="icon ni ni-external"></em>
+                                        </div>
+                                    </a>
+                                    -->
+                            </div>
+                        </div><!-- .nk-header-news -->
+                        <div class="nk-header-tools">
+                            <ul class="nk-quick-nav">
+                                <li class="dropdown user-dropdown">
+                                    <a href="#" class="dropdown-toggle"
+                                       data-toggle="dropdown">
+                                        <div class="user-toggle">
+                                            <div class="user-avatar sm">
+                                                <em class="icon ni ni-user-alt"></em>
+                                            </div>
+                                            <div class="user-info d-none d-md-block">
+                                                <div
+                                                        class="user-status">{{ current_user.email }}</div>
+                                                <div class="user-name dropdown-indicator">{{ current_user.username }}</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-md dropdown-menu-right dropdown-menu-s1">
+                                        <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
+                                            <div class="user-card">
+                                                <div class="user-avatar">
+                                                    <span>AB</span>
+                                                </div>
+                                                <div class="user-info">
+                                                    <span class="lead-text">Abu Bin Ishtiyak</span>
+                                                    <span class="sub-text">info@softnio.com</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="dropdown-inner">
+                                            <ul class="link-list">
+                                                <li>
+                                                    <a href="html/user-profile-regular.html"><em
+                                                            class="icon ni ni-user-alt"></em><span>View Profile</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="html/user-profile-setting.html"><em
+                                                            class="icon ni ni-setting-alt"></em><span>Account Setting</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="html/user-profile-activity.html"><em
+                                                            class="icon ni ni-activity-alt"></em><span>Login Activity</span></a>
+                                                </li>
+                                                <li><a class="dark-switch"
+                                                       href="#"><em
+                                                        class="icon ni ni-moon"></em><span>Dark Mode</span></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="dropdown-inner">
+                                            <ul class="link-list">
+                                                <li><a href="/logout"><em
+                                                        class="icon ni ni-signout"></em><span>Sign out</span></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li><!-- .dropdown -->
+                                <li class="dropdown notification-dropdown mr-n1">
+                                    <a href="#"
+                                       class="dropdown-toggle nk-quick-nav-icon"
+                                       data-toggle="dropdown">
+                                        <div class="icon-status icon-status-info">
+                                            <em class="icon ni ni-bell"></em>
+                                        </div>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-xl dropdown-menu-right dropdown-menu-s1">
+                                        <div class="dropdown-head">
+                                            <span class="sub-title nk-dropdown-title">Notifications</span>
+                                            <a href="#">Mark All as Read</a>
+                                        </div>
+                                        <div class="dropdown-body">
+                                            <div class="nk-notification">
+                                                <div class="nk-notification-item dropdown-inner">
+                                                    <div class="nk-notification-icon">
+                                                        <em class="icon icon-circle bg-warning-dim ni ni-curve-down-right"></em>
+                                                    </div>
+                                                    <div class="nk-notification-content">
+                                                        <div class="nk-notification-text">
+                                                            You have requested
+                                                            to
+                                                            <span>Widthdrawl</span>
+                                                        </div>
+                                                        <div class="nk-notification-time">
+                                                            2 hrs ago
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- .nk-notification -->
+                                        </div><!-- .nk-dropdown-body -->
+                                        <div class="dropdown-foot center">
+                                            <a href="#">View All</a>
+                                        </div>
+                                    </div>
+                                </li><!-- .dropdown -->
+                            </ul><!-- .nk-quick-nav -->
+                        </div><!-- .nk-header-tools -->
+                    </div><!-- .nk-header-wrap -->
+                </div><!-- .container-fliud -->
+            </div>
+            <!-- main header @e -->
+            <!-- content @s -->
+            <div class="nk-content " id="body-content">
+                <div class="card card-preview">
+                    <div class="card-inner">
+                        <div class="row">
+                            {% for neo in neo_list %}
+                                <div class="col-lg-4">
+                                    <div class="card card-bordered">
+                                        <div class="card-inner"><h5
+                                                class="card-title">{{ neo.s_project_name }}</h5>
+                                            <h6
+                                                    class="card-subtitle mb-2 ff-base {{ neo.status }}">
+                                                status: {{ neo.status }}</h6>
+                                            <p class="card-text">
+                                                user_email: {{ neo.login_name }}</p>
+                                            <p class="card-text">create
+                                                time: {{ neo.create_date_time }}</p>
+                                            <p class="card-text">update
+                                                time: {{ neo.update_date_time }}</p>
+                                            <p class="card-text">task
+                                                id: {{ neo.mark }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- content @e -->
+            <!-- footer @s -->
+            <div class="nk-footer">
+                <div class="container-fluid">
+                    <div class="nk-footer-wrap">
+                        <div class="nk-footer-copyright"> &copy; 2021 Christin.
+                            by <a href="http://harumonia.moe/"
+                                  target="_blank">harumonia</a>
+                        </div>
+                        <div class="nk-footer-links">
+                            <ul class="nav nav-sm">
+                                <li class="nav-item"><a class="nav-link"
+                                                        href="#">Terms</a></li>
+                                <li class="nav-item"><a class="nav-link"
+                                                        href="#">Privacy</a>
+                                </li>
+                                <li class="nav-item"><a class="nav-link"
+                                                        href="#">Help</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- footer @e -->
+        </div>
+        <!-- wrap @e -->
+    </div>
+    <!-- main @e -->
+</div>
+<!-- app-root @e -->
+<!-- JavaScript -->
+<script src="../../static/js/dashlite/bundle.js?ver=2.2.0"></script>
+<script src="../../static/js/dashlite/scripts.js?ver=2.2.0"></script>
+<script src="../../static/js/dashlite/charts/gd-default.js?ver=2.2.0"></script>
+<script src="../../static/js/myjs/myjs.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+<script>
+    const herb_table_page = '{{ url_for('dashboard.show_herb_data_table') }}'
+    const herb_query_api = '{{ url_for('data_manage.query') }}'
+    const herb_create_api = '{{ url_for('data_manage.create') }}'
+    const herb_delete_api = '{{ url_for('data_manage.delete') }}'
+    const herb_update_api = '{{ url_for('data_manage.update') }}'
+    const dt_fields_api = '{{ url_for('data_manage.get_dt_fields') }}'
+    const docker_containers_api = '{{ url_for('data_manage.show_docker_containers') }}'
+
+    const herb_query_particular_page = '{{ url_for('dashboard.query_particular') }}'
+    const edit_particular_page = '{{ url_for('dashboard.edit_particular') }}'
+    const create_particular_page = '{{ url_for('dashboard.create_particular') }}'
+
+
+    let page_type = ''
+    let table = ''
+
+    $(document).ready(function () {
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+
+        $("#show-herb").click(function () {
+            init_table_page(herb_table_page, 'Herb')
+        })
+
+        $("#show-prescription").click(function () {
+            init_table_page(herb_table_page, 'Prescription')
+        })
+
+        $("#show-dict-data").click(function () {
+            init_table_page(herb_table_page, 'DicTableData')
+        })
+
+        $("#show-mmsymptom").click(function () {
+            init_table_page(herb_table_page, 'MMSymptom')
+        })
+
+        $("#show-tcmsymptom").click(function () {
+            init_table_page(herb_table_page, 'TCMSymptom')
+        })
+
+        $("#show-disease").click(function () {
+            init_table_page(herb_table_page, 'Disease')
+        })
+
+        $("#show-target").click(function () {
+            init_table_page(herb_table_page, 'Target')
+        })
+
+        $("#show-ingredient").click(function () {
+            init_table_page(herb_table_page, 'Ingredient')
+        })
+
+        $("#show-users").click(function () {
+            init_table_page(herb_table_page, 'User')
+        })
+
+        $("#show-roles").click(function () {
+            init_table_page(herb_table_page, 'Role')
+        })
+
+        $("#show-docker-container").click(function () {
+            getData(docker_containers_api).then(data => {
+                console.log(data)
+            })
+
+        })
+
+    })
+
+    function init_table_page(url, type) {
+        fetch(url + '?type=' + type).then(response => {
+            return response.text()
+        }).then(data => {
+            let body = document.getElementById('body-content');
+            body.innerHTML = data;
+
+            document.getElementById('add-new-data').click(() => {
+                postData(create_particular_page, type)
+            })
+
+            render_datatable(herb_query_api, type)
+
+            $("#add-new-data").click(create_modal)
+
+
+        })
+        page_type = type   //important！！！
+    }
+
+
+    function render_datatable(url, type) {
+        let type_dic = {
+            'Herb': 'bin_hid',
+            'DicTableData': 'id'
+        }
+
+        getData(dt_fields_api + '?type=' + type).then(data => {
+            if (data['code'] === 200) {
+                let colunms = []
+                data['msg'].forEach(item => {
+                    colunms.push({"data": item, orderable: false})
+                })
+                table = $('#herb-table').DataTable({
+                    "processing": true,
+                    "serverSide": true,
+                    searching: false,
+                    dom: "<'row justify-between g-2'<'col-7 col-sm-6 text-left'><'col-5 col-sm-6 text-right'l>>" +
+                        "<'datatable-wrap my-3'tr>" +
+                        "<'row align-items-center'<'col-7 col-sm-12 col-md-9'p><'col-5 col-sm-12 col-md-3 text-left text-md-right'i>>",
+                    pagingType: 'simple_numbers',
+                    "ajax": {
+                        "url": url,
+                        "type": "POST",
+                        "data": function (d) {
+                            d.type_ = page_type;
+                        }
+                    },
+                    columns: [...colunms, {
+                        'option': 'option',
+                        orderable: false
+                    }],
+
+                    "infoCallback": function (settings, start, end, max, total, pre) {
+                        var api = this.api();
+                        var pageInfo = api.page.info();
+                        return 'Page ' + (pageInfo.page + 1) + ' of ' + pageInfo.pages;
+                    },
+
+                    "columnDefs": [{
+                        "targets": -1,
+                        "data": 'id',
+                        render: function (data, type, row, meta) {
+                            return `<div class="dropdown"><a
+                                class="text-soft dropdown-toggle btn btn-icon
+                                 btn-trigger" data-toggle="dropdown"><em
+                                 class="icon ni ni-more-h"></em></a><div
+                                 class="dropdown-menu dropdown-menu-right
+                                 dropdown-menu-xs"><ul
+                                 class="link-list-plain"><li><a id="view"
+                                 href="javascript:" onclick="view_modal('${data}')">View</a></li><li><a
+                                 href="javascript:" id="edit"  onclick="edit_modal('${data}')">Edit</a></li><li><a
+                                 href="javascript:" id="remove"  onclick="delete_modal('${data}')
+                                 ">Remove</a></li></ul></div></div>`
+                        },
+                    }]
+                    //initComplete: function(settings, json) {
+                    //    let id = '#datatable';
+                    //    console.log('DataTable.initComplete', settings, json);
+                    //    $(`${id}_paginate .pagination`).addClass
+                    //('pagination-sm');
+                    //    $(`${id}_info`).addClass('pt-1');
+                    //    $(`${id} thead .check-all`).on('click', function () {
+                    //        $(`${id} tbody .check`).prop('checked', $(this)
+                    //   .prop('checked'));
+                    //  });
+                    //},
+                });
+            } else {
+                toastr.warning(data['msg'])
+            }
+        })
+
+
+    }
+
+    function view_modal(id) {
+        postData(herb_query_particular_page, {
+            'type': page_type,
+            'data': id
+        }).then(data => {
+            let modal_tmp = document.getElementById('view-data-modal')
+            modal_tmp.innerHTML = data['msg']
+
+            $('#view-modal').modal('show')
+        })
+
+    }
+
+    function delete_modal(id) {
+        let btn = document.querySelector("#delete-modal > div > div > div.modal-body > a.btn.btn-primary")
+        btn.addEventListener('click', function () {
+            postData(herb_delete_api, {
+                'type': page_type,
+                'data': id
+            }).then(data => {
+                if (data['code'] === 200) {
+                    toastr.success(data['msg'])
+                } else {
+                    toastr.error(data['msg'])
+                }
+            })
+        })
+
+        $('#delete-modal').modal('show')
+
+        $('#delete-modal').on('hidden.bs.modal', function (event) {
+            table.ajax.reload()
+        })
+
+    }
+
+    function edit_modal(id) {
+
+        postData(edit_particular_page, {
+            'type': page_type,
+            'data': id
+        }).then(data => {
+            let modal_tmp = document.getElementById('edit-data-modal')
+            modal_tmp.innerHTML = data['msg']
+
+            $('#edit-modal').modal('show')
+
+            $('#edit-submit').click(() => {
+                let myForm = document.getElementById('form-data-edit')
+                let data = new FormData(myForm);
+                let data_for_post = {}
+                for (let pair of data.entries()) {
+                    if (pair[0] in data_for_post) {
+                        data_for_post[pair[0]] += ',' + pair[1]
+                    } else {
+                        data_for_post[pair[0]] = pair[1]
+                    }
+                }
+
+                postData(herb_update_api, {
+                    'data': data_for_post,
+                    'type': page_type
+                }).then((response) => {
+                    if (response['code'] === 200) {
+                        toastr.success('update success')
+                        $('#edit-modal').modal('hide')
+                    } else {
+                        toastr.error('update failed, ' + response['msg'])
+                    }
+                })
+            })
+
+        })
+    }
+
+    function create_modal() {
+
+        postData(create_particular_page, {'type': page_type}).then(data => {
+            let modal_tmp = document.getElementById('view-data-modal')
+            modal_tmp.innerHTML = data['msg']
+
+            $('#view-modal').modal('show')
+
+            $('#create-submit').click(() => {
+                let myForm = document.getElementById('form-data-create')
+                let data = new FormData(myForm);
+                let data_for_post = {}
+                for (let pair of data.entries()) {
+                    if (pair[0] in data_for_post) {
+                        data_for_post[pair[0]] += ',' + pair[1]
+                    } else {
+                        data_for_post[pair[0]] = pair[1]
+                    }
+                }
+
+                postData(herb_create_api, {
+                    'data': data_for_post,
+                    'type': page_type
+                }).then(response => {
+                    if (response['code'] === 200) {
+                        toastr.success('create success')
+                        $('#view-modal').modal('hide')
+                    } else {
+                        toastr.error('create failed, ' + response['msg'])
+                    }
+                })
+            })
+        })
+    }
+
+    function edit_data_post() {
+        let myForm = document.getElementById('form-data-edit')
+        let formData = new FormData(myForm);
+
+        console.log('111')
+    }
+
+    function test_func() {
+        console.log('11')
+    }
+
+</script>
+
+</body>
+
+</html>

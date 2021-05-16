@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zxx" class="js">
+
+<head>
+    <base href="../../">
+    <meta charset="utf-8">
+    <meta name="author" content="Harumonia">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description"
+          content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers.">
+    <!-- Fav Icon  -->
+    <link rel="shortcut icon" href="./images/favicon.png">
+    <!-- Page Title  -->
+    <title>Christin</title>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="../static/js/myjs/myjs.js"></script>
+
+    <script type="text/javascript" src="../static/js/neovis/neovis.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../static/css/mycss/mycss.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/mycss/ent.css">
+    <!-- StyleSheets  -->
+    <link rel="stylesheet"
+          href="../static/css/dashlite2/dashlite.css?ver=2.2.0">
+    <link id="skin-default" rel="stylesheet"
+          href="../static/css/dashlite2/theme.css?ver=2.2.0">
+    <link href="https://cdn.bootcdn.net/ajax/libs/toastr.js/latest/css/toastr.min.css"
+          rel="stylesheet">
+</head>
+
+<body class="nk-body bg-lighter npc-general has-sidebar ">
+<div class="nk-app-root">
+    <!-- main @s -->
+    <div class="nk-main ">
+        <!-- sidebar @s -->
+        <div class="nk-sidebar nk-sidebar-fixed is-light "
+             data-content="sidebarMenu">
+            <div class="nk-sidebar-element nk-sidebar-head">
+                <div class="nk-sidebar-brand">
+                    <a href="#" class="logo-link nk-sidebar-logo">
+                        <img class="logo-light logo-img"
+                             src="../static/images/logos/large-blue-resize.png"
+                             srcset="../static/images/logos/large-blue-resize.png"
+                             alt="logo">
+                        <img class="logo-dark logo-img"
+                             src="../static/images/logos/large-blue-resize.png"
+                             srcset="../static/images/logos/large-blue-resize.png"
+                             alt="logo-dark">
+                        <img class="logo-small logo-img logo-img-small"
+                             src="../static/images/logos/small-blue-resize.png"
+                             srcset="../static/images/logos/small-blue-resize.png"
+                             alt="logo-small"
+                             style="margin-left: 5px">
+                    </a>
+                </div>
+                <div class="nk-menu-trigger mr-n2">
+                    <a href="javascript:;"
+                       class="nk-nav-toggle nk-quick-nav-icon d-xl-none"
+                       data-target="sidebarMenu"><em
+                            class="icon ni ni-arrow-left"></em></a>
+                    <a href="javascript:;"
+                       class="nk-nav-compact nk-quick-nav-icon d-none d-xl-inline-flex"
+                       data-target="sidebarMenu"><em
+                            class="icon ni ni-menu"></em></a>
+                </div>
+            </div>
+            <!-- .nk-sidebar-element -->
+            <div class="nk-sidebar-element">
+                <div class="nk-sidebar-content">
+                    <div class="nk-sidebar-menu" data-simplebar>
+                        <ul class="nk-menu">
+                            <li class="nk-menu-item">
+                                <a href="#"
+                                   class="nk-menu-link">
+                                    <span class="nk-menu-icon"><em
+                                            class="icon ni ni-building-fill"></em></span>
+                                    <span class="nk-menu-text">{{ _('Main Dashboard') }}</span>
+                                </a>
+                            </li>
+                            <li class="nk-menu-item">
+                                <a href="{{ url_for('main.projects') }}"
+                                   class="nk-menu-link">
+                                    <span class="nk-menu-icon"><em
+                                            class="icon ni ni-dashboard-fill"></em></span>
+                                    <span class="nk-menu-text">{{ _('Projects') }}</span>
+                                </a>
+                            </li><!-- .nk-menu-item -->
+                        </ul><!-- .nk-menu -->
+                    </div><!-- .nk-sidebar-menu -->
+                </div><!-- .nk-sidebar-content -->
+            </div><!-- .nk-sidebar-element -->
+        </div>
+        <!-- sidebar @e -->
+        <!-- wrap @s -->
+        <div class="nk-wrap ">
+            <!-- main header @s -->
+            <div class="nk-header nk-header-fixed is-light">
+                <div class="container-fluid">
+                    <div class="nk-header-wrap">
+                        <div class="nk-menu-trigger d-xl-none ml-n1">
+                            <a href="#" class="nk-nav-toggle nk-quick-nav-icon"
+                               data-target="sidebarMenu"><em
+                                    class="icon ni ni-menu"></em></a>
+                        </div>
+                        <div class="nk-header-tools">
+                            <ul class="nk-quick-nav">
+                                <li class="dropdown chats-dropdown hide-mb-xs">
+                                    <a href="#"
+                                       class="dropdown-toggle nk-quick-nav-icon"
+                                       data-toggle="dropdown">
+                                        <div class="icon-status icon-status-na">
+                                            <em class="icon ni ni-comments"></em>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="dropdown user-dropdown">
+                                    <a href="#" class="dropdown-toggle mr-n1"
+                                       data-toggle="dropdown">
+                                        <div class="user-toggle">
+                                            <div class="user-avatar sm">
+                                                <em class="icon ni ni-user-alt"></em>
+                                            </div>
+                                            <div class="user-info d-none d-xl-block">
+                                                <div class="user-status user-status-active">
+                                                    Administator
+                                                </div>
+                                                <div class="user-name dropdown-indicator">
+                                                    {{ current_user.username }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
+                                        <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
+                                            <div class="user-card">
+                                                <div class="user-avatar">
+                                                    <span>AB</span>
+                                                </div>
+                                                <div class="user-info">
+                                                    <span class="lead-text">{{ current_user.username }}</span>
+                                                    <span class="sub-text">{{ current_user.email }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="dropdown-inner">
+                                            <ul class="link-list">
+                                                <li>
+                                                    <a href="html/ecommerce/user-profile.html"><em
+                                                            class="icon ni ni-user-alt"></em><span>{{ _('View Profile') }}</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="/dashboard"><em
+                                                            class="icon ni ni-setting-alt"></em><span>{{ _('Backend') }}</span></a>
+                                                </li>
+                                                <li><a class="dark-switch"
+                                                       href="#"><em
+                                                        class="icon ni ni-moon"></em><span>{{ _('Dark Mode') }}</span></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="dropdown-inner">
+                                            <ul class="link-list">
+                                                <li><a href="/logout"><em
+                                                        class="icon ni ni-signout"></em><span>{{ _('Logout') }}</span></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div><!-- .nk-header-wrap -->
+                </div><!-- .container-fliud -->
+            </div>
+            <!-- main header @e -->
+
+            <div class="nk-content">
+                <div class="container-fluid">
+                    <div class="nk-content-body">
+                        {% block body_content %}
+
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+            <!-- footer @s -->
+            <div class="nk-footer">
+                <div class="container-fluid">
+                    <div class="nk-footer-wrap">
+                        <div class="nk-footer-copyright"> &copy; 2021 Christin
+                            by <a href="http://harumonia.moe/" target="_blank">Harumonia</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- footer @e -->
+        </div>
+        <!-- wrap @e -->
+    </div>
+    <!-- main @e -->
+</div>
+<!-- app-root @e -->
+<!-- JavaScript -->
+<script src="../static/js/dashlite2/bundle.js?ver=2.2.0"></script>
+<script src="../static/js/dashlite2/scripts.js?ver=2.2.0"></script>
+</body>
+
+</html>

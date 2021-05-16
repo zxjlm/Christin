@@ -1,0 +1,97 @@
+<div class="components-preview wide-md mx-auto">
+    <div class="nk-block nk-block-lg">
+        <div class="nk-block-head">
+            <div class="nk-block-head-content">
+                <div>
+
+                    <button type="button" class="btn btn-primary"
+                            id="add-new-data" style="float: right"
+                            {% if page_type != 0 %}disabled{% endif %}>Add
+                    </button>
+
+                    <h4 class="nk-block-title">{{ title }}</h4>
+                    <div class="nk-block-des">
+                        <p>{{ subtitle }}</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="nk-block-content">
+            <div class="card card-preview">
+                <div class="card-inner">
+                    <table class="datatable-init nowrap table dataTable no-footer dtr-inline"
+                           id="herb-table" style="width: 100%">
+                        <thead>
+                        <tr class="tb-tnx-head">
+                            {% for field in fields %}
+                                <th class="tb-tnx-info">{{ field }}</th>
+                            {% endfor %}
+                            <th class="tb-tnx-action">options</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- model show form-->
+<div class="modal zoom fade" tabindex="-1" id="view-modal"
+     style="display: none;" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title">Customer Info</h5>
+                <a href="#" class="close"
+                   data-dismiss="modal"
+                   aria-label="Close"><em
+                        class="icon ni ni-cross"></em></a></div>
+            <div class="modal-body" id="view-data-modal">
+
+            </div>
+            <div class="modal-footer bg-light"><span class="sub-text">Modal Footer Text</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal zoom fade" tabindex="-1" id="edit-modal"
+     style="display: none;" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title">Customer Info</h5>
+                <a href="#" class="close"
+                   data-dismiss="modal"
+                   aria-label="Close"><em
+                        class="icon ni ni-cross"></em></a></div>
+            <div class="modal-body" id="edit-data-modal">
+
+            </div>
+            <div class="modal-footer bg-light"><span class="sub-text">Modal Footer Text</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal zoom fade" tabindex="-1" id="delete-modal"
+     style="display: none;" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title">是否确认删除</h5><a
+                    href="#" class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"><em
+                    class="icon ni ni-cross"></em></a></div>
+            <div class="modal-body">
+                <a class="btn btn-primary" href="#"
+                   data-dismiss="modal">确认删除</a>
+                <a class="btn btn-light" href="#" data-dismiss="modal">取消</a>
+            </div>
+        </div>
+    </div>
+</div>

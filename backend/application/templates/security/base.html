@@ -1,0 +1,42 @@
+{% block doc -%}
+    <!DOCTYPE html>
+    <html{% block html_attribs %}{% endblock html_attribs %}>
+    {%- block html %}
+        <head>
+
+            <link rel="stylesheet"
+                  href="../../static/css/dashlite2/dashlite.css?ver=2.2.0">
+            <link id="skin-default" rel="stylesheet"
+                  href="../../static/css/dashlite2/theme.css?ver=2.2.0">
+            {%- block head %}
+                <title>{% block title %}
+                    {{ title|default }}{% endblock title %}</title>
+
+                {%- block metas %}
+                    <meta name="viewport"
+                          content="width=device-width, initial-scale=1.0">
+                {%- endblock metas %}
+
+                {%- block styles %}
+                {%- endblock styles %}
+            {%- endblock head %}
+        </head>
+        <body{% block body_attribs %}{% endblock body_attribs %}>
+
+        {% block body -%}
+            {% block navbar %}
+            {%- endblock navbar %}
+
+            {% block content -%}
+            {%- endblock content %}
+
+            {% block scripts %}
+            {%- endblock scripts %}
+        {%- endblock body %}
+
+        <script src="../../static/js/dashlite2/bundle.js?ver=2.2.0"></script>
+        <script src="../../static/js/dashlite2/scripts.js?ver=2.2.0"></script>
+        </body>
+    {%- endblock html %}
+    </html>
+{% endblock doc -%}

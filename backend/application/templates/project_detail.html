@@ -1,0 +1,71 @@
+<div class="card">
+    <div class="card-inner">
+        <div class="card-head"><h5 class="card-title">
+            {{ _('Project Name') }}: {{ project.s_project_name }}</h5></div>
+        <form action="#" class="gy-3">
+            <div class="row g-3 align-center">
+                <div class="col-lg-5">
+                    <div class="form-group"><label class="form-label"
+                                                   for="site-name">{{ _('Status') }}</label><span
+                            class="form-note">{{ _('Running Status') }}</span>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="form-group">
+                        <div class="form-control-wrap">
+                            <p class="{{ project.status }}">{{ project.status }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-3 align-center">
+                <div class="col-lg-5">
+                    <div class="form-group"><label
+                            class="form-label">{{ _('Create Date') }}</label><span
+                            class="form-note">{{ _('when the project created') }}</span>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="form-group">
+                        <div class="form-control-wrap">
+                            <p>{{ project.create_date_time }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-3 align-center">
+                <div class="col-lg-5">
+                    <div class="form-group"><label
+                            class="form-label">{{ _('Build Time') }}</label><span
+                            class="form-note">{{ _('time spent for building the project') }}</span>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="form-group">
+                        <div class="form-control-wrap">
+                            <p>{{ project.runtime }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-3 align-center">
+                <div class="form-group"><label
+                        class="form-label">{{ _('Basic Data') }}</label><span
+                        class="form-note">{{ _('Data for build graph') }}</span>
+                </div>
+                <div class="container" id="basic-data-cards"></div>
+            </div>
+
+            <div class="row g-3">
+                <div class="col-lg-7 offset-lg-5">
+                    <div class="form-group mt-2">
+                        <button type="button" class="btn btn-lg btn-primary"
+                                id="goto-visneo">
+                            {{ _('Go Graph page') }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

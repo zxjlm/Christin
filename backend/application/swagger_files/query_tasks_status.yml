@@ -1,0 +1,35 @@
+tags:
+  - normal
+description: get tasks status
+consumes:
+  - application/json
+parameters:
+  - name: task_id
+    in: path
+    type: string
+    required: true
+    format: uuid
+definitions:
+  status:
+    type: object
+    properties:
+      state:
+        type: string
+        example: "Pending"
+      info:
+        type: object
+        properties:
+          current:
+            type: int
+            example: 2
+          total:
+            type: int
+            example: 4
+
+responses:
+  200:
+    description: 'success'
+    schema:
+      $ref: '#/definitions/status'
+  405:
+    "description": "Invalid input"

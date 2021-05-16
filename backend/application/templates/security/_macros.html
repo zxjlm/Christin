@@ -1,0 +1,28 @@
+{% macro render_field_with_errors(field) %}
+    <div class="form-floating mb-3">
+        {{ field.label }} {{ field(**kwargs)|safe }}
+        {% if field.errors %}
+            <ul>
+                {% for error in field.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+{% endmacro %}
+
+{% macro render_field(field) %}
+    <p>{{ field(**kwargs)|safe }}</p>
+{% endmacro %}
+
+{% macro render_field_errors(field) %}
+    <div>
+        {% if field and field.errors %}
+            <ul>
+                {% for error in field.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+{% endmacro %}

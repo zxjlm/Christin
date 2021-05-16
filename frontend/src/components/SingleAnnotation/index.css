@@ -1,0 +1,15 @@
+.highlight-container.highlight-container--bottom-labels {
+  align-items: flex-start;
+}
+
+.highlight-container {
+  display: flex;
+  flex-wrap: wrap;
+  line-height: 42px;
+  white-space: pre-wrap;
+  cursor: default;
+}
+
+.highlight-container.highlight-container--bottom-labels .highlight.bottom {
+  margin-top: 6px;
+}

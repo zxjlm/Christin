@@ -1,0 +1,226 @@
+<!doctype html>
+<html>
+<head>
+    <title>Neovis.js Simple Example</title>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- FIXME: load from dist -->
+    <script type="text/javascript"
+            src="../../static/js/neovis/neovis.js"></script>
+
+    <script type="text/javascript">
+        let viz;
+        let node_id;
+
+        function draw() {
+            var config = {
+                container_id: "viz",
+                server_url: "bolt://39.99.178.69:7778/",
+                server_user: "neo4j",
+                server_password: 'zxjzxj233',
+                labels: {
+                    "Herb": {
+                        "caption": "English_name",
+                        "size": 1.5,
+                    },
+                    "Gene": {
+                        "caption": "s_name",
+                        "size": 0.5,
+                    },
+                    "Mol": {
+                        "caption": "s_name",
+                        "size": 1.0,
+                    },
+                    "TCM_symptom": {
+                        "caption": "s_name",
+                        "size": 0.8,
+                    },
+                    "MM_symptom": {
+                        "caption": "s_name",
+                        "size": 0.8,
+                    },
+                    "Disease": {
+                        "caption": "s_name",
+                        "size": 1.2,
+                    },
+                },
+                relationships: {
+                    // "PRESIDENT": {
+                    //     "caption": "El Presidente"
+                    // }
+                },
+                // initial_cypher: "match (p:Person)-[r]-(o:Organization)-[r1]-(p2:Person) RETURN * LIMIT 10",
+                initial_cypher: "MATCH (n:Herb) RETURN n",
+                arrows: false,
+                console_debug: true,
+
+            };
+
+            viz = new NeoVis.default(config);
+            viz.render();
+            console.log(viz);
+
+            viz.registerOnEvent("completed", (e) => {
+                viz["_network"].on("select", (event) => {
+                    if (event['nodes'][0]) {
+                        node_id = event['nodes'][0]
+                    }
+                });
+            });
+
+        }
+    </script>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+    <script src="../../static/js/myjs/jquery.bootstrap-duallistbox.js"></script>
+
+    <link href="https://cdn.bootcdn.net/ajax/libs/bootstrap4-duallistbox/4.0.2/bootstrap-duallistbox.min.css"
+          rel="stylesheet">
+    <link rel="stylesheet"
+          href="../../static/css/mycss/sliding_panel.css">
+    <link id="skin-default" rel="stylesheet"
+          href="../../static/css/dashlite/theme.css?ver=2.2.0">
+    <link href="https://cdn.bootcdn.net/ajax/libs/toastr.js/latest/css/toastr.min.css"
+          rel="stylesheet">
+</head>
+<body class="nk-body bg-lighter npc-default has-sidebar no-touch nk-nio-theme"
+      onload="draw()">
+<div class="nk-app-root">
+    <div id="viz"></div>
+</div>
+<ul class="nk-sticky-toolbar">
+    <li class="demo-settings"><a class="toggle tipinfo"
+                                 data-target="settingPanel" href="#" title=""
+                                 data-original-title="Demo Settings"><em
+            class="icon ni ni-setting-alt"></em></a></li>
+
+</ul>
+
+<div class="nk-demo-panel toggle-slide toggle-slide-right toggle-screen-any"
+     data-content="settingPanel" data-toggle-overlay="true"
+     data-toggle-body="true" data-toggle-screen="any">
+    <div class="nk-demo-head"><h6 class="mb-0">Preview Settings</h6><a
+            class="nk-demo-close toggle btn btn-icon btn-trigger revarse mr-n2"
+            data-target="settingPanel" href="#"><em
+            class="icon ni ni-cross"></em></a></div>
+    <div class="nk-opt-panel" data-simplebar="init">
+        <div class="simplebar-wrapper" style="margin: 0px;">
+            <div class="simplebar-height-auto-observer-wrapper">
+                <div class="simplebar-height-auto-observer"></div>
+            </div>
+            <div class="simplebar-mask">
+                <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
+                    <div class="simplebar-content-wrapper"
+                         style="height: auto; overflow: hidden scroll;">
+                        <div class="simplebar-content" style="padding: 0px;">
+                            <div class="nk-opt-set">
+                                <div class="nk-opt-set-title">Direction Change
+                                </div>
+                                <div class="nk-opt-list col-2x">
+                                    <div class="nk-opt-item only-text active"
+                                         data-key="dir" data-update="ltr"><span
+                                            class="nk-opt-item-bg"><span
+                                            class="nk-opt-item-name">LTR Mode</span></span>
+                                    </div>
+                                    <div class="nk-opt-item only-text"
+                                         data-key="dir" data-update="rtl"><span
+                                            class="nk-opt-item-bg"><span
+                                            class="nk-opt-item-name">RTL Mode</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="nk-opt-set">
+                                <div class="nk-opt-set-title">Find
+                                    Relations(Single Node)
+                                </div>
+                                <button type="button"
+                                        class="btn btn-sm btn-primary"
+                                        id="find-relations">
+                                    Find Relations
+                                </button>
+                            </div>
+                            <div class="nk-opt-set">
+                                <div class="nk-opt-set-title">Find
+                                    Relations(Multi Nodes)
+                                </div>
+                                <select id="select-nodes" class="dual-listbox"
+                                        multiple>
+                                    <option value="1">Cheese</option>
+                                    <option value="2">Egg</option>
+                                    <option value="3">Butter</option>
+                                    <option value="4">Margarine</option>
+                                    <option value="5">Yogurt</option>
+                                    <option value="6">Pizza</option>
+                                    <option value="7">Steak</option>
+                                    <option value="8">Kebab</option>
+                                    <option value="9">Sandwich</option>
+                                    <optizon value="10">Hamburger</optizon>
+                                </select>
+                                <button type="button"
+                                        class="btn btn-sm btn-primary"
+                                        id="find-multi-nodes-relations" style="margin-top: 20px">
+                                    Find Relations
+                                </button>
+                            </div>
+                            <div class="nk-opt-reset"><a href="#"
+                                                         class="reset-opt-setting">Reset
+                                Setting</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="simplebar-placeholder"
+                 style="width: auto; height: 883px;"></div>
+        </div>
+        <div class="simplebar-track simplebar-horizontal"
+             style="visibility: hidden;">
+            <div class="simplebar-scrollbar"
+                 style="width: 0px; display: none;"></div>
+        </div>
+        <div class="simplebar-track simplebar-vertical"
+             style="visibility: visible;">
+            <div class="simplebar-scrollbar"
+                 style="height: 114px; transform: translate3d(0px, 0px, 0px); display: block;"></div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $('#find-relations').click(() => {
+            if (node_id) {
+                viz.renderWithCypher('MATCH r=(s)-->() WHERE ID(s) = ' + node_id + ' RETURN r');
+            } else {
+                toastr.warning('choose a node first')
+            }
+        })
+    })
+
+    let demo1 = $('#select-nodes').bootstrapDualListbox();
+
+    $("#reload").click(function () {
+
+        var cypher = $("#cypher").val();
+
+        if (cypher.length > 3) {
+            viz.renderWithCypher(cypher);
+        } else {
+            console.log("reload");
+            viz.reload();
+
+        }
+
+    });
+
+
+</script>
+
+<script src="../../static/js/dashlite/bundle.js?ver=2.2.0"></script>
+<script src="../../static/js/dashlite/scripts.js?ver=2.2.0"></script>
+</body>
+
+
+</html>

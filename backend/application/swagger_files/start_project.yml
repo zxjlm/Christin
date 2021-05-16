@@ -1,0 +1,31 @@
+tags:
+  - project
+description: start a project in docker container
+consumes:
+  - application/json
+parameters:
+  - name: task_id
+    in: path
+    type: string
+    required: true
+    format: uuid
+definitions:
+  normal_response:
+    type: object
+    properties:
+      code:
+        type: string
+        example: "200"
+      task_id:
+        type: string
+      msg:
+        type: string
+        example: 'success'
+
+responses:
+  200:
+    description: 'success'
+    schema:
+      $ref: '#/definitions/normal_response'
+  405:
+    "description": "Invalid input"

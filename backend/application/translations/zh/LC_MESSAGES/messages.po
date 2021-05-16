@@ -1,0 +1,542 @@
+# Chinese translations for PROJECT.
+# Copyright (C) 2021 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2021-04-25 20:11+0800\n"
+"PO-Revision-Date: 2021-02-22 11:01+0800\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh\n"
+"Language-Team: zh <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: application/forms/user.py:25
+msgid "Username"
+msgstr "用户名"
+
+#: application/forms/user.py:29
+msgid "Email Address"
+msgstr "邮箱地址"
+
+#: application/forms/user.py:30
+#, fuzzy
+msgid "Password"
+msgstr "重置密码"
+
+#: application/forms/user.py:31
+msgid "Remember Me"
+msgstr "记住我"
+
+#: application/forms/user.py:32 application/templates/dashboard/index.html:183
+#: application/templates/security/_menu.html:5
+#: application/templates/security/login_user.html:31
+#: application/templates/security/login_user_bk.html:6
+#: application/templates/security/send_login.html:6
+msgid "Login"
+msgstr "登录"
+
+#: application/templates/dash_base.html:80
+msgid "Main Dashboard"
+msgstr "主面板"
+
+#: application/templates/dash_base.html:88
+msgid "Projects"
+msgstr "工程项目"
+
+#: application/templates/dash_base.html:152
+msgid "View Profile"
+msgstr "个人信息"
+
+#: application/templates/dash_base.html:156
+msgid "Backend"
+msgstr "后台管理"
+
+#: application/templates/dash_base.html:160
+msgid "Dark Mode"
+msgstr "深色模式"
+
+#: application/templates/dash_base.html:167
+msgid "Logout"
+msgstr "退出"
+
+#: application/templates/index.html:19
+msgid "Site Info"
+msgstr "网站信息"
+
+#: application/templates/index.html:27
+msgid "Intro"
+msgstr "简介"
+
+#: application/templates/index.html:28
+msgid ""
+"CMKGLab(Chinese Medicine Know Graph Lab) is a platform for TCM Knowledge "
+"Graph."
+msgstr "CMKGLab(Chinese Medicine Know Graph Lab) 是中医药数据知识图谱平台."
+
+#: application/templates/index.html:31
+msgid "Some Data"
+msgstr "一些开放数据"
+
+#: application/templates/index.html:35
+msgid "Third Party Interface"
+msgstr "第三方接口"
+
+#: application/templates/index.html:36
+msgid ""
+"In order to serve scientific researchers more conveniently, we provide a "
+"third-party interface that conforms to API design specifications for "
+"users to call."
+msgstr "为了更方便地服务于科研人员,我们提供了符合API设计规范的第三方接口以供各位用户调用."
+
+#: application/templates/index.html:37
+msgid "visit api documents"
+msgstr ""
+
+#: application/templates/index.html:49
+msgid "Data Info"
+msgstr "数据存量"
+
+#: application/templates/index.html:58
+msgid "Total"
+msgstr "总计"
+
+#: application/templates/index.html:65
+msgid "Herb"
+msgstr "中药"
+
+#: application/templates/index.html:73
+msgid "Prescription"
+msgstr "处方"
+
+#: application/templates/index.html:81
+msgid "Gene"
+msgstr "基因"
+
+#: application/templates/index.html:89
+msgid "Protein"
+msgstr "蛋白质"
+
+#: application/templates/index.html:97
+msgid "Other"
+msgstr "其他"
+
+#: application/templates/index.html:111
+msgid "Project Statistics"
+msgstr "项目统计"
+
+#: application/templates/index.html:121 application/templates/projects.html:99
+msgid "Creating"
+msgstr "创建中"
+
+#: application/templates/create_project/create_project_base.html:62
+#: application/templates/index.html:132 application/templates/projects.html:103
+msgid "Running"
+msgstr "运行中"
+
+#: application/templates/index.html:143 application/templates/projects.html:106
+msgid "Exited"
+msgstr "休眠"
+
+#: application/templates/index.html:154 application/templates/projects.html:110
+msgid "Deleted"
+msgstr "删除"
+
+#: application/templates/create_project/create_project_base.html:46
+#: application/templates/project_detail.html:4
+#, fuzzy
+msgid "Project Name"
+msgstr "工程项目"
+
+#: application/templates/project_detail.html:9
+msgid "Status"
+msgstr "状态"
+
+#: application/templates/project_detail.html:10
+msgid "Running Status"
+msgstr "运行状态"
+
+#: application/templates/project_detail.html:24
+#: application/templates/projects.html:177
+msgid "Create Date"
+msgstr "创建日期"
+
+#: application/templates/project_detail.html:25
+msgid "when the project created"
+msgstr "创建项目的日期时间"
+
+#: application/templates/project_detail.html:39
+msgid "Build Time"
+msgstr "构建时间"
+
+#: application/templates/project_detail.html:40
+msgid "time spent for building the project"
+msgstr "项目构建所花费的时间"
+
+#: application/templates/dashboard/index.html:64
+#: application/templates/project_detail.html:53
+msgid "Basic Data"
+msgstr "基础数据"
+
+#: application/templates/project_detail.html:54
+msgid "Data for build graph"
+msgstr "用来构建图数据库的数据"
+
+#: application/templates/project_detail.html:64
+msgid "Go Graph page"
+msgstr "前往图数据库可视化页面"
+
+#: application/templates/projects.html:8
+#, fuzzy
+msgid "Projects Management"
+msgstr "工程项目"
+
+#: application/templates/create_project/create_project_base.html:3
+#: application/templates/projects.html:51
+#: application/templates/projects.html:220
+msgid "Create New Project"
+msgstr "创建新项目"
+
+#: application/templates/projects.html:61
+msgid "structured data"
+msgstr "结构化数据"
+
+#: application/templates/projects.html:71
+msgid "half-structured data"
+msgstr "半结构化数据"
+
+#: application/templates/projects.html:81
+msgid "normal data"
+msgstr "非结构化数据"
+
+#: application/templates/projects.html:143
+msgid "manage"
+msgstr "管理"
+
+#: application/templates/projects.html:154
+msgid "Subtasks"
+msgstr "子任务"
+
+#: application/templates/projects.html:228
+msgid "Content"
+msgstr "内容"
+
+#: application/templates/projects.html:359
+msgid "start this project"
+msgstr "启动项目"
+
+#: application/templates/projects.html:360
+msgid "Start this project. It will take some time."
+msgstr "启动项目. 这将花费少许的时间"
+
+#: application/templates/projects.html:365
+msgid "Yes, start it!"
+msgstr "确认启动"
+
+#: application/templates/projects.html:372
+#: application/templates/projects.html:382
+msgid "success"
+msgstr "成功"
+
+#: application/templates/projects.html:373
+#: application/templates/projects.html:383
+msgid "Your file has been started."
+msgstr "你的项目已经被启动"
+
+#: application/templates/create_project/create_project_base.html:14
+msgid "Data Input"
+msgstr "数据录入"
+
+#: application/templates/create_project/create_project_base.html:20
+msgid "Knowledge Extraction Running"
+msgstr "知识抽取"
+
+#: application/templates/create_project/create_project_base.html:26
+msgid "Knowledge Extraction Result"
+msgstr "抽取结果"
+
+#: application/templates/create_project/create_project_base.html:32
+#: application/templates/create_project/create_project_base.html:87
+msgid "KG Loading"
+msgstr "构建图数据库"
+
+#: application/templates/create_project/create_project_base.html:38
+msgid "KG Result"
+msgstr "图数据库构建结果"
+
+#: application/templates/create_project/create_project_base.html:48
+#, fuzzy
+msgid "Input Project Name"
+msgstr "工程项目"
+
+#: application/templates/create_project/create_project_base.html:51
+msgid "Project Description(limit in 500 words)"
+msgstr "项目描述(250字以内)"
+
+#: application/templates/create_project/create_project_base.html:53
+msgid "Input Project Description"
+msgstr "输入项目描述"
+
+#: application/templates/create_project/create_project_base.html:66
+msgid "Revise Data"
+msgstr "校对数据"
+
+#: application/templates/create_project/create_project_base.html:76
+msgid "email notification after success"
+msgstr "成功后通过邮件通知"
+
+#: application/templates/create_project/create_project_base.html:81
+msgid "Generate Graph"
+msgstr "生成图数据"
+
+#: application/templates/create_project/create_project_base.html:103
+msgid "Graph Result"
+msgstr "图数据结果"
+
+#: application/templates/create_project/create_project_base.html:118
+msgid "Cancel"
+msgstr "取消"
+
+#: application/templates/create_project/create_project_half_struct.html:9
+msgid "JSON File"
+msgstr "JSON文件"
+
+#: application/templates/create_project/create_project_half_struct.html:15
+msgid "To Add"
+msgstr ""
+
+#: application/templates/create_project/create_project_half_struct.html:22
+#, fuzzy
+msgid "File Upload: accept .json file"
+msgstr "文件上次: 支持 .txt 文件"
+
+#: application/templates/create_project/create_project_half_struct.html:30
+#: application/templates/create_project/create_project_half_struct.html:50
+#: application/templates/create_project/create_project_normal.html:49
+#: application/templates/create_project/create_project_normal.html:69
+msgid "Choose File"
+msgstr "选择文件"
+
+#: application/templates/create_project/create_project_half_struct.html:36
+#: application/templates/create_project/create_project_half_struct.html:56
+msgid "Run Knowledge Extractor"
+msgstr ""
+
+#: application/templates/create_project/create_project_half_struct.html:43
+#, fuzzy
+msgid "File Upload: accept .xml file"
+msgstr "文件上次: 支持 .txt 文件"
+
+#: application/templates/create_project/create_project_normal.html:9
+msgid "Manual Input"
+msgstr "手动输入"
+
+#: application/templates/create_project/create_project_normal.html:14
+msgid "Excel | Csv"
+msgstr "从excel或者csv导入"
+
+#: application/templates/create_project/create_project_normal.html:19
+msgid "Text File"
+msgstr "从文本文件导入"
+
+#: application/templates/create_project/create_project_normal.html:26
+msgid "multilines use enter twice"
+msgstr ""
+
+#: application/templates/create_project/create_project_normal.html:35
+#: application/templates/create_project/create_project_normal.html:55
+#: application/templates/create_project/create_project_normal.html:75
+msgid "Named Entity Recognition"
+msgstr "运行NER"
+
+#: application/templates/create_project/create_project_normal.html:42
+msgid "File Upload: accept .xls | .xlsx | .csv file"
+msgstr "文件上传: 支持 .xls | .xlsx | .csv 文件"
+
+#: application/templates/create_project/create_project_normal.html:62
+msgid "File Upload: accept .txt file"
+msgstr "文件上次: 支持 .txt 文件"
+
+#: application/templates/create_project/create_project_struct.html:9
+msgid "Mysql Input"
+msgstr "输入MySQL"
+
+#: application/templates/create_project/create_project_struct.html:19
+msgid "host"
+msgstr "地址"
+
+#: application/templates/create_project/create_project_struct.html:21
+msgid "Input host config"
+msgstr "输入主机地址配置"
+
+#: application/templates/create_project/create_project_struct.html:27
+msgid "port"
+msgstr "端口"
+
+#: application/templates/create_project/create_project_struct.html:29
+msgid "Input port config"
+msgstr "输入端口配置"
+
+#: application/templates/create_project/create_project_struct.html:35
+msgid "username"
+msgstr "用户名"
+
+#: application/templates/create_project/create_project_struct.html:39
+msgid "Input username config"
+msgstr "输入用户名配置"
+
+#: application/templates/create_project/create_project_struct.html:46
+#, fuzzy
+msgid "password"
+msgstr "密码"
+
+#: application/templates/create_project/create_project_struct.html:49
+msgid "Input password config"
+msgstr "输入密码配置"
+
+#: application/templates/create_project/create_project_struct.html:55
+msgid "database"
+msgstr "数据库名"
+
+#: application/templates/create_project/create_project_struct.html:59
+msgid "Input database name"
+msgstr "输入要使用的数据库名"
+
+#: application/templates/create_project/create_project_struct.html:66
+msgid "Start to parse database"
+msgstr "开始解析数据库内容"
+
+#: application/templates/dashboard/index.html:59
+msgid "Dashboard"
+msgstr "主面板"
+
+#: application/templates/dashboard/index.html:70
+msgid "Basic Data Management"
+msgstr "基础数据管理"
+
+#: application/templates/dashboard/index.html:128
+msgid "Dict Management"
+msgstr "字典数据管理"
+
+#: application/templates/dashboard/index.html:142
+#: application/templates/dashboard/index.html:148
+#, fuzzy
+msgid "User Data"
+msgstr "非结构化数据"
+
+#: application/templates/dashboard/index.html:155
+msgid "Role"
+msgstr "角色"
+
+#: application/templates/dashboard/index.html:162
+msgid "User"
+msgstr "用户"
+
+#: application/templates/dashboard/index.html:170
+#, fuzzy
+msgid "Log Data"
+msgstr "非结构化数据"
+
+#: application/templates/dashboard/index.html:176
+msgid "User Log"
+msgstr "用户日志"
+
+#: application/templates/dashboard/index.html:191
+#, fuzzy
+msgid "Sandbox Data"
+msgstr "非结构化数据"
+
+#: application/templates/dashboard/index.html:197
+#, fuzzy
+msgid "Container Management"
+msgstr "基础数据管理"
+
+#: application/templates/dashboard/index.html:204
+msgid "Container"
+msgstr ""
+
+#: application/templates/security/_menu.html:2
+msgid "Menu"
+msgstr "菜单"
+
+#: application/templates/security/_menu.html:8
+msgid "Unified Sign In"
+msgstr "登陆"
+
+#: application/templates/security/_menu.html:11
+#: application/templates/security/register_user.html:6
+msgid "Register"
+msgstr "注册"
+
+#: application/templates/security/_menu.html:14
+msgid "Forgot password"
+msgstr "忘记密码"
+
+#: application/templates/security/_menu.html:17
+msgid "Confirm account"
+msgstr "确认账户"
+
+#: application/templates/security/change_password.html:6
+msgid "Change password"
+msgstr "修改密码"
+
+#: application/templates/security/forgot_password.html:6
+msgid "Send password reset instructions"
+msgstr ""
+
+#: application/templates/security/login_user.html:33
+#, fuzzy
+msgid "Access the CMKGLab using your email and passcode."
+msgstr "使用您的邮箱和密码进入CMKGLab"
+
+#: application/templates/security/reset_password.html:6
+msgid "Reset password"
+msgstr "重置密码"
+
+#: application/templates/security/send_confirmation.html:6
+msgid "Resend confirmation instructions"
+msgstr "重新发送"
+
+#: application/templates/visneo/vis_neo.html:4
+msgid "visual KG"
+msgstr "可视化知识图谱"
+
+#~ msgid "Test Sample"
+#~ msgstr "测试案例"
+
+#~ msgid "Email Address"
+#~ msgstr "邮件地址"
+
+#~ msgid "Password"
+#~ msgstr "密码"
+
+#~ msgid "Remember Me"
+#~ msgstr "记住我"
+
+#~ msgid "Christin is a website for TCM Knowledge Graph."
+#~ msgstr "Christin 是服务于中医药知识图谱的网站"
+
+#~ msgid "NER Running"
+#~ msgstr "NER运行"
+
+#~ msgid "NER Result"
+#~ msgstr "NER结果"
+
+#~ msgid "用户名"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Projects\n"
+#~ "                Management"
+#~ msgstr "项目管理"
+
+#~ msgid "XML File"
+#~ msgstr "XML文件"
+

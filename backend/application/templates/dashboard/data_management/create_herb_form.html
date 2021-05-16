@@ -1,0 +1,14 @@
+{% from "./dashboard/data_management/_formhelpers.html"
+                import render_field %}
+<form action="#" class="form-validate is-alter"
+      novalidate="novalidate" id="form-data-create">
+    {% for foo in form %}
+        {{ render_field(foo,class_="form-control") }}
+    {% endfor %}
+
+    <div class="container">
+        <button class="btn btn-primary" type="button" id="create-submit">
+            确认创建
+        </button>
+    </div>
+</form>

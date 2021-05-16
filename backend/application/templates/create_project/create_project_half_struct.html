@@ -1,0 +1,62 @@
+{% extends 'create_project/create_project_base.html' %}
+
+{% block text_type %}
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item"><a class="nav-link active"
+                                data-toggle="tab"
+                                href="#tabItem5"><em
+                class="icon ni ni-file-text"></em><span>{{ _('JSON File') }}</span></a>
+        </li>
+        <li class="nav-item" style="pointer-events: none">
+            <a class="nav-link" data-toggle="tab"
+               href="#tabItem6"
+            ><em
+                    class="icon ni ni-table-view"></em><span>{{ _('To Add') }}</span></a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="tabItem5">
+            <div class="form-group"><label
+                    class="form-label" for="default-06">
+                {{ _('File Upload: accept .json file') }}</label>
+                <div class="form-control-wrap">
+                    <div class="custom-file"><input
+                            type="file" multiple=""
+                            accept=".json"
+                            class="custom-file-input"
+                            id="json-file"><label
+                            class="custom-file-label"
+                            for="customFile">{{ _('Choose File') }}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-lg btn-primary"
+                        id="extract-json-file">{{ _('Run Knowledge Extractor') }}
+                </button>
+            </div>
+        </div>
+        <div class="tab-pane" id="tabItem6">
+            <div class="form-group"><label
+                    class="form-label" for="default-06">
+                {{ _('File Upload: accept .xml file') }}</label>
+                <div class="form-control-wrap">
+                    <div class="custom-file"><input
+                            type="file" multiple=""
+                            class="custom-file-input"
+                            id="csv-file"><label
+                            class="custom-file-label"
+                            for="customFile">{{ _('Choose File') }}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-lg btn-primary"
+                        id="excel2diy">{{ _('Run Knowledge Extractor') }}
+                </button>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

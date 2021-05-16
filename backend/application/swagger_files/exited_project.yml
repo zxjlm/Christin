@@ -1,0 +1,19 @@
+tags:
+  - project
+description: exited a project in docker container
+consumes:
+  - application/json
+parameters:
+  - name: task_id
+    in: path
+    type: string
+    required: true
+    format: uuid
+
+responses:
+  200:
+    description: 'success'
+    schema:
+      $ref: '#/definitions/normal_response'
+  405:
+    "description": "Invalid input"

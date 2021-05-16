@@ -1,0 +1,35 @@
+{% macro project_tools(status) %}
+    <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right"
+         style="">
+        <ul class="link-list-opt no-bdr">
+            {% if status!='creating' %}
+                <li>
+                    <a href="javascript:"
+                       data-toggle="modal"
+                       class="show-project-detail-modal"
+                       data-target="#view-project-detail">
+                        {{ _('View Detail') }}
+                    </a>
+                </li>
+            {% endif %}
+            {% if status=='creating' %}
+                <li>
+                    <a href="javascript:"
+                       class="eg-swal-av3 project-process"><span>{{ _('Query Process') }}</span></a>
+                </li>
+            {% endif %}
+            {% if status=='running' or status =='exited' %}
+                <li>
+                    <a href="javascript:"
+                       class="eg-swal-av3 project-delete"><span>{{ _('Delete') }}</span></a>
+                </li>
+            {% endif %}
+            {% if status =='exited' %}
+                <li>
+                    <a href="javascript:"
+                       class="eg-swal-av3 project-start"><span>{{ _('Start') }}</span></a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+{% endmacro %}

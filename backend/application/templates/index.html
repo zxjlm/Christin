@@ -1,0 +1,168 @@
+{% extends 'dash_base.html' %}
+
+{% block body_content %}
+
+    <div class="nk-block-head nk-block-head-sm">
+        <div class="nk-block-between">
+            <div class="nk-block-head-content"><h3
+                    class="nk-block-title page-title">Welcome ~</h3></div>
+        </div>
+    </div>
+
+    <div class="nk-block">
+        <div class="row g-gs">
+            <div class="col-xxl-3 col-md-6">
+                <div class="card h-60">
+                    <div class="card-header bg-light">
+                        <div class="card-header-title">
+                            <div class="card-title"><h6
+                                    class="title">{{ _('Site Info') }}</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-inner">
+                        <div class="card-body">
+                            <div class="info">
+                                <h6>{{ _('Intro') }}</h6>
+                                <p>{{ _('CMKGLab(Chinese Medicine Know Graph Lab) is a platform for TCM Knowledge Graph.') }}</p>
+                            </div>
+                            <div class="info" style="margin-top: 30px">
+                                <h6>{{ _('Some Data') }}</h6>
+                                <p>{{ _('Now serving for <scan class="num-people">{}</scan> People'.format(basic['user_c'])) }}</p>
+                            </div>
+                            <div class="info" style="margin-top: 30px">
+                                <h6>{{ _('Third Party Interface') }}</h6>
+                                <p>{{ _('In order to serve scientific researchers more conveniently, we provide a third-party interface that conforms to API design specifications for users to call.') }}</p>
+                                <a href="/apidocs/">{{ _('visit api documents') }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xxl-3 col-md-6">
+                <div class="card h-100">
+                    <div class="card-header bg-light">
+                        <div class="card-header-title">
+                            <div class="card-title"><h6
+                                    class="title">{{ _('Data Info') }}</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-inner">
+                        <ul class="nk-store-statistics">
+                            <li class="item">
+                                <div class="info">
+                                    <div class="title">{{ _('Total') }}</div>
+                                    <div class="count">{{ basic['total_c'] }}</div>
+                                </div>
+                            </li>
+
+                            <li class="item">
+                                <div class="info">
+                                    <div class="title">{{ _('Herb') }}</div>
+                                    <div class="count">{{ basic['herb_c'] }}</div>
+                                </div>
+                                <em class="icon bg-primary-dim ni ni-plus-medi-fill"></em>
+                            </li>
+
+                            <li class="item">
+                                <div class="info">
+                                    <div class="title">{{ _('Prescription') }}</div>
+                                    <div class="count">{{ basic['pre_c'] }}</div>
+                                </div>
+                                <em class="icon bg-primary-dim ni ni-file-check"></em>
+                            </li>
+
+                            <li class="item">
+                                <div class="info">
+                                    <div class="title">{{ _('Gene') }}</div>
+                                    <div class="count">{{ basic['gene_c'] }}</div>
+                                </div>
+                                <em class="icon bg-primary-dim ni ni-line-chart"></em>
+                            </li>
+
+                            <li class="item">
+                                <div class="info">
+                                    <div class="title">{{ _('Protein') }}</div>
+                                    <div class="count">{{ basic['pro_c'] }}</div>
+                                </div>
+                                <em class="icon bg-primary-dim ni ni-property"></em>
+                            </li>
+
+                            <li class="item">
+                                <div class="info">
+                                    <div class="title">{{ _('Other') }}</div>
+                                    <div class="count">{{ basic['other_c'] }}</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xxl-3 col-md-6">
+                <div class="card h-30">
+                    <div class="card-header bg-light">
+                        <div class="card-header-title">
+                            <div class="card-title"><h6
+                                    class="title">{{ _('Project Statistics') }}</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-gs">
+                        <div class="col-sm-6">
+                            <div class="card-inner">
+                                <div class="card-body">
+                                    <div class="info">
+                                        <h6>{{ _('Creating') }}</h6>
+                                        <p>{{ count['creating'] }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="card-inner">
+                                <div class="card-body">
+                                    <div class="info">
+                                        <h6>{{ _('Running') }}</h6>
+                                        <p>{{ count['running'] }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="card-inner">
+                                <div class="card-body">
+                                    <div class="info">
+                                        <h6>{{ _('Exited') }}</h6>
+                                        <p>{{ count['exited'] }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="card-inner">
+                                <div class="card-body">
+                                    <div class="info">
+                                        <h6>{{ _('Deleted') }}</h6>
+                                        <p>{{ count['deleted'] }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

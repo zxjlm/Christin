@@ -1,0 +1,17 @@
+{% macro render_field(field) %}
+    <div class="row g-3 align-center">
+        <div class="col-lg-5">
+            <div class="form-group">
+                <label class="form-label"
+                       for="{{ field.id }}">{{ field.label.text }}</label>
+            </div>
+        </div>
+        <div class="col-lg-7">
+            <div class="form-group">
+                <div class="form-control-wrap">
+                    {{ field(**kwargs)|safe }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endmacro %}

@@ -1,0 +1,331 @@
+<!doctype html>
+<html>
+<head>
+    <title>{{ _('visual KG') }}</title>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- FIXME: load from dist -->
+    <script type="text/javascript"
+            src="../../static/js/neovis/neovis.js"></script>
+
+    <script type="text/javascript">
+        let viz;
+        let node_id;
+        let node_click_event_flag = false;
+
+        function sleep(ms) {
+            return new Promise(
+                resolve => setTimeout(resolve, ms)
+            );
+        }
+
+        function draw() {
+            var config = {
+                container_id: "viz",
+                server_url: "bolt://{{ neo_host }}:{{ port }}/",
+                server_user: "neo4j",
+                server_password: '{{ pwd }}',
+                labels: {
+                    "Herb": {
+                        "caption": "English_name",
+                        "size": 1.5,
+                    },
+                    "Gene": {
+                        "caption": "s_name",
+                        "size": 0.5,
+                    },
+                    "Mol": {
+                        "caption": "s_name",
+                        "size": 1.0,
+                    },
+                    "TCM_symptom": {
+                        "caption": "s_name",
+                        "size": 0.8,
+                    },
+                    "MM_symptom": {
+                        "caption": "s_name",
+                        "size": 0.8,
+                    },
+                    "Disease": {
+                        "caption": "s_name",
+                        "size": 1.2,
+                    },
+                    [NeoVis.NEOVIS_DEFAULT_CONFIG]: {
+                        "caption": "s_name",
+                        //"size": "defaultPagerank",
+                        //"community": "defaultCommunity"
+                        //"sizeCypher": "defaultSizeCypher"
+
+                    }
+                },
+                relationships: {
+                    // "HerbIngredient": {
+                    //     "thickness": 5,
+                    // },
+                    // 'TargetGene': {
+                    //     "thickness": 4,
+                    // },
+                    // 'HerbTCM': {
+                    //     "thickness": 3,
+                    // },
+                    // 'GeneIndications': {
+                    //     "thickness": 2,
+                    // },
+                    // 'TCM2MM': {
+                    //     "thickness": 1,
+                    // },
+                    // 'MM2Dis': {
+                    //     "thickness": 6,
+                    // }
+                },
+                // initial_cypher: "match (p:Person)-[r]-(o:Organization)-[r1]-(p2:Person) RETURN * LIMIT 10",
+                initial_cypher: "MATCH (n) RETURN n LIMIT 100",
+                arrows: false,
+                //console_debug: true,
+            };
+
+            viz = new NeoVis.default(config);
+            viz.render();
+
+            viz.registerOnEvent("completed", (e) => {
+
+                if (!node_click_event_flag) {
+                    viz["_network"].on("click", (event) => {
+                        if (event['nodes'][0]) {
+                            if (node_id === event['nodes'][0]) {
+                                viz.updateWithCypher('MATCH r=(s)-->() WHERE ID(s) = ' + node_id + ' RETURN r');
+                            } else {
+                                node_id = event['nodes'][0]
+                            }
+                        }
+                    });
+                    node_click_event_flag = true
+                }
+            });
+
+        }
+    </script>
+
+    <script src="../../static/js/myjs/jquery.bootstrap-duallistbox.js"></script>
+
+    <link href="https://cdn.bootcdn.net/ajax/libs/bootstrap4-duallistbox/4.0.2/bootstrap-duallistbox.min.css"
+          rel="stylesheet">
+    <link rel="stylesheet"
+          href="../../static/css/mycss/sliding_panel.css">
+    <link id="skin-default" rel="stylesheet"
+          href="../../static/css/dashlite/theme.css?ver=2.2.0">
+    <link href="https://cdn.bootcdn.net/ajax/libs/toastr.js/latest/css/toastr.min.css"
+          rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/jquery-autocomplete/1.0.7/jquery.auto-complete.css"
+          rel="stylesheet">
+</head>
+<body class="nk-body bg-lighter npc-default has-sidebar no-touch nk-nio-theme"
+      onload="draw()">
+<div class="nk-app-root">
+    <div id="viz"></div>
+</div>
+<ul class="nk-sticky-toolbar">
+    <li class="demo-settings"><a class="toggle tipinfo"
+                                 data-target="settingPanel" href="#" title=""
+                                 data-original-title="Demo Settings"><em
+            class="icon ni ni-setting-alt"></em></a></li>
+
+</ul>
+
+<div class="nk-demo-panel toggle-slide toggle-slide-right toggle-screen-any"
+     data-content="settingPanel" data-toggle-overlay="true"
+     data-toggle-body="true" data-toggle-screen="any">
+    <div class="nk-demo-head"><h6 class="mb-0">Preview Settings</h6><a
+            class="nk-demo-close toggle btn btn-icon btn-trigger revarse mr-n2"
+            data-target="settingPanel" href="#"><em
+            class="icon ni ni-cross"></em></a></div>
+    <div class="nk-opt-panel" data-simplebar="init">
+        <div class="simplebar-wrapper" style="margin: 0px;">
+            <div class="simplebar-height-auto-observer-wrapper">
+                <div class="simplebar-height-auto-observer"></div>
+            </div>
+            <div class="simplebar-mask">
+                <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
+                    <div class="simplebar-content-wrapper"
+                         style="height: auto; overflow: hidden scroll;">
+                        <div class="simplebar-content" style="padding: 0px;">
+                            <!--
+                                <div class="nk-opt-set">
+                                    <div class="nk-opt-set-title">Find
+                                        Relations(Single Node)
+                                    </div>
+                                    <button type="button"
+                                            class="btn btn-sm btn-primary"
+                                            id="find-relations">
+                                        Find Relations
+                                    </button>
+                                </div>
+                                -->
+                            <div class="nk-opt-set">
+                                <div class="nk-opt-set-title">Find
+                                    Relations(Multi Nodes)
+                                </div>
+                                <select id="select-nodes" class="dual-listbox"
+                                        multiple>
+                                    {% for id_,name in nodes.items() %}
+                                        <option value="{{ id_ }}">{{ name }}</option>
+                                    {% endfor %}
+                                </select>
+                                <button type="button"
+                                        class="btn btn-sm btn-primary"
+                                        id="find-multi-nodes-relations"
+                                        style="margin-top: 20px">
+                                    Find Relations
+                                </button>
+                            </div>
+                            <div class="nk-opt-set">
+                                <div class="nk-opt-set-title">Find Path
+                                </div>
+                                <div class="nk-opt-list col-2x">
+                                    <div class="nk-opt-item only-text active">
+                                        <input class="form-control-sm"
+                                               placeholder="Begin Node"
+                                               id="begin-node">
+                                    </div>
+                                    <div class="nk-opt-item only-text">
+                                        <input class="form-control-sm"
+                                               placeholder="End Node"
+                                               id="end-node">
+                                    </div>
+                                </div>
+                                <button type="button"
+                                        class="btn btn-sm btn-primary"
+                                        id="find-shortest-path"
+                                        style="margin-top: 20px">
+                                    Find Shortest Path
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="simplebar-placeholder"
+                 style="width: auto; height: 883px;"></div>
+        </div>
+        <div class="simplebar-track simplebar-horizontal"
+             style="visibility: hidden;">
+            <div class="simplebar-scrollbar"
+                 style="width: 0px; display: none;"></div>
+        </div>
+        <div class="simplebar-track simplebar-vertical"
+             style="visibility: visible;">
+            <div class="simplebar-scrollbar"
+                 style="height: 114px; transform: translate3d(0px, 0px, 0px); display: block;"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let availableTags = {{ node_name|safe }};
+
+    $(document).ready(function () {
+        $('#find-relations').click(() => {
+            if (node_id) {
+                viz.updateWithCypher('MATCH r=(s)-->() WHERE ID(s) = ' + node_id + ' RETURN r');
+                if (viz._data['nodes'].length === 0) {
+                    toastr.warning('query complete, none result find')
+                } else {
+                    toastr.success('query success')
+                }
+            } else {
+                toastr.warning('choose a node first')
+            }
+        })
+
+        $('#find-multi-nodes-relations').click(() => {
+            let node_list = dual_listbox.val()
+            if (node_list) {
+                let query_str = 'MATCH r = (s)-[*]->() WHERE ID(s) IN [' + node_list.join() + '] RETURN r limit 500'
+                console.log(query_str)
+                viz.renderWithCypher(query_str)
+                if (viz._data['nodes'].length === 0) {
+                    toastr.warning('query complete, none result find')
+                } else if (viz._data['nodes'].length === 500) {
+                    toastr.success('query success, but web can only display 500 nodes')
+                } else {
+                    toastr.success('query success')
+                }
+            } else {
+                toastr.warning('at least choose one node')
+            }
+        })
+
+        $('#find-shortest-path').click(() => {
+            let start_node = document.getElementById('begin-node').value;
+            let end_node = document.getElementById('end-node').value;
+
+            if (start_node === end_node) {
+                toastr.warning('two node must be different!')
+            } else if (start_node === '' || end_node === '') {
+                toastr.warning('node can`t be empty!')
+            } else if (availableTags.indexOf(start_node) === -1 || availableTags.indexOf(end_node) === -1) {
+                toastr.warning('node must in the choice list!')
+            } else {
+                let query_str = "MATCH (A:Herb {s_name:'" + start_node + "'}),(B:Gene { s_name: '" + end_node + "' }), p = shortestPath((A)-[*]-(B)) RETURN p"
+                console.log(query_str)
+                viz.renderWithCypher(query_str);
+                if (viz._data['nodes'].length === 0) {
+                    toastr.warning('query complete, none result find')
+                } else {
+                    toastr.success('query success')
+                }
+            }
+
+        })
+
+        $('#begin-node').autoComplete({
+            minChars: 2,
+            source: function (term, suggest) {
+                term = term.toLowerCase();
+                var choices = availableTags;
+                var matches = [];
+                for (i = 0; i < choices.length; i++)
+                    if (~choices[i].toLowerCase().indexOf(term)) matches.push(choices[i]);
+                suggest(matches);
+            }
+        });
+
+        $('#end-node').autoComplete({
+            minChars: 2,
+            source: function (term, suggest) {
+                term = term.toLowerCase();
+                var choices = availableTags;
+                var matches = [];
+                for (i = 0; i < choices.length; i++)
+                    if (~choices[i].toLowerCase().indexOf(term)) matches.push(choices[i]);
+                suggest(matches);
+            }
+        });
+
+    })
+
+    let dual_listbox = $('#select-nodes').bootstrapDualListbox();
+
+    $("#reload").click(function () {
+
+        var cypher = $("#cypher").val();
+
+        if (cypher.length > 3) {
+            viz.renderWithCypher(cypher);
+        } else {
+            console.log("reload");
+            viz.reload();
+
+        }
+
+    });
+</script>
+
+<script src="../../static/js/dashlite/bundle.js?ver=2.2.0"></script>
+<script src="../../static/js/dashlite/scripts.js?ver=2.2.0"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery-autocomplete/1.0.7/jquery.auto-complete.js"></script>
+</body>
+
+
+</html>

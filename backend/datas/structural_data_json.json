@@ -1,0 +1,35 @@
+[
+  {
+    "EntType": "Herb",
+    "name": "佛手",
+    "latin_name": "Fructus Citri sarcodactylis",
+    "en_name": "Finger Citron",
+    "origin": "<中药方剂大辞典>"
+  },
+  {
+    "EntType": "Herb",
+    "name": "牵牛子",
+    "latin_name": "Semen Pharbitidis",
+    "en_name": "Pharbitis seed",
+    "application": "To regulate the qi of the liver and stomach, and relieve pain."
+  },
+  {
+    "EntType": "Herb",
+    "name": "柿蒂",
+    "latin_name": "Calyx Kaki",
+    "en_name": "calyx and receptacle of a Persimmon",
+    "application": "To check the upward flow of the stomach qi."
+  },
+  {
+    "EntType": "Herb",
+    "name": "天仙藤",
+    "latin_name": "Herba Aristolochiae",
+    "en_name": "Dutchmanspipe Vine"
+  },
+  {
+    "EntType": "Herb",
+    "name": "菊苣",
+    "latin_name": "Herba Cichorii",
+    "en_name": "Chicory Herb"
+  }
+]

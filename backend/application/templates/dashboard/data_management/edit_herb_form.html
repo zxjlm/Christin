@@ -1,0 +1,14 @@
+{% from "./dashboard/data_management/_formhelpers.html"
+                import render_field %}
+<form action="#" class="form-validate is-alter"
+      novalidate="novalidate" id="form-data-edit">
+    {% for foo in form %}
+        {{ render_field(foo,class_="form-control") }}
+    {% endfor %}
+
+    <div class="container">
+        <button class="btn btn-primary" type="button" id="edit-submit">
+            确认修改
+        </button>
+    </div>
+</form>

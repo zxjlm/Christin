@@ -1,0 +1,179 @@
+{% extends 'dash_base.html' %}
+
+{% block body_content %}
+    <div class="container-sm" style="text-align: -webkit-center;"
+         id="main-body">
+        <div class="input-group">
+            <span class="input-group-text">With textarea</span>
+            <textarea class="form-control" aria-label="With textarea"
+                      id="data4post">近一周饮食不当,一度腹泻,日3次,泻下后精神疲烦,时有低热,怕风,口干,痰中夹有血丝,左侧胸痛时作</textarea>
+        </div>
+        <button class="btn btn-outline-secondary" type="button" id="text2DIY">
+            自训练模型
+        </button>
+        <button class="btn btn-outline-secondary" type="button"
+                id="text2normal">
+            通用模型
+        </button>
+        <button class="btn btn-outline-secondary" type="button" id="text2fake">
+            假模型
+        </button>
+
+        <div class="container-sm">
+            <div class="card">
+                <div class="card-body" id="show-res">
+                    This is some text within a card body.
+                </div>
+            </div>
+        </div>
+        <div class="container-sm">
+            <button class="btn btn-outline-secondary" type="button"
+                    id="submit_annotation_result">确认提交
+            </button>
+        </div>
+
+        <div id="after-sandbox-finish">
+            <div class="container-fluid">
+                <p id="sandbox-config"></p>
+            </div>
+            <div class="container-fluid">
+                <div id="neo-sandbox-page">
+                    <div id="viz"></div>
+                    Cypher query: <textarea rows="4" cols=50 id="cypher">MATCH (n:Herb) RETURN n LIMIT 25</textarea><br>
+                    <input type="submit" value="Submit" id="reload">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="progress-modal" data-bs-backdrop="static"
+         data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Modal
+                        处理进度</h5>
+                    <button type="button" class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid" id="show-sandbox"
+                         style="margin-top: 30px">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                 data-progress="75"
+                                 id="sandbox-progress"></div>
+                        </div>
+                        <div style="margin-top: 30px" id="progress-message">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        let base64 = ''
+        let json_res = ''
+        var texts = []
+        var task_id = ''
+
+        const api_for_my_model = "{{ url_for('main_api.my_model') }}"
+        const api_for_normal_model = "{{ url_for('main_api.normal_model') }}"
+        const api_for_fake_model = "{{ url_for('main_api.fake_model') }}"
+        const api_for_get_sandbox = "{{ url_for('main_api.build_sandbox') }}"
+
+        const page_for_neo_sanbox = "{{ url_for('main.neo_page',task_id='none') }}"
+
+        let api_for_sandbox_progress = "{{ url_for('main_api.taskstatus',task_id='none') }}"
+
+
+        $(document).ready(function () {
+            $("#text2DIY").click(function () {
+                {#get_static_page(page_font_url, 'main-body')#}
+                let data4post = {'message': document.getElementById('data4post').value}
+                postData(api_for_my_model, data4post).then(data => {
+                    let textfiled = document.getElementById('show-res');
+
+                    textfiled.innerHTML = generate_cards(data['data'])
+
+                    $(".delete").click(function () {
+                        this.parentElement.outerHTML = this.parentElement.innerText.strip()
+                    })
+
+                    $(".tagging").click(function () {
+                        tagText1(this.innerText);
+                    })
+                    //$(".fentity").click(function () {
+                    //    let fortext = this.innerText.strip().split(' ')
+                    //    this.outerHTML = fortext[1]
+                    //})
+                });
+
+            })
+
+            $("#text2normal").click(function () {
+                {#get_static_page(page_font_url, 'main-body')#}
+                let data4post = {'message': document.getElementById('data4post').value}
+                postData(api_for_normal_model, data4post).then(data => {
+                    let textfiled = document.getElementById('show-res');
+                    textfiled.innerHTML = data['data']
+                });
+            })
+
+            $("#text2fake").click(function () {
+                let data4post = {'message': document.getElementById('data4post').value}
+                postData(api_for_fake_model, data4post).then(data => {
+                    let textfiled = document.getElementById('show-res');
+                    textfiled.innerHTML = generate_cards(data['data'])
+                });
+
+                $(".delete").click(function () {
+                    this.parentElement.outerHTML = this.parentElement.innerText.strip()
+                })
+            })
+
+            $("#submit_annotation_result").click(function () {
+                let labels = document.getElementsByClassName('entity-label');
+                let contents = document.getElementsByClassName('entity-text');
+                if (labels.length !== contents.length) {
+                    toastr["error"]("length of labels not equal with texts")
+                }
+
+                let annotation_cards = document.getElementsByClassName('annotation-card')
+
+                let data_for_post = []
+                for (let i = 0; i < annotation_cards.length; i++) {
+                    data_for_post.push(generate_text_and_ents_from_html_1(annotation_cards[i]))
+                }
+
+                // let data_for_post = generate_text_and_ents_from_html(labels,contents)
+                postData(api_for_get_sandbox, data_for_post).then(data => {
+                    if (data['code'] === 200) {
+                        task_id = data['task_id']
+                        let progress_msg_div = document.getElementById('progress-message')
+
+                        var progress_modal = new bootstrap.Modal(document.getElementById
+                        ('progress-modal'), {
+                            backdrop: 'static',
+                            keyboard: false
+                        })
+                        progress_modal.show()
+
+                        update_progress(progress_msg_div, progress_modal)
+                    } else {
+                        toastr.error(data['msg'])
+                    }
+                })
+            })
+
+        });
+    </script>
+{% endblock %}
+

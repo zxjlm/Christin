@@ -1,0 +1,64 @@
+tags:
+  - NLP
+description: NER from text message
+consumes:
+  - application/json
+parameters:
+  - name: message
+    in: body
+    required: true
+    schema:
+      $ref: "#/definitions/nerRequestData"
+
+definitions:
+  nerRequestData:
+    type: object
+    properties:
+      message:
+        type: string
+        example: '近一周饮食不当,一度腹泻,日3次,泻下后精神疲烦,时有低热,怕风,口干,痰中夹有血丝,左侧胸痛时作'
+  nerString:
+    type: object
+    properties:
+      msg:
+        type: string
+        example: "success"
+      data:
+        type: object
+        properties:
+          text:
+            type: string
+            example: '近一周饮食不当,一度腹泻,日3次,泻下后精神疲烦,时有低热,怕风,口干,痰中夹有血丝,左侧胸痛时作'
+          ents:
+            type: array
+            items:
+              type: object
+              properties:
+                start:
+                  type: int
+                  example: 20
+                end:
+                  type: int
+                  example: 24
+                label:
+                  type: string
+                  example: 'ZZ'
+          title:
+            type: string
+            example: ''
+          settings:
+            type: object
+            properties:
+              lang:
+                type: string
+                example: 'zh'
+              direction:
+                type: string
+                example: 'ltr'
+responses:
+  200:
+    description: 'success'
+    schema:
+      $ref: '#/definitions/nerString'
+  405:
+    "description": "Invalid input"

@@ -1,0 +1,10 @@
+exclude_dirs:
+  - '/test/'
+  - 'baseconfig.py'
+  - 'port_scanner.py'
+  - 'common_model_opt.py'
+  - 'dashboard_datamanage.py'
+  - 'normal.py'
+  - 'mysql_handler.py'
+  - 'tasks.py'
+  - 'neo4j_handler.py'

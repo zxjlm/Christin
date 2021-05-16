@@ -1,0 +1,176 @@
+.tag {
+    font-size: 16pt;
+    height: 1.5em;
+    padding-left: .5em;
+    padding-right: .5em;
+}
+
+.tag:not(body) {
+    align-items: center;
+    border-radius: 4px;
+    display: inline-flex;
+    font-size: .8rem;
+    height: 2em;
+    justify-content: center;
+    line-height: 1.5;
+    padding-left: .75em;
+    padding-right: .75em;
+    white-space: nowrap;
+}
+
+.delete {
+    -webkit-appearance: none;
+    background-color: rgba(10, 10, 10, .2);
+    border: none;
+    border-radius: 290486px;
+    cursor: pointer;
+    pointer-events: auto;
+    display: inline-block;
+    flex-grow: 0;
+    flex-shrink: 0;
+    font-size: 0;
+    height: 20px;
+    max-height: 20px;
+    max-width: 20px;
+    min-height: 20px;
+    min-width: 20px;
+    outline: 0;
+    position: relative;
+    vertical-align: top;
+    width: 20px;
+}
+
+.delete:hover {
+    background-color: rgba(10, 10, 10, .3);
+}
+
+.delete:focus {
+    background-color: rgba(10, 10, 10, .3);
+}
+
+.delete:active {
+    background-color: rgba(10, 10, 10, .3);
+}
+
+.delete::before {
+    height: 2px;
+    width: 50%;
+}
+
+.delete::after {
+    height: 50%;
+    width: 2px;
+}
+
+.delete::before, .delete::after {
+    background-color: #fff;
+    content: "";
+    display: block;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%) rotate(
+            45deg
+    );
+    transform-origin: center center;
+}
+
+
+.is-small.delete {
+    height: 16px;
+    max-height: 16px;
+    max-width: 16px;
+    min-height: 16px;
+    min-width: 16px;
+    width: 16px;
+}
+
+.ZZ {
+    background-color: #7aecec !important;
+    color: white
+}
+
+.CD {
+    background-color: #bfeeb7 !important;
+    color: white
+}
+
+.BW {
+    background-color: #feca74 !important;
+    color: white
+}
+
+.LOC {
+    background-color: #ff9561 !important;
+    color: white
+}
+
+.HERB {
+    background-color: #aa9cfc !important;
+    color: white
+}
+
+.PRESCRIPTION {
+    background-color: #c887fb !important;
+    color: white
+}
+
+.MM {
+    background-color: #9cc9cc !important;
+    color: white
+}
+
+.TCM {
+    background-color: #ffeb80 !important;
+    color: white
+}
+
+.LAW {
+    background-color: #ff8197 !important;
+    color: white
+}
+
+.LANGUAGE {
+    background-color: #ff8197 !important;
+    color: white
+}
+
+.WORK_OF_ART {
+    background-color: #f0d0ff;
+    color: white
+}
+
+.DATE {
+    background-color: #bfe1d9;
+    color: white
+}
+
+.TIME {
+    background-color: #bfe1d9;
+    color: white
+}
+
+.MONEY {
+    background-color: #e4e7d2;
+    color: white
+}
+
+.QUANTITY {
+    background-color: #e4e7d2;
+    color: white
+}
+
+.ORDINAL {
+    background-color: #e4e7d2;
+    color: white
+}
+
+.CARDINAL {
+    background-color: #e4e7d2;
+    color: white
+}
+
+.PERCENT {
+    background-color: #e4e7d2;
+    color: white
+}
