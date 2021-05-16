@@ -7,7 +7,7 @@
 @time: 2020/8/10 21:54
 @desc:
 """
-from config.settings import MYSQL_HOST
+from config.settings import MYSQL_HOST, MYSQL_PWD, MYSQL_PORT, MYSQL_USER
 
 
 class SecureInfo:
@@ -17,7 +17,7 @@ class SecureInfo:
 
     @staticmethod
     def get_mysql_of_development():
-        return f"mysql+cymysql://root:root@{MYSQL_HOST}/christin"
+        return f"mysql+cymysql://{MYSQL_USER}:{MYSQL_PWD}@{MYSQL_HOST}:{MYSQL_PORT}/christin"
 
     @staticmethod
     def get_mysql_of_production():
@@ -25,7 +25,7 @@ class SecureInfo:
         #     return 'mysql+cymysql://root:NKKMCDWJFW3CFRwJcA@39.108.229.166' \
         #            ':6622/christin'
         # else:
-        return f"mysql+cymysql://root:root@{MYSQL_HOST}/christin"
+        return f"mysql+cymysql://{MYSQL_USER}:{MYSQL_PWD}@{MYSQL_HOST}:{MYSQL_PORT}/christin"
 
     @staticmethod
     def get_mysql_of_test():

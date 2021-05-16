@@ -12,8 +12,8 @@ ENV POETRY_VERSION=1.1.4
 
 # install dependencies
 RUN pip install "poetry==$POETRY_VERSION"
-COPY ./backend/ /Christin/
+COPY ./backend/poetry.lock ./backend/pyproject.toml /Christin/
 RUN poetry config virtualenvs.create false && poetry install --no-interaction --no-ansi
 
 # copy project
-# COPY . .
+COPY ./backend/ /Christin/

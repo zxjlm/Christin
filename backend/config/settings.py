@@ -35,7 +35,10 @@ LANGUAGES = {"en": "English", "zh": "Chinese"}
 REDIS_HOST = os.environ.get("CHRISTIN_REDIS_HOST", "localhost")
 NEO_HOST = os.environ.get("CHRISTIN_NEO_HOST", "localhost")
 MYSQL_HOST = os.environ.get("CHRISTIN_MYSQL_HOST", "localhost")
-SERVER = "39.99.178.69"
+MYSQL_PORT = os.environ.get("CHRISTIN_MYSQL_PORT", "3306")
+MYSQL_USER = os.environ.get("CHRISTIN_MYSQL_USER", "root")
+MYSQL_PWD = os.environ.get("CHRISTIN_MYSQL_PWD", "root")
+SERVER = NEO_HOST
 
 SWAGGER_FOLDER = os.path.join("..", "..", "swagger_files")
 

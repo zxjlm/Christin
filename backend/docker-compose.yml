@@ -1,7 +1,6 @@
-version: '3.8'
+version: "3.8"
 
 services:
-
   web:
     build: .
     image: christin_web
@@ -15,6 +14,7 @@ services:
       - /usr/bin/docker:/usr/bin/docker
     environment:
       - FLASK_DEBUG=0
+      - CHRISTIN_MYSQL_HOST=host.docker.internal
       - APP_SETTINGS=config.production.ProductionConfig
       - CELERY_BROKER_URL=redis://redis:6379/0
       - CELERY_RESULT_BACKEND=redis://redis:6379/0
@@ -42,19 +42,19 @@ services:
       - redis
 
   dashboard:
-      build: .
-      command: flower --app=application.server.tasks.celery --port=5555 --broker=redis://redis:6379/0
-      ports:
-        - 5556:5555
-      environment:
-        - FLASK_DEBUG=1
-        - APP_SETTINGS=config.production.ProductionConfig
-        - CELERY_BROKER_URL=redis://redis:6379/0
-        - CELERY_RESULT_BACKEND=redis://redis:6379/0
-      depends_on:
-        - web
-        - redis
-        - worker
+    build: .
+    command: flower --app=application.server.tasks.celery --port=5555 --broker=redis://redis:6379/0
+    ports:
+      - 5556:5555
+    environment:
+      - FLASK_DEBUG=1
+      - APP_SETTINGS=config.production.ProductionConfig
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+    depends_on:
+      - web
+      - redis
+      - worker
 
   redis:
     image: redis:6-alpine

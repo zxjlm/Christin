@@ -4,10 +4,10 @@ FROM node:${NODE_VERSION}-alpine AS frontend-builder
 COPY frontend/ /app/
 WORKDIR /app
 
-RUN apk add -U --no-cache git python3 make g++ \
-    && yarn install \
-    && yarn build \
-    && apk del --no-cache git make g++
+# RUN apk add -U --no-cache git python3 make g++ \
+#     && yarn install \
+#     && yarn build \
+#     && apk del --no-cache git make g++
 
 FROM nginx:1.17.4-alpine AS runtime
 

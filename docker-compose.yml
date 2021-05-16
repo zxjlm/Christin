@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: backend/Dockerfile
     ports:
-      - 8000:5000
+      - 5000:5000
     command: flask run --host 0.0.0.0
     volumes:
       - ./backend:/usr/src/app
@@ -14,6 +14,10 @@ services:
       - /usr/bin/docker:/usr/bin/docker
     environment:
       - FLASK_DEBUG=0
+      - CHRISTIN_MYSQL_HOST=39.108.229.166
+      - CHRISTIN_MYSQL_PWD=NKKMCDWJFW3CFRwJcA
+      - CHRISTIN_MYSQL_PORT=6622
+      - CHRISTIN_MYSQL_USER=root
       - APP_SETTINGS=config.production.ProductionConfig
       - CELERY_BROKER_URL=redis://redis:6379/0
       - CELERY_RESULT_BACKEND=redis://redis:6379/0
@@ -22,27 +26,32 @@ services:
     depends_on:
       - redis
     networks:
+      - network-frontend
       - network-backend
 
-  # worker:
-  #   build:
-  #     context: .
-  #     dockerfile: backend/Dockerfile
-  #   command: celery worker --app=application.server.tasks.celery --loglevel=info --logfile=logs/celery.log
-  #   volumes:
-  #     - ./backend:/usr/src/app
-  #     - /var/run/docker.sock:/var/run/docker.sock
-  #     - /usr/bin/docker:/usr/bin/docker
-  #   environment:
-  #     - FLASK_DEBUG=0
-  #     - APP_SETTINGS=config.production.ProductionConfig
-  #     - CELERY_BROKER_URL=redis://redis:6379/0
-  #     - CELERY_RESULT_BACKEND=redis://redis:6379/0
-  #     - CHRISTIN_REDIS_HOST=redis
-  #     - CHRISTIN_NEO_HOST=host.docker.internal
-  #   depends_on:
-  #     - web
-  #     - redis
+  worker:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    command: celery worker --app=application.server.tasks.celery --loglevel=info --logfile=logs/celery.log
+    volumes:
+      - ./backend:/usr/src/app
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+    environment:
+      - FLASK_DEBUG=0
+      - CHRISTIN_MYSQL_HOST=39.108.229.166
+      - CHRISTIN_MYSQL_PWD=NKKMCDWJFW3CFRwJcA
+      - CHRISTIN_MYSQL_PORT=6622
+      - CHRISTIN_MYSQL_USER=root
+      - APP_SETTINGS=config.production.ProductionConfig
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+      - CHRISTIN_REDIS_HOST=redis
+      - CHRISTIN_NEO_HOST=host.docker.internal
+    depends_on:
+      - backend
+      - redis
 
   # dashboard:
   #   build: .
@@ -64,7 +73,7 @@ services:
       context: .
       dockerfile: nginx/Dockerfile
     environment:
-      API_URL: "http://backend:8000"
+      API_URL: "http://backend:5000"
       GOOGLE_TRACKING_ID: ""
     # volumes:
     # - static_volume:/static

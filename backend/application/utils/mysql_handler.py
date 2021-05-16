@@ -16,7 +16,7 @@ import cymysql
 from loguru import logger
 
 from application.models import basic_data_models
-from config.settings import MYSQL_HOST
+from config.settings import MYSQL_HOST, MYSQL_USER, MYSQL_PWD, MYSQL_PORT
 
 
 def change_project_status(id_, config=None, runtime=None, status=1):
@@ -31,7 +31,7 @@ def change_project_status(id_, config=None, runtime=None, status=1):
     Returns:
 
     """
-    conn = cymysql.connect(host=MYSQL_HOST, user="root", passwd="root", db="christin")
+    conn = cymysql.connect(host=MYSQL_HOST, user=MYSQL_USER, passwd=MYSQL_PWD, port=MYSQL_PORT, db="christin")
     cur = conn.cursor()
     try:
         cur.execute(
@@ -60,7 +60,7 @@ def change_project_status(id_, config=None, runtime=None, status=1):
 
 
 def update_task_process(id_, current_step: int):
-    conn = cymysql.connect(host=MYSQL_HOST, user="root", passwd="root", db="christin")
+    conn = cymysql.connect(host=MYSQL_HOST, user=MYSQL_USER, passwd=MYSQL_PWD, port=MYSQL_PORT, db="christin")
     cur = conn.cursor()
     try:
         cur.execute(
@@ -89,13 +89,13 @@ def generate_validate_query() -> (str, set):
 
 
 def mysql_query_operator(
-    host: str,
-    port: str,
-    username: str,
-    password: str,
-    db_name: str,
-    query_sql: str,
-    numbers: int = -1,
+        host: str,
+        port: str,
+        username: str,
+        password: str,
+        db_name: str,
+        query_sql: str,
+        numbers: int = -1,
 ) -> (list, list):
     """
     mysql 查询语句的封装
