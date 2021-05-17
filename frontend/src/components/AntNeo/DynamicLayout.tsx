@@ -5,11 +5,10 @@ import {ContextMenu, FishEye, Legend, MiniMap, Toolbar, Tooltip} from '@antv/gra
 import type {GraphinData} from '@antv/graphin/es';
 import {neoQuery} from '@/utils/neoOperations';
 import {AntdTooltip} from './AntdTooltip';
-import {dictUnique, arrSubtraction, edgesUnique, normalUnique} from '@/utils/useful';
+import {dictUnique, edgesUnique} from '@/utils/useful';
 import {CustomContent} from './ToolbarCustom';
 import LayoutSelectorPanel from './LayoutSelectorPanel';
 import CypherFunctionalPanel from './CypherFunctionalPanel';
-import type {DataNode} from 'rc-tree-select/lib/interface';
 import ActivateRelations from "@antv/graphin/es/behaviors/ActivateRelations";
 import {message} from "antd";
 import {ExpandAltOutlined, TagFilled} from "@ant-design/icons";
@@ -17,11 +16,6 @@ import {ExpandAltOutlined, TagFilled} from "@ant-design/icons";
 const {Menu} = ContextMenu
 
 const nodeSize = 40;
-
-interface autoComplete {
-  label: string;
-  options: { value: string; label?: string }[];
-}
 
 const defaultLayout = {
   type: 'grid',
@@ -118,86 +112,6 @@ export const DynamicLayout = ({port, pwd}: { port: string; pwd: string }) => {
     setLayout({...defaultLayoutConfigs, type});
   };
 
-  const handleClose = () => {
-    setVisible(false);
-  };
-
-  /**
-   * 渲染节点
-   */
-  const renderNodeOptions = () => {
-    const options: autoComplete[] = [];
-    graphData.nodes.forEach((node) => {
-      const type_id = options.findIndex((r) => node.nodeType === r.label);
-      if (type_id === -1) {
-        options.push({label: node.nodeType, options: [{value: node.s_name}]});
-      } else {
-        options[type_id].options.push({value: node.s_name});
-      }
-    });
-    return options;
-  };
-
-  /**
-   * 递归构建搜索树的子节点
-   * @param nodeId
-   * @param nodeValue
-   * @param newNodes
-   * @param newEdges
-   */
-  const nodeRecurrence = (
-    nodeId: string,
-    nodeValue: string,
-    newNodes: Record<string, string>,
-    newEdges: Record<string, string[]>,
-  ) => {
-    if (Object.keys(newEdges).findIndex((elem) => elem === nodeId) === -1) {
-      return {
-        title: newNodes[nodeId],
-        value: nodeValue + newNodes[nodeId],
-      };
-    }
-    const tmp: { title: string; value: string; children: any[] } = {
-      title: newNodes[nodeId],
-      value: nodeValue + newNodes[nodeId],
-      children: [],
-    };
-    newEdges[nodeId].forEach((targetNodeId) => {
-      tmp.children.push(
-        nodeRecurrence(targetNodeId, `${nodeValue}==>${targetNodeId}`, newNodes, newEdges),
-      );
-    });
-    return tmp;
-  };
-
-  /**
-   * 渲染树节点
-   */
-  const renderTreeOptions = () => {
-    const options: DataNode[] = [];
-    const newNodes: Record<string, string> = {};
-    const newEdges: Record<string, string[]> = {};
-    const targetEdges: string[] = [];
-    // 构建节点字典表
-    graphData.nodes.forEach((node) => {
-      newNodes[node.id] = node.s_name;
-    });
-    // 构建关系字典表
-    graphData.edges.forEach((edge) => {
-      targetEdges.push(edge.target);
-      if (newEdges.hasOwnProperty(edge.source)) newEdges[edge.source].push(edge.target);
-      else newEdges[edge.source] = [edge.target];
-    });
-    // 寻找根节点
-    const root = arrSubtraction(Object.keys(newNodes), normalUnique(targetEdges));
-    // 组建搜索树
-    root.forEach((nodeId) => {
-      options.push(nodeRecurrence(nodeId, nodeId, newNodes, newEdges));
-    });
-    console.log('tree option ', options);
-    return options;
-  };
-
   /**
    * 右键菜单
    * @param menuItem
@@ -241,9 +155,8 @@ export const DynamicLayout = ({port, pwd}: { port: string; pwd: string }) => {
         <CypherFunctionalPanel
           isVisible={funcPanelVisible}
           setVisible={setFuncPanelVisible}
-          nodeOptions={renderNodeOptions()}
+          graphData={graphData}
           setGraphData={setGraphData}
-          treeOptions={renderTreeOptions()}
         />
         {/* </LayoutSelector> */}
         <Tooltip
@@ -265,7 +178,7 @@ export const DynamicLayout = ({port, pwd}: { port: string; pwd: string }) => {
           />
         </Toolbar>
         <MiniMap visible={true}/>
-        <FishEye options={{}} visible={visible} handleEscListener={handleClose}/>
+        <FishEye options={{}} visible={visible} handleEscListener={() => setVisible(false)}/>
         <ActivateRelations trigger="click"/>
       </Graphin>
     </div>
