@@ -69,7 +69,7 @@ const CypherFunctionalPanel = ({
               }
               key="2"
             >
-              <TreeSelector graphData={graphData}/>
+              <TreeSelector graphData={graphData} setGraphData={setGraphData}/>
             </TabPane>
           </Tabs>
         </Col>

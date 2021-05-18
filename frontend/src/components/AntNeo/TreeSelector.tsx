@@ -1,14 +1,27 @@
-import {TreeSelect} from 'antd';
+import {Button, TreeSelect} from 'antd';
 import type {DataNode} from 'rc-tree-select/lib/interface';
 import {arrSubtraction, normalUnique} from "@/utils/useful";
 import type {GraphinData} from "@antv/graphin/es";
+import {useState} from "react";
+import {neoQuery} from "@/utils/neoOperations";
 
 const {SHOW_PARENT} = TreeSelect;
 
-export const TreeSelector = ({graphData}: { graphData: GraphinData }) => {
-  console.log('gg', graphData)
+export const TreeSelector = ({graphData, setGraphData}: { graphData: GraphinData, setGraphData: (x: any) => void }) => {
+  console.log('gd', graphData)
+  const [selected, setSelected] = useState<string[]>([]);
 
-  const onChange = () => {
+  const onChange = (value: any[], labelList: any[]) => {
+    const selectedId = labelList.map(item => (graphData.nodes.filter(node => node.s_name === item))).flat()
+    setSelected(selectedId.map(item => item.queryId))
+  }
+
+  const handleClick = () => {
+    console.log(selected.toString())
+    neoQuery(`MATCH (n) WHERE id(n) IN [${selected.toString()}] RETURN n`).then((result) => {
+      setGraphData(result);
+      sessionStorage.setItem('graph', JSON.stringify(result));
+    });
   };
 
   /**
@@ -67,21 +80,23 @@ export const TreeSelector = ({graphData}: { graphData: GraphinData }) => {
     root.forEach((nodeId) => {
       options.push(nodeRecurrence(nodeId, nodeId, newNodes, newEdges));
     });
-    console.log('tree option ', options);
     return options;
   };
 
   return (
-    <TreeSelect
-      treeData={renderTreeOptions()}
-      onChange={onChange}
-      treeCheckable={true}
-      showCheckedStrategy={SHOW_PARENT}
-      placeholder={'Please select'}
-      allowClear={true}
-      style={{
-        width: '100%',
-      }}
-    />
+    <div>
+      <TreeSelect
+        treeData={renderTreeOptions()}
+        onChange={onChange}
+        treeCheckable={true}
+        showCheckedStrategy={SHOW_PARENT}
+        placeholder={'Please select'}
+        allowClear={true}
+        style={{
+          width: '100%',
+        }}
+      />
+      <Button onClick={handleClick}>确认选择</Button>
+    </div>
   );
 };
