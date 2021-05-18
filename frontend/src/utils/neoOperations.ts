@@ -4,6 +4,7 @@ import type Record from "neo4j-driver/types/record";
 import type Integer from "neo4j-driver/types/integer";
 import type {Node, NumberOrInteger, Relationship} from "neo4j-driver/types/graph-types";
 import neo4j from 'neo4j-driver';
+import {dictUnique, edgesUnique} from "@/utils/useful";
 
 interface neoQueryType {
   nodes: any[]
@@ -129,7 +130,7 @@ export const extract_path = (result: QueryResult) => {
 }
 
 /**
- * 返回一个符合Graphin渲染规则的字典
+ * 返回一个符合Graphin渲染规则的字典, 经过去重
  * @param query CYPHER语句
  */
 export const neoQuery = async (query: string): Promise<neoQueryType> => {
@@ -139,7 +140,8 @@ export const neoQuery = async (query: string): Promise<neoQueryType> => {
   const raw_nodes = result.records.filter(elem => elem.keys[0] === 'n')
   const {edges, nodes_1} = extract_links(raw_links)
   const nodes_2 = extract_nodes(raw_nodes)
-  return {'nodes': [...nodes_1, ...nodes_2], 'edges': edges}
+  return {nodes: dictUnique([...nodes_1, ...nodes_2], 'queryId'), edges: edgesUnique(edges)};
+  // return {'nodes': [...nodes_1, ...nodes_2], 'edges': edges}
 }
 
 function short_node(name: string) {
