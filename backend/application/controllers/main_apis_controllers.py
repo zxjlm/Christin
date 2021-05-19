@@ -140,7 +140,7 @@ def package_data_for_sandbox(data_list: list) -> dict:
     result = {"nodes": [], "relationships": []}
     for data in data_list:
         result["nodes"] += [
-            {"name": data["text"][ent[0] : ent[1]], "type": ent[2]}
+            {"name": data["text"][ent[0]: ent[1]], "type": ent[2]}
             for ent in data["ents"]
         ]
         result["relationships"] += data["links"]
@@ -173,8 +173,8 @@ def package_data_for_sandbox_v2(data_list: list) -> dict:
                 result["nodes"].append(
                     {
                         "name": data["text"][
-                            annotation["startOffset"] : annotation["endOffset"]
-                        ],
+                                annotation["startOffset"]: annotation["endOffset"]
+                                ],
                         "type": label.s_name,
                     }
                 )
@@ -232,12 +232,12 @@ def push_sandbox_data(data_list: list):
 
 
 def add_analyse_log(
-    data: dict,
-    user: str,
-    project_name: str,
-    task_id: str,
-    description: str,
-    analyse_type: int = 2,
+        data: dict,
+        user: str,
+        project_name: str,
+        task_id: str,
+        description: str,
+        analyse_type: int = 2,
 ):
     """
     记录操作的数据
@@ -510,8 +510,8 @@ def extract_data_from_file(file) -> dict:
     elif file.mimetype == "application/octet-stream":
         pass  # numbers
     elif (
-        file.mimetype == "application/vnd.openxmlformats"
-        "-officedocument.spreadsheetml.sheet"
+            file.mimetype == "application/vnd.openxmlformats"
+                             "-officedocument.spreadsheetml.sheet"
     ):
         df = pd.read_excel(file, engine="openpyxl")
         for idx in df.index:
@@ -651,8 +651,8 @@ def extract_data_from_different_type_file(file):
 
     """
     if (
-        file.mimetype == "application/vnd.openxmlformats-"
-        "officedocument.spreadsheetml.sheet"
+            file.mimetype == "application/vnd.openxmlformats-"
+                             "officedocument.spreadsheetml.sheet"
     ):
         return extract_data_from_excel_file(file)
     elif file.mimetype == "text/csv":
@@ -685,3 +685,43 @@ def package_tables_data_v2(tables: list) -> list:
         result.append(tmp)
 
     return result
+
+
+def task_returner(task) -> dict:
+    """
+    根据不同的task状态生成不同的返回值
+    Args:
+        task:
+
+    Returns:
+
+    """
+    if task.state == "PENDING":
+        response = {
+            "state": "empty task",
+            "info": {"current": 0, "total": 4, "status": "empty task"},
+        }
+    elif task.state == "FILL DATA":
+        response = {
+            "state": task.state,
+            "info": task.info,
+        }
+    elif task.state == "SUCCESS":
+        response = {"state": task.state, "info": task.info, "msg": "success"}
+        if "result" in task.info:
+            response["result"] = task.info["result"]
+    elif task.state != "FAILURE":
+        response = {"state": task.state, "info": task.info}
+        if "result" in task.info:
+            response["result"] = task.info["result"]
+    else:
+        # something went wrong in the background job
+        response = {
+            "state": task.state,
+            "info": {
+                "current": 4,
+                "total": 4,
+            },
+            "status": str(task.info),  # this is the exception raised
+        }
+    return response

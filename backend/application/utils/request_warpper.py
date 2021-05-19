@@ -34,6 +34,6 @@ def normal_api_wrapper(func):
             return jsonify({**result, 'spend_time': spend, 'code': 200})
         except Exception as _e:
             logger.exception(_e)
-            return jsonify({'code': 400, 'msg': str(_e), 'err_func': func.__name__})
+            return jsonify({'code': 400, 'msg': str(_e), 'err_func': func.__name__}), 400
 
     return wrapper
