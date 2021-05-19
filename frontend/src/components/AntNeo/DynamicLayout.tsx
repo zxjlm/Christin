@@ -39,7 +39,6 @@ const nodeOptions = [
 ];
 
 export const DynamicLayout = ({port, pwd}: { port: string; pwd: string }) => {
-  console.log('mount dyn');
   const graphinRef = createRef<Graphin>();
 
   const [layout, setLayout] = React.useState({...defaultLayout, animation: false});
