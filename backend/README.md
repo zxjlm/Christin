@@ -1,4 +1,10 @@
-# Christin
+# Christin Backend
+
+## 说明
+
+这里是 *Christin* 的后端代码, 使用Flask框架进行开发.
+
+目前API存在两个版本, v1(原始版本)的API以SSR为主的架构思想进行设计, v2的API采用完全前后端分离的架构思想.
 
 ## 注意事项
 
