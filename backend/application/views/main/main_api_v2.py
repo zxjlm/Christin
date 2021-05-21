@@ -52,8 +52,8 @@ def get_website_info():
 
 
 @main_api_v2_bp.route("/extractKnowledge", methods=["POST"])
-@swag_from(os.path.join(SWAGGER_FOLDER, "my_model_ner_message.yml"))
 @normal_api_wrapper
+@swag_from(os.path.join(SWAGGER_FOLDER, "my_model_ner_message.yml"))
 def extract_knowledge_from_message():
     """
     使用自训练模型处理
@@ -164,8 +164,8 @@ def show_project_detail(task_id):
 
 
 @main_api_v2_bp.route("/delete_project/<task_id>", methods=["DELETE"])
-@swag_from(os.path.join(SWAGGER_FOLDER, "delete_project.yml"))
 @normal_api_wrapper
+@swag_from(os.path.join(SWAGGER_FOLDER, "delete_project.yml"))
 def delete_project(task_id):
     """
     删除项目
@@ -208,6 +208,14 @@ def start_project(task_id):
 @main_api_v2_bp.route("/exited_project/<task_id>", methods=["PUT"])
 @swag_from(os.path.join(SWAGGER_FOLDER, "exited_project.yml"))
 def exited_project(task_id):
+    """
+    结束项目(休眠)
+    Args:
+        task_id:
+
+    Returns:
+
+    """
     try:
         msg = exited_project_co(task_id, current_user.id)
         return jsonify(msg)
