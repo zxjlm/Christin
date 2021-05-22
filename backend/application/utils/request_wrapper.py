@@ -4,7 +4,7 @@
 @contact: zxjlm233@gmail.com
 @software: Pycharm
 @homepage: https://harumonia.moe/
-@file: request_warpper.py
+@file: request_wrapper.py
 @time: 2021/5/19 3:04 下午
 @desc:
 """

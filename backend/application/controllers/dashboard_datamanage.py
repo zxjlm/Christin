@@ -14,6 +14,14 @@ from application.controllers.common_model_opt import data_query_particular
 
 
 def query_data_controller(data):
+    """
+    基础数据的查询
+    Args:
+        data:
+
+    Returns: 可填充的基础数据的表单
+
+    """
     msg = data_query_particular(data["data"], data["type"])
     if msg:
         tmp_cls = importlib.import_module("application.forms", data["type"] + "Form")
@@ -26,13 +34,14 @@ def query_data_controller(data):
 
 
 def create_data_controller(data):
-    # from application.forms.dict_table_data import DicTableDataForm
-    # from application.forms.herb import HerbForm
-    # from application.forms.target import TargetForm
-    # from application.forms.symptom import MMSymptomForm, TCMSymptom
-    # from application.forms.disease import DiseaseForm
-    # from application.forms.ingredient import IngredientForm
-    # from application.forms.prescription import PrescriptionForm
+    """
+    创建基础数据
+    Args:
+        data:
+
+    Returns: 创建基础数据所用的数据表单
+
+    """
     tmp_cls = importlib.import_module("application.forms", data["type"] + "Form")
 
     form = getattr(tmp_cls, data["type"] + "Form")()
@@ -90,15 +99,5 @@ def get_data_table_fields(type_):
     Returns:
 
     """
-    # if type_ == 'Herb':
-    #     from application.models.herb.herb import Herb
-    #     return Herb.data_table_fields()
-    # elif type_ == 'Prescription':
-    #     from application.models.prescription.prescription import Prescription
-    #     return Prescription.data_table_fields()
-    # elif type_ == 'Role' or type_ == 'User':
-    #     mod = importlib.import_module('application.models.authbase', type_)
-    # else:
-    #     mod = importlib.import_module('applicatino.models.')
     mod = importlib.import_module("application.models", type_)
     return getattr(mod, type_).data_table_fields()

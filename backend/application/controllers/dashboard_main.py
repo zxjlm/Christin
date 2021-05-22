@@ -12,7 +12,12 @@ from application.utils.docker_handler import get_all_container_and_classify
 from application.models.authbase.logs import AnalysesLog
 
 
-def docker_neo4j_list():
+def docker_neo4j_list() -> list:
+    """
+    查询本机上的neo4j容器列表
+    Returns:
+
+    """
     res = []
     neo_dict = get_all_container_and_classify()
     for status, neo_containers in neo_dict.items():

@@ -25,7 +25,7 @@ def check_file_type():
     """
 
 
-def extract_data_from_csv_file(file: FileStorage):
+def extract_data_from_csv_file(file: FileStorage) -> list:
     """
     从csv文件中提取数据
     Returns:
@@ -35,7 +35,7 @@ def extract_data_from_csv_file(file: FileStorage):
     return list(df["data"])
 
 
-def extract_data_from_excel_file(file: FileStorage):
+def extract_data_from_excel_file(file: FileStorage) -> list:
     """
     从excel文件中提取数据
     Returns:
@@ -45,7 +45,7 @@ def extract_data_from_excel_file(file: FileStorage):
     return list(df["data"])
 
 
-def extract_data_from_text_file(file: FileStorage):
+def extract_data_from_text_file(file: FileStorage) -> list:
     """
     从文本文件中提取数据
     Returns:

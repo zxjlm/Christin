@@ -31,7 +31,7 @@ from application.controllers.main_apis_controllers import (
     package_tables_data_v2,
     extract_data_from_json, task_returner, build_sandbox_from_structure_data,
 )
-from application.utils.request_warpper import normal_api_wrapper
+from application.utils.request_wrapper import normal_api_wrapper
 from config.settings import SWAGGER_FOLDER
 from application.server.tasks import long_task
 

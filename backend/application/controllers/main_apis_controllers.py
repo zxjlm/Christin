@@ -29,6 +29,7 @@ from application.utils.file_handler import (
     parser_json_file_v1,
     extract_data_from_json_file,
 )
+from application.utils.function_status_wrapper import function_departed_warning
 from application.utils.mysql_handler import (
     generate_validate_query,
     mysql_query_operator,
@@ -42,9 +43,11 @@ from application.utils.normal import (
 from config.settings import NEO_HOST, ROOT_PATH
 
 
+@function_departed_warning('use_spacy_modal & extract_data_from_file',
+                           'will be split into two parts, use_spacy_modal and extract_data_from_file')
 def u_my_model(message: str):
     """
-
+    使用我自己的训练的模型
     Args:
         message: 待分析的语句
 
@@ -86,7 +89,7 @@ def get_messages_for_ner_model(request_json: dict):
 
 def use_spacy_modal(request_json: dict):
     """
-
+    使用我自己的训练的模型
     Args:
         request_json: 前端传回的数据
 
@@ -105,9 +108,10 @@ def use_spacy_modal(request_json: dict):
     return doccano_wapper(res)
 
 
+@function_departed_warning('none')
 def u_normal_model(message):
     """
-
+    使用基础的spacy模型
     Args:
         message:待分析的语句
 
@@ -120,9 +124,11 @@ def u_normal_model(message):
     return html
 
 
+@function_departed_warning('package_data_for_sandbox_v2',
+                           'old data structure is for dashlite style annotation, and new liked doccano is different')
 def package_data_for_sandbox(data_list: list) -> dict:
     """
-
+    在构建sandbox之前堆数据进行预处理
     Args:
         data_list:[
         {'text': '矮地茶,艾叶,安息香',
@@ -182,9 +188,9 @@ def package_data_for_sandbox_v2(data_list: list) -> dict:
     return result
 
 
-def generate_fake_data():
+def generate_fake_data() -> list:
     """
-    返回假数据
+    返回假数据, 返回固定的值, 能够进行自选标注的渲染
     """
     # graph = Graph(SecureInfo.get_neo4j_blot(),
     #               password=SecureInfo.get_neo4j_password())
@@ -211,13 +217,6 @@ def generate_fake_data():
             ],
         }
     ]
-
-
-def create_sandbox():
-    """
-    创建sandbox
-    """
-    ...
 
 
 def push_sandbox_data(data_list: list):
@@ -265,25 +264,16 @@ def add_analyse_log(
     )
 
 
-def update_analyse_log(data, task_id):
+@function_departed_warning('none', 'new neo4j config has a different form')
+def get_neo_config(task_id):
     """
-    在neo建立完毕之后更新数据库
+    获取neo4j的配置数据数据
     Args:
-        data:
         task_id:
 
     Returns:
 
     """
-    ana = AnalysesLog.query.filter_by(s_mark=task_id).first()
-    if ana:
-        ana.update({"j_remark": data, "i_status": 1})
-        return "update db success"
-    else:
-        return "invalid container_id"
-
-
-def get_neo_config(task_id):
     ana = AnalysesLog.query.filter_by(s_mark=task_id).first()
     return ana.j_remark
 
@@ -353,7 +343,17 @@ def count_projects(proj: dict) -> dict:
     return res
 
 
+@function_departed_warning('get_project_detail_v2', 'old data structure isn`t a standard restful api')
 def get_project_detail(task_id, userid) -> dict:
+    """
+    获取项目的详细信息
+    Args:
+        task_id:
+        userid:
+
+    Returns:
+
+    """
     project = AnalysesLog.query.filter_by(s_mark=task_id, s_sy_user_id=userid).first()
     if project:
         res = project.to_dict_particular()
@@ -377,6 +377,15 @@ def get_project_detail(task_id, userid) -> dict:
 
 
 def get_project_detail_v2(task_id, userid) -> dict:
+    """
+    获取项目的详细信息 for api v2
+    Args:
+        task_id:
+        userid:
+
+    Returns:
+
+    """
     project = AnalysesLog.query.filter_by(s_mark=task_id, s_sy_user_id=userid).first()
     labels = [foo.to_config() for foo in Labels.query.all()]
     if project:
@@ -396,7 +405,8 @@ def get_project_detail_v2(task_id, userid) -> dict:
 
 def delete_project_co(task_id, userid):
     """
-
+    异步删除项目
+    ps: co -> coroutine
     Args:
         task_id:
         userid:
@@ -465,7 +475,7 @@ def start_project_co(task_id, userid):
 
 def exited_project_co(task_id, userid):
     """
-
+    休眠指定项目
     Returns:
 
     """
@@ -497,7 +507,7 @@ def extract_data_from_file(file) -> dict:
     Returns:
         返回一个包含了状态信息的结果字典
     """
-    nlp = spacy.load("./application/nlp_model")
+    nlp = spacy.load(ROOT_PATH + "/application/nlp_model")
     res = []
     if file.mimetype == "text/csv":
         df = pd.read_csv(file)
@@ -538,6 +548,7 @@ def extract_data_from_file(file) -> dict:
     return {"msg": "success", "data": res}
 
 
+@function_departed_warning('none', 'not need any more')
 def query_neo_nodes(port, pwd):
     """
     查询所有的节点
@@ -589,6 +600,7 @@ def extract_data_from_database(config, data_number: int = -1):
     return tables
 
 
+@function_departed_warning('package_tables_data_v2')
 def package_tables_data(tables: list) -> dict:
     """
     将从数据库中提取到的数据打包为展示数据
@@ -625,6 +637,7 @@ def extract_data_from_json(data):
     return unique_list_dict_via_one_key("s_name", result)
 
 
+@function_departed_warning()
 def extract_data_from_json_file_v1(files: MultiDict):
     """
     提取json文件中的数据,将所有文件中的数据解析,并将其中的标准数据合并为一个大的字典
@@ -644,9 +657,9 @@ def extract_data_from_json_file_v1(files: MultiDict):
     return result
 
 
-def extract_data_from_different_type_file(file):
+def extract_data_from_different_type_file(file) -> list:
     """
-    从不同的文件类型中获取数据
+    从不同的文件类型中获取数
     Returns:
 
     """
@@ -667,7 +680,7 @@ def extract_data_from_different_type_file(file):
 
 def package_tables_data_v2(tables: list) -> list:
     """
-
+    结构化数据 打包表内的数据
     Args:
         tables:
 
@@ -689,7 +702,7 @@ def package_tables_data_v2(tables: list) -> list:
 
 def task_returner(task) -> dict:
     """
-    根据不同的task状态生成不同的返回值
+    * 根据不同的task状态生成不同的返回值
     Args:
         task:
 
