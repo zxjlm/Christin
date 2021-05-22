@@ -12,7 +12,7 @@ import json
 import pytest
 
 from application import create_app, db
-from application.models import User
+from application.models import User, Labels
 
 
 @pytest.fixture
@@ -27,6 +27,10 @@ def client():
             user = User(name='zxj', sex='M', email='test@me.com', password='test', active=True,
                         fs_uniquifier='e67fa8573c2d42198aeed56d019a2032')
             db.session.add(user)
+            label1 = Labels(s_label='ZZ', s_name='ZZ')
+            label2 = Labels(s_label='CD', s_name='CD')
+            db.session.add(label1)
+            db.session.add(label2)
             db.session.commit()
 
             yield client

@@ -113,12 +113,12 @@ def test_get_project_runtime(client, auth):
     rv = client.get('/main/api/v2/currentUser')
     assert rv.json['s_name'] == 'zxj'
 
-# def test_spacy(client):
-#     import json
-#     response = client.post('/my_model', json={
-#         'message': '近一周饮食不当,一度腹泻,日3次,泻下后精神疲烦,时有低热,'
-#                    '怕风,口干,痰中夹有血丝,左侧胸痛时作'})
-#     resp_json = json.loads(response.data)
-#     assert response.status_code == 200
-#     assert resp_json['code'] == 200
-#     assert len(resp_json['data']) > 0
+
+def test_spacy_model(client):
+    response = client.post(
+        '/main/api/v2/extractKnowledge',
+        json={'message': '近一周饮食不当,一度腹泻,日3次,泻下后精神疲烦,时有低热,怕风,口干,痰中夹有血丝,左侧胸痛时作'},
+    )
+    assert response.status_code == 200 and response.json['code'] == 200
+    # assert resp_json['code'] == 200
+    # assert len(resp_json['data']) > 0
