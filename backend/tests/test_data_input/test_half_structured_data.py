@@ -30,4 +30,4 @@ def test_half_structure_data(client):
 
     response = client.post('/main/api/v2/extract_from_json', data={'files': my_file})
 
-    assert response.status_code == 200 and len(response.json['data']) == 5 and response.json['code'] == '200'
+    assert response.status_code == 200 and len(response.json['data']) == 5 and response.json['code'] == 200
