@@ -14,11 +14,6 @@ role_resource_table = db.Table(
 
 class Role(db.Model, fsqla.FsRoleMixin):
 
-    def resources_update(self):
-        # db.session.add()
-        # self.id
-        pass
-
     def get_id(self):
         return str(self.id)
 
