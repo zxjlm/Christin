@@ -6,7 +6,7 @@ authors = ["harumonia <zxjlm233@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-Flask = "^1.1.2"
+Flask = "^2.0.1"
 Flask-Login = "^0.5.0"
 Flask-SQLAlchemy = "^2.4.4"
 Flask-Migrate = "^2.5.3"

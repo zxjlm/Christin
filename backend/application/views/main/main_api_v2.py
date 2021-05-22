@@ -29,7 +29,7 @@ from application.controllers.main_apis_controllers import (
     exited_project_co,
     extract_data_from_database,
     package_tables_data_v2,
-    extract_data_from_json, task_returner,
+    extract_data_from_json, task_returner, build_sandbox_from_structure_data,
 )
 from application.utils.request_warpper import normal_api_wrapper
 from config.settings import SWAGGER_FOLDER
@@ -46,7 +46,7 @@ def get_current_user():
 
 @main_api_v2_bp.route("/get_website_info")
 @auth_required()
-def get_website_info():
+async def get_website_info():
     basic = get_website_basic_info_dict()
     return jsonify(basic)
 
@@ -260,20 +260,9 @@ def build_sandbox_via_struct_data():
 
     """
     try:
-        data = request.json
-        if data["projectName"] == "":
+        if request.json.get("projectName", '') == "":
             return jsonify({"code": -1, "msg": "Do you guys not have a name?"})
-        task = long_task.delay(
-            data["data"], data["projectName"], data["needEmail"], current_user.email
-        )
-        add_analyse_log(
-            data,
-            current_user,
-            data["projectName"],
-            task.id,
-            data["projectDescription"],
-            0,
-        )
+        task = build_sandbox_from_structure_data(request.json, current_user)
         return jsonify({"task_id": task.id}), 202
     except Exception as _e:
         logger.exception(_e)

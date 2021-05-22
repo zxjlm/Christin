@@ -20,7 +20,13 @@ export default () => {
 
   useEffect(() => {
     projectRuntime().then(response => {
-      const tmp = Object.entries(response).map(item => ({'status': statusMapper[item[0]], 'numbers': item[1].length}))
+      const resp = {
+        creating: response.creating,
+        deleted: response.deleted,
+        exited: response.exited,
+        running: response.running
+      }
+      const tmp = Object.entries(resp).map(item => ({'status': statusMapper[item[0]], 'numbers': item[1].length}))
       setProjectNumbers(tmp)
     })
   }, []);
@@ -30,7 +36,7 @@ export default () => {
       <div>
         <Card
           title="项目情况"
-          headStyle={{backgroundColor:"lightgray"}}
+          headStyle={{backgroundColor: "lightgray"}}
         >
           {projectNumbers.map(item => <Statistic key={item.status} title={item.status} value={item.numbers}/>)}
         </Card>

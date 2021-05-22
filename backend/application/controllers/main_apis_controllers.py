@@ -21,7 +21,7 @@ from werkzeug.datastructures import MultiDict
 
 from application.models import Labels
 from application.models.authbase import AnalysesLog
-from application.server.tasks import neo_start
+from application.server.tasks import neo_start, long_task
 from application.utils.file_handler import (
     extract_data_from_csv_file,
     extract_data_from_excel_file,
@@ -725,3 +725,27 @@ def task_returner(task) -> dict:
             "status": str(task.info),  # this is the exception raised
         }
     return response
+
+
+def build_sandbox_from_structure_data(data, current_user):
+    """
+    从结构化数据中构建sandbox
+    Args:
+        current_user:
+        data:
+
+    Returns:
+
+    """
+    task = long_task.delay(
+        data["data"], data["projectName"], data["needEmail"], current_user.email
+    )
+    add_analyse_log(
+        data,
+        current_user,
+        data["projectName"],
+        task.id,
+        data["projectDescription"],
+        0,
+    )
+    return task
