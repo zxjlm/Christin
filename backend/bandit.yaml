@@ -1,5 +1,5 @@
 exclude_dirs:
-  - '/test/'
+  - '/tests/'
   - 'baseconfig.py'
   - 'port_scanner.py'
   - 'common_model_opt.py'
