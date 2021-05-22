@@ -14,6 +14,7 @@ from werkzeug.datastructures import FileStorage
 import pandas as pd
 
 from application.models import basic_data_models
+from application.utils.function_status_wrapper import function_departed_warning
 from application.utils.mysql_handler import generate_validate_query
 
 
@@ -73,6 +74,7 @@ def extract_data_from_json_file(file: FileStorage):
     return "not a json file"
 
 
+@function_departed_warning()
 def parser_json_file_v1(data: dict, result: dict):
     """
     解析json文件,提取出符合规范的数据

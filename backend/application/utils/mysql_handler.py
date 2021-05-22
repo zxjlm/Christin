@@ -60,6 +60,15 @@ def change_project_status(id_, config=None, runtime=None, status=1):
 
 
 def update_task_process(id_, current_step: int):
+    """
+    更新任务进度
+    Args:
+        id_: 任务id
+        current_step: 当前进度
+
+    Returns:
+
+    """
     conn = cymysql.connect(host=MYSQL_HOST, user=MYSQL_USER, passwd=MYSQL_PWD, port=MYSQL_PORT, db="christin")
     cur = conn.cursor()
     try:
