@@ -12,10 +12,6 @@ from application.utils.normal import gen_id
 class Prescription(BaseModel):
     __tablename__ = "tb_prescription"
     bin_pid = Column(String(32), primary_key=True, default=gen_id())
-    # i_board_head = Column(Integer, default=0)
-    # s_board_head = Column(String(20), nullable=True)
-    # i_subclass = Column(Integer, default=0)
-    # s_subclass = Column(String(20), default="")
     s_name = Column(String(20), comment=u"名字", nullable=False)
     s_abbreviated_name = Column(String(100), comment=u"首字母缩写", default="")
     constitute = relationship(
@@ -33,7 +29,6 @@ class Prescription(BaseModel):
         backref=backref("prescription"),
         cascade="save-update,delete",
     )
-    # dose_list = Column(String(50), comment=u"用量列表")
     s_dosage_form = Column(String(10), comment=u"剂型", default="")
     s_indications = Column(String(500), comment=u"主治", default="")
     s_origin = Column(String(255), comment=u"出处", default="")
@@ -62,9 +57,6 @@ class Prescription(BaseModel):
             "id": self.bin_pid,
             "s_name": self.s_name,
             "s_en_name": "",
-            # 'constitute': ','.join(
-            #     [foo.s_herb_name for foo in self.constitute]),
-            # 'alias': ','.join([foo.s_alias for foo in self.s_alias]),
         }
 
     def to_dict_particular(self):
@@ -93,15 +85,3 @@ class Prescription(BaseModel):
             "constitute": ",".join([foo.s_herb_name for foo in self.constitute]),
             "alias": ",".join([foo.s_alias for foo in self.s_alias]),
         }
-
-    #
-    # def to_json_show_for_visitor(self):
-    #     return {
-    #         'id': self.bin_pid,
-    #         'name': self.s_name,
-    #         'constitute': ','.join(
-    #             [foo.s_herb_name for foo in self.constitute]),
-    #         'alias': ','.join([foo.s_alias for foo in self.s_alias]),
-    #         'board_head': self.s_board_head,
-    #         'subclass': self.s_subclass
-    #     }

@@ -15,7 +15,6 @@ class PrescriptionAlias(BaseModel):
 
     __tablename__ = "tb_prescription_alias"
     id = Column(Integer, autoincrement=True, primary_key=True)
-    # tb_prescription = relationship('Prescription')
     bin_pid = Column(
         String(32), ForeignKey("tb_prescription.bin_pid", ondelete="CASCADE")
     )
@@ -34,18 +33,6 @@ class PrescriptionIndications(BaseModel):
         String(32), ForeignKey("tb_prescription.bin_pid", ondelete="CASCADE")
     )
     s_indications = Column(String(500), comment=u"主治")
-
-
-# class DosageForm(BaseModel):
-#     """
-#     剂型(deprecated)
-#     """
-#     __tablename__ = 'tb_prescription_dosage_form'
-#     id = Column(Integer, autoincrement=True, primary_key=True)
-#     tb_prescription = relationship('Prescription')
-#     bin_pid = Column(String(32),
-#                   ForeignKey('tb_prescription.bin_pid', ondelete='CASCADE'))
-#     s_dosage_form = Column(String(10), comment=u"剂型")
 
 
 class PrescriptionConstitute(BaseModel):

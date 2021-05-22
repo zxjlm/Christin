@@ -48,13 +48,6 @@ class DicTableType(BaseModel):
         ]
         return dict1
 
-    # def to_dict(self):
-    #     return {
-    #         'id': self.id,
-    #         's_name': self.s_name,
-    #         's_en_name': self.s_en_name
-    #     }
-
 
 class DicTableData(BaseModel):
     __tablename__ = "tb_dic_data"

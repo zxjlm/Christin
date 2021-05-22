@@ -3,19 +3,6 @@ from flask_security.models import fsqla_v2 as fsqla
 from application.extensions import db
 
 
-# @login_manager.user_loader
-# def load_user(user_id):
-#     return User.query.filter(User.id == user_id).first()
-
-
-# user_role_table = db.Table('tb_rel_user_role',
-#                            db.Model.metadata,
-#                            db.Column('user_id', db.String(36),
-#                                      db.ForeignKey('tb_sy_user.id')),
-#                            db.Column('role_id', db.Integer,
-#                                      db.ForeignKey('tb_sy_role.id')))
-
-
 class User(db.Model, fsqla.FsUserMixin):
     # __tablename__ = 'tb_sy_user'
     name = db.Column(db.String(100))

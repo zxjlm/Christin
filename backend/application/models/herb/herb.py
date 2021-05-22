@@ -21,8 +21,6 @@ from application.utils.normal import gen_id
 class Herb(BaseModel):
     __tablename__ = "tb_herb"
     bin_hid = db.Column(String(32), primary_key=True)
-    # i_board_head = db.Column(Integer, default=0)
-    # i_subclass = db.Column(Integer, default=0)
     s_name = db.Column(String(10), unique=True, nullable=False)
     s_en_name = db.Column(String(100), comment="英文名", default="")
 
@@ -39,18 +37,6 @@ class Herb(BaseModel):
     fk_property = db.relationship(
         "DicTableData", secondary=herb_property_table, backref=db.backref("fk_herb")
     )
-
-    # meridian = db.relationship('Meridian',
-    #                            backref=db.backref('herb'),
-    #                            cascade='save-update,delete')
-    # four_properties = db.relationship('FourNatures',
-    #                                   backref=db.backref('herb'),
-    #                                   cascade='save-update,delete')
-    # five_tastes = db.relationship('FiveTastes', backref=db.backref('herb'),
-    #                               cascade='save-update,delete')
-    # ascending_descending_sinking_floating = db.relationship(
-    #     'FloatingAndSinking', backref=db.backref('herb'),
-    #     cascade='save-update,delete')
 
     s_latin_name = db.Column(String(100), comment="拉丁文名", default="")
     s_abbreviated_name = db.Column(String(20), comment=u"首字母缩写", default="")
@@ -123,7 +109,6 @@ class Herb(BaseModel):
         """
         录入数据时，对外键数据进行拆解
 
-        TODO: 添加数据验证(针对错位数据)
         Args:
             fk_data:
 
