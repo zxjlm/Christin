@@ -46,3 +46,5 @@ DOCKER_NEO4J_IMAGES_VERSION = [
     "neo4j/neo4j-arm64-experimental:4.2.5-arm64",
     "neo4j:3.5.12",
 ]
+
+ROOT_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
