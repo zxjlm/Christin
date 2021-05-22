@@ -46,7 +46,7 @@ def get_current_user():
 
 @main_api_v2_bp.route("/get_website_info")
 @auth_required()
-async def get_website_info():
+def get_website_info():
     basic = get_website_basic_info_dict()
     return jsonify(basic)
 

@@ -39,7 +39,7 @@ from application.utils.normal import (
     get_time_delta,
     unique_list_dict_via_one_key,
 )
-from config.settings import NEO_HOST
+from config.settings import NEO_HOST, ROOT_PATH
 
 
 def u_my_model(message: str):
@@ -93,7 +93,7 @@ def use_spacy_modal(request_json: dict):
     Returns:
 
     """
-    nlp = spacy.load("./application/nlp_model")
+    nlp = spacy.load(ROOT_PATH + "/application/nlp_model")
     res = []
     messages = get_messages_for_ner_model(request_json)
     for msg in messages:
