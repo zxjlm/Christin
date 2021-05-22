@@ -29,7 +29,7 @@ class SecureInfo:
 
     @staticmethod
     def get_mysql_of_test():
-        return "测试环境数据库配置"
+        return "sqlite:///:memory:"
 
     @staticmethod
     def get_mail_passwd():
