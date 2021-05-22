@@ -89,6 +89,7 @@ def extract_from_json():
 
 
 @main_api_v2_bp.route("/get_project_runtime")
+@auth_required()
 @normal_api_wrapper
 def get_project_runtime():
     """
@@ -131,6 +132,7 @@ def build_sandbox():
 
 
 @main_api_v2_bp.route("/status/<task_id>")
+@auth_required()
 @swag_from(os.path.join(SWAGGER_FOLDER, "query_tasks_status.yml"))
 def taskstatus(task_id):
     """
@@ -147,10 +149,11 @@ def taskstatus(task_id):
 
 
 @main_api_v2_bp.route("/show_project_detail/<task_id>")
+@auth_required()
 @normal_api_wrapper
 def show_project_detail(task_id):
     """
-
+    查询项目具体信息
     Args:
         task_id:
 
@@ -164,6 +167,7 @@ def show_project_detail(task_id):
 
 
 @main_api_v2_bp.route("/delete_project/<task_id>", methods=["DELETE"])
+@auth_required()
 @normal_api_wrapper
 @swag_from(os.path.join(SWAGGER_FOLDER, "delete_project.yml"))
 def delete_project(task_id):
@@ -182,6 +186,7 @@ def delete_project(task_id):
 
 
 @main_api_v2_bp.route("/start_project/<task_id>")
+@auth_required()
 @swag_from(os.path.join(SWAGGER_FOLDER, "start_project.yml"))
 def start_project(task_id):
     """
@@ -206,6 +211,7 @@ def start_project(task_id):
 
 
 @main_api_v2_bp.route("/exited_project/<task_id>", methods=["PUT"])
+@auth_required()
 @swag_from(os.path.join(SWAGGER_FOLDER, "exited_project.yml"))
 def exited_project(task_id):
     """
@@ -253,6 +259,7 @@ def knowledge_extract_from_json():
 
 
 @main_api_v2_bp.route("/build_sandbox_via_struct_data", methods=["POST"])
+@auth_required()
 def build_sandbox_via_struct_data():
     """
     从结构化数据中构建sandbox
