@@ -1,20 +1,30 @@
-# -*- coding: utf-8 -*-
 """
-    :time: 2021/3/8 16:45
-    :author: Harumonia
-    :url: http://harumonia.moe
-    :project: Christin
-    :file: test_common.py
-    :copyright: © 2021 harumonia<zxjlm233@gmail.com>
-    :license: MIT, see LICENSE for more details.
+@author: harumonia
+@license: © Copyright 2021, Node Supply Chain Manager Corporation Limited.
+@contact: zxjlm233@gmail.com
+@software: Pycharm
+@homepage: https://harumonia.moe/
+@file: test_project_utils.py
+@time: 2021/5/22 8:20 下午
+@desc:
 """
 from application.controllers.main_apis_controllers import package_data_for_sandbox
-from application.utils.data_management_reducer import get_cls_primary_key
+from application.models import Herb
+from application.utils.data_management_reducer import get_cls_primary_key, is_locked_field_in, check_model_name
 
 
-def test_key_map():
+def test_sql_checkers():
+    """
+    测试数据库的各个约束函数
+    Returns:
+
+    """
     assert get_cls_primary_key("Herb") == "bin_hid"
     assert get_cls_primary_key("Prescription") == "bin_pid"
+
+    assert ~is_locked_field_in({'i_status': 1}, Herb)
+
+    assert check_model_name('Herb')
 
 
 def test_sandbox_data_package():
