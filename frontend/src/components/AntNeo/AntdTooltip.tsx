@@ -35,9 +35,10 @@ const CustomContextMenu = (props: { content: any }) => {
       <Card title={content.s_name}>
         <Typography>
           <ul>
-            {generate_card().map((e) => (
+            {generate_card().slice(0,3).map((e) => (
               <li key={hashCode(e)}>{e}</li>
             ))}
+            <li key={'props-tips'}>... (右击节点可以查看更多信息)</li>
           </ul>
         </Typography>{' '}
       </Card>
@@ -46,20 +47,6 @@ const CustomContextMenu = (props: { content: any }) => {
 };
 
 export const AntdTooltip = () => {
-  // const [state, setState] = React.useState({
-  //     visible: false,
-  //     x: 0,
-  //     y: 0,
-  // });
-  // const handleContextMenu = (e: Event) => {
-  //     e.preventDefault();
-  //     setState(preState => {
-  //         return {
-  //             ...preState,
-  //             visible: true,
-  //         };
-  //     });
-  // };
   const { tooltip } = React.useContext(GraphinContext);
   const context = tooltip.node;
   const { item } = context;
@@ -67,9 +54,6 @@ export const AntdTooltip = () => {
   return (
     // @ts-ignore
     <div>
-      {/* <Popover placement="topLeft" title={model.s_name} content={'1231231231'} color={"#FFB148"}> */}
-      {/*    <div style={tooltipStyles} /> */}
-      {/* </Popover> */}
       <CustomContextMenu content={model} />
     </div>
   );

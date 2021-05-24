@@ -3,15 +3,15 @@ import Graphin, {GraphinContext} from '@antv/graphin';
 import {ContextMenu, FishEye, Legend, MiniMap, Toolbar, Tooltip} from '@antv/graphin-components';
 
 import type {GraphinData} from '@antv/graphin/es';
-import {neoQuery} from '@/utils/neoOperations';
+import {executeCypher, neoQuery} from '@/utils/neoOperations';
 import {AntdTooltip} from './AntdTooltip';
-import {dictUnique, edgesUnique} from '@/utils/useful';
+import {dictUnique, edgesUnique, hashCode} from '@/utils/useful';
 import {CustomContent} from './ToolbarCustom';
 import LayoutSelectorPanel from './LayoutSelectorPanel';
 import CypherFunctionalPanel from './CypherFunctionalPanel';
 import ActivateRelations from "@antv/graphin/es/behaviors/ActivateRelations";
-import {message} from "antd";
-import {ExpandAltOutlined, TagFilled} from "@ant-design/icons";
+import {message, Modal, Typography} from "antd";
+import {ExpandAltOutlined, TagFilled, FileTextOutlined} from "@ant-design/icons";
 
 const {Menu} = ContextMenu
 
@@ -35,6 +35,11 @@ const nodeOptions = [
     key: 'expand',
     icon: <ExpandAltOutlined/>,
     name: '下钻',
+  },
+  {
+    key: 'detail',
+    icon: <FileTextOutlined/>,
+    name: '节点详细信息',
   },
 ];
 
@@ -101,6 +106,30 @@ export const DynamicLayout = ({port, pwd}: { port: string; pwd: string }) => {
   }
 
   /**
+   * 查询节点的详细信息
+   * @param queryId
+   */
+  const handleQueryClick = (queryId: string) => {
+    executeCypher(`MATCH (n) where id(n)=${queryId} RETURN n`).then(response => {
+      // @ts-ignore
+      // eslint-disable-next-line no-underscore-dangle
+      const {properties} = response.records[0]._fields[0]
+      Modal.info({
+        title: properties.s_name,
+        content: <Typography>
+          <ul>
+            {Object.entries(properties).map((e) => (
+              <li key={hashCode(e[0])}>{e[0]}: {e[1] || 'None'}</li>
+            ))}
+          </ul>
+        </Typography>,
+        maskClosable: true,
+        okText: '确认'
+      });
+    })
+  }
+
+  /**
    * 更新布局
    * @param previousType
    * @param type
@@ -121,6 +150,8 @@ export const DynamicLayout = ({port, pwd}: { port: string; pwd: string }) => {
       handleDrillDownClick(menuData.queryId)
     } else if (menuItem.name === '上卷') {
       handleRollUpClick(menuData.queryId)
+    } else if (menuItem.name === '节点详细信息') {
+      handleQueryClick(menuData.queryId)
     } else {
       message.info(`元素：${menuData.id}，动作：${menuItem.name}`);
     }
@@ -169,7 +200,7 @@ export const DynamicLayout = ({port, pwd}: { port: string; pwd: string }) => {
         ref={graphinRef}
         style={{height: '700px', width: '95%'}}
       >
-        <ContextMenu style={{width: '80px'}}>
+        <ContextMenu style={{width: '160px'}}>
           <Menu options={nodeOptions} onChange={handleNodeClick} bindType="node"/>
         </ContextMenu>
         <ContextMenu style={{width: '160px'}} bindType="canvas">
