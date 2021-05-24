@@ -1,5 +1,5 @@
 import React, {createRef, useEffect, useState} from 'react';
-import Graphin from '@antv/graphin';
+import Graphin, {GraphinContext} from '@antv/graphin';
 import {ContextMenu, FishEye, Legend, MiniMap, Toolbar, Tooltip} from '@antv/graphin-components';
 
 import type {GraphinData} from '@antv/graphin/es';
@@ -126,6 +126,41 @@ export const DynamicLayout = ({port, pwd}: { port: string; pwd: string }) => {
     }
   }
 
+  /**
+   * 画布右键菜单
+   * @constructor
+   */
+  const CanvasMenu = () => {
+    const {graph, contextmenu} = React.useContext(GraphinContext);
+    const context = contextmenu.canvas;
+    const handleDownload = () => {
+      graph.downloadFullImage('neo-canvas', 'image/jpeg', {backgroundColor: 'white'});
+      context.handleClose();
+    };
+    const callLayoutPanel = () => {
+      setLayoutPanelVisible(!layoutPanelVisible)
+      setFuncPanelVisible(true)
+      context.handleClose();
+    };
+    const callCypherPanel = () => {
+      setLayoutPanelVisible(true)
+      setFuncPanelVisible(!funcPanelVisible)
+      context.handleClose();
+    };
+    const callFishEye = () => {
+      setVisible(true)
+      context.handleClose();
+    }
+    return (
+      <Menu bindType="canvas">
+        <Menu.Item onClick={callLayoutPanel}>可视化布局面板</Menu.Item>
+        <Menu.Item onClick={callCypherPanel}>Cypher功能面板</Menu.Item>
+        <Menu.Item onClick={callFishEye}>使用鱼眼放大镜</Menu.Item>
+        <Menu.Item onClick={handleDownload}>下载画布</Menu.Item>
+      </Menu>
+    );
+  };
+
   return (
     <div>
       <Graphin
@@ -136,6 +171,9 @@ export const DynamicLayout = ({port, pwd}: { port: string; pwd: string }) => {
       >
         <ContextMenu style={{width: '80px'}}>
           <Menu options={nodeOptions} onChange={handleNodeClick} bindType="node"/>
+        </ContextMenu>
+        <ContextMenu style={{width: '160px'}} bindType="canvas">
+          <CanvasMenu/>
         </ContextMenu>
         {/* <LayoutSelector> */}
         <Legend
