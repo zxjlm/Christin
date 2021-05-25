@@ -15,11 +15,11 @@ from application.models.base import BaseModel
 
 class Labels(BaseModel):
     __tablename__ = "tb_labels"
-    id = Column(Integer, autoincrement=True, primary_key=True)
-    s_label = Column(String(10), nullable=False)
-    s_name = Column(String(20), nullable=False)
-    s_background_color = Column(String(10), nullable=False, default="#fff")
-    s_text_color = Column(String(10), nullable=False, default="#000")
+    id = Column(Integer, autoincrement=True, primary_key=True, comment='id')
+    s_label = Column(String(10), nullable=False, comment='标签')
+    s_name = Column(String(20), nullable=False, comment='标签名')
+    s_background_color = Column(String(10), nullable=False, default="#fff", comment='背景色')
+    s_text_color = Column(String(10), nullable=False, default="#000", comment='字体色')
     s_suffix_key = Column(String(5), comment="后缀")
     s_prefix_key = Column(String(5), comment="前缀")
 
