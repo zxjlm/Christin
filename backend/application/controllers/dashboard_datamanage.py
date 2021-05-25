@@ -10,7 +10,7 @@
 """
 import importlib
 
-from application.controllers.common_model_opt import data_query_particular
+from application.controllers.common_model_opt import data_query_particular, query_data_from_models
 
 
 def query_data_controller(data):
@@ -101,3 +101,23 @@ def get_data_table_fields(type_):
     """
     mod = importlib.import_module("application.models", type_)
     return getattr(mod, type_).data_table_fields()
+
+
+def get_model_columns(model):
+    mod = importlib.import_module("application.models", model)
+    tmp = getattr(mod, model)
+    # page_res = query_data_from_models(tmp, 1, 20)
+    # result = {'initData': [item.to_dict() for item in page_res.items], 'columns': getattr(mod, model).normal_columns()}
+    # return result
+    return getattr(mod, model).normal_columns()
+
+
+def get_model_paginated_data(model, current, **kwargs):
+    condition = {}
+    mod = importlib.import_module("application.models", model)
+    tmp = getattr(mod, model)
+    if 's_name' in kwargs.keys():
+        condition = {'s_name': kwargs.pop('s_name')}
+    page_res = query_data_from_models(tmp, current, kwargs.pop('pageSize'), condition=condition)
+    result = [item.to_dict() for item in page_res.items]
+    return {'data': result, 'success': True, 'total': page_res.total}

@@ -11,6 +11,8 @@
 # from application.models import *
 import importlib
 
+from flask_sqlalchemy import Pagination
+
 from application.models.herb import Herb
 from application.models.prescription import Prescription
 
@@ -31,11 +33,12 @@ from application.utils.data_management_reducer import (
 
 
 def query_data_from_models(
-    cls: object, page: int, per_page: int, need_status: bool = True
-):
+        cls: object, page: int, per_page: int, need_status: bool = True, condition=None
+) -> Pagination:
     """
 
     Args:
+        condition:
         cls:
         page:
         per_page:
@@ -44,8 +47,10 @@ def query_data_from_models(
     Returns:
 
     """
+    if condition is None:
+        condition = {}
     if need_status:
-        res = cls.query.filter_by(i_status=1).paginate(
+        res = cls.query.filter_by(i_status=1, **condition).paginate(
             page, int(per_page), error_out=False
         )
     else:
@@ -227,7 +232,6 @@ def get_website_basic_info_dict() -> dict:
         "pro_c": protein_count,
         "other_c": other_count,
     }
-
 
 #
 # def get_website_basic_info() -> list:

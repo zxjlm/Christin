@@ -82,3 +82,20 @@ class BaseModel(db.Model):
                 if not callable(value):
                     res[attribute] = value
         return res
+
+    @staticmethod
+    def normal_columns():
+        return [{
+            'title': '排序',
+            'dataIndex': 'id',
+        }, {
+            'title': '名称',
+            'dataIndex': 's_name',
+            'ellipsis': True,
+            'copyable': True
+        }, {
+            'title': '英文名称',
+            'dataIndex': 's_en_name',
+            'ellipsis': True,
+            'copyable': True
+        }]

@@ -26,4 +26,5 @@ class User(db.Model, fsqla.FsUserMixin):
             "s_name": self.name,
             "username": self.username,
             "last_login_date": self.last_login_at,
+            "access": self.roles[0].name
         }
