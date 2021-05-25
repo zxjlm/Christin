@@ -56,11 +56,11 @@ class Target(BaseModel):
     """
 
     __tablename__ = "tb_target"
-    bin_id = Column(String(32), primary_key=True)
-    s_gene_symbol = Column(String(50), default="")
-    s_chromosome = Column(String(20), default="")
-    s_name = Column(String(500), default="")
-    s_protein_name = Column(String(500), default="")
+    bin_id = Column(String(32), primary_key=True, comment='id')
+    s_gene_symbol = Column(String(50), default="", comment='基因符号')
+    s_chromosome = Column(String(20), default="", comment='染色体')
+    s_name = Column(String(500), default="", comment='靶点名称')
+    s_protein_name = Column(String(500), default="", comment='蛋白质名称')
 
     fk_disease = db.relationship(
         "Disease",

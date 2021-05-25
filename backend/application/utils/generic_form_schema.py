@@ -30,7 +30,7 @@ def string_item(title, data_index, value, required=False, readonly=False):
         "formItemProps": item_props,
         "width": "m",
         "initialValue": value,
-        "disable": readonly,
+        "readonly": readonly,
     }
 
 
