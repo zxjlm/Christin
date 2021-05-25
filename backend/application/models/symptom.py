@@ -52,10 +52,10 @@ class MMSymptom(BaseModel):
     """
 
     __tablename__ = "tb_mm_symptom"
-    bin_id = Column(String(32), primary_key=True)
-    s_name = Column(String(50), default="")
-    s_mm_symptom_definition = Column(String(1000), default="")
-    s_mm_tree_numbers = Column(String(1000), default="")
+    bin_id = Column(String(32), primary_key=True, comment='id')
+    s_name = Column(String(50), default="", comment='名称')
+    s_mm_symptom_definition = Column(String(1000), default="", comment='定义')
+    s_mm_tree_numbers = Column(String(1000), default="", comment='MM症状在MeSH数据库中的树编号')
 
     fk_disease = db.relationship(
         "Disease",
@@ -130,12 +130,12 @@ class TCMSymptom(BaseModel):
     """
 
     __tablename__ = "tb_tcm_symptom"
-    bin_id = Column(String(32), primary_key=True)
-    s_name = Column(String(50), default="")
-    s_pinyin_name = Column(String(50), default="")
-    s_symptom_definition = Column(String(1000), default="")
-    s_symptom_locus = Column(String(50), comment="病位", default="")
-    s_symptom_property = Column(String(100), default="")
+    bin_id = Column(String(32), primary_key=True, comment='id')
+    s_name = Column(String(50), default="", comment='症状名称')
+    s_pinyin_name = Column(String(50), default="", comment='汉语拼音')
+    s_symptom_definition = Column(String(1000), default="", comment='定义')
+    s_symptom_locus = Column(String(50), default="", comment="症状病位")
+    s_symptom_property = Column(String(100), default="", comment='症状属性')
 
     fk_mm = db.relationship(
         "MMSymptom",
