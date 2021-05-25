@@ -1,43 +1,186 @@
-import React from 'react';
-import { HeartTwoTone, SmileTwoTone } from '@ant-design/icons';
-import { Card, Typography, Alert } from 'antd';
-import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { useIntl } from 'umi';
+import React, {useEffect, useState} from 'react';
+import {Card} from 'antd';
+import {PageHeaderWrapper} from '@ant-design/pro-layout';
+import ProTable from '@ant-design/pro-table';
+import {getColumnsList, getTableData} from "@/services/data-management/api";
+
+
+export type TableListItem = {
+  key: number;
+  name: string;
+  containers: number;
+  creator: string;
+  createdAt: number;
+  progress: number;
+  money: number;
+  memo: string;
+};
+// const tableListDataSource: TableListItem[] = [];
+
+// const creators = ['付小小', '曲丽丽', '林东东', '陈帅帅', '兼某某'];
+
+// for (let i = 0; i < 100; i += 1) {
+//   tableListDataSource.push({
+//     key: i,
+//     name: 'AppName',
+//     containers: Math.floor(Math.random() * 20),
+//     creator: creators[Math.floor(Math.random() * creators.length)],
+//     createdAt: Date.now() - Math.floor(Math.random() * 2000),
+//     money: Math.floor(Math.random() * 2000) * i,
+//     progress: Math.ceil(Math.random() * 100) + 1,
+//     memo: i % 2 === 1 ? '很长很长很长很长很长很长很长的文字要展示但是要留下尾巴' : '简短备注文案',
+//   });
+// }
+
+// const columns: ProColumns<TableListItem>[] = [
+//   {
+//     title: '排序',
+//     dataIndex: 'index',
+//     valueType: 'indexBorder',
+//     width: 48,
+//   },
+//   {
+//     title: '应用名称',
+//     dataIndex: 'name',
+//     render: (_) => <a>{_}</a>,
+//     // 自定义筛选项功能具体实现请参考 https://ant.design/components/table-cn/#components-table-demo-custom-filter-panel
+//     filterDropdown: () => (
+//       <div style={{padding: 8}}>
+//         <Input style={{width: 188, marginBottom: 8, display: 'block'}}/>
+//       </div>
+//     ),
+//     filterIcon: (filtered) => (
+//       <SearchOutlined style={{color: filtered ? '#1890ff' : undefined}}/>
+//     ),
+//   },
+//   {
+//     title: '创建者',
+//     dataIndex: 'creator',
+//     valueEnum: {
+//       all: {text: '全部'},
+//       付小小: {text: '付小小'},
+//       曲丽丽: {text: '曲丽丽'},
+//       林东东: {text: '林东东'},
+//       陈帅帅: {text: '陈帅帅'},
+//       兼某某: {text: '兼某某'},
+//     },
+//   },
+//   {
+//     title: '状态',
+//     dataIndex: 'status',
+//     initialValue: 'all',
+//     filters: true,
+//     onFilter: true,
+//     valueEnum: {
+//       all: {text: '全部', status: 'Default'},
+//       close: {text: '关闭', status: 'Default'},
+//       running: {text: '运行中', status: 'Processing'},
+//       online: {text: '已上线', status: 'Success'},
+//       error: {text: '异常', status: 'Error'},
+//     },
+//   },
+//   {
+//     title: (
+//       <>
+//         创建时间
+//         <Tooltip placement="top" title="这是一段描述">
+//           <QuestionCircleOutlined style={{marginLeft: 4}}/>
+//         </Tooltip>
+//       </>
+//     ),
+//     width: 140,
+//     key: 'since',
+//     dataIndex: 'createdAt',
+//     valueType: 'date',
+//     sorter: (a, b) => a.createdAt - b.createdAt,
+//   },
+//   {
+//     title: '备注',
+//     dataIndex: 'memo',
+//     ellipsis: true,
+//     copyable: true,
+//   },
+//   {
+//     title: '操作',
+//     width: 180,
+//     key: 'option',
+//     valueType: 'option',
+//     render: () => [
+//       <a key="link">链路</a>,
+//       <a key="link2">报警</a>,
+//       <a key="link3">监控</a>,
+//       <TableDropdown
+//         key="actionGroup"
+//         menus={[
+//           {key: 'copy', name: '复制'},
+//           {key: 'delete', name: '删除'},
+//         ]}
+//       />,
+//     ],
+//   },
+// ];
+
+const optionColumn = {
+  title: '操作',
+  width: 180,
+  key: 'option',
+  valueType: 'option',
+  render: (text: string, record: string, _: any, action: any) => [
+    <a key="link" onClick={() => {
+      console.log(text, record, action)
+    }}>查看</a>,
+    <a key="link2">编辑</a>,
+    <a key="link3">删除</a>,
+  ],
+}
 
 export default (): React.ReactNode => {
-  const intl = useIntl();
+  const [columns, setColumns] = useState<any[]>([]);
+  useEffect(() => {
+    getColumnsList('Herb').then(response => {
+      setColumns([...response, optionColumn])
+    })
+    return () => {
+    };
+  }, []);
+
+
   return (
     <PageHeaderWrapper
-      content={intl.formatMessage({
-        id: 'pages.admin.subPage.title',
-        defaultMessage: ' 这个页面只有 admin 权限才能查看',
-      })}
+      // content={intl.formatMessage({
+      //   id: 'pages.admin.subPage.title',
+      // defaultMessage: ' 这个页面只有 admin 权限才能查看',
+      // })}
     >
       <Card>
-        <Alert
-          message={intl.formatMessage({
-            id: 'pages.welcome.alertMessage',
-            defaultMessage: '更快更强的重型组件，已经发布。',
-          })}
-          type="success"
-          showIcon
-          banner
-          style={{
-            margin: -12,
-            marginBottom: 48,
+        <ProTable<TableListItem>
+          columns={columns}
+          request={(params, sorter, filter) => {
+            // 表单搜索项会从 params 传入，传递给后端接口。
+            console.log(params, sorter, filter);
+            return getTableData('Herb', params).then(response => {
+              return response
+            })
+            // return Promise.resolve({
+            //   data: tableListDataSource,
+            //   success: true,
+            // });
+          }}
+          rowKey="key"
+          pagination={{
+            showQuickJumper: true,
+          }}
+          // search={{
+          //   layout: 'vertical',
+          //   defaultCollapsed: false,
+          // }}
+          dateFormatter="string"
+          toolbar={{
+            title: '高级表格',
+            tooltip: '这是一个标题提示',
           }}
         />
-        <Typography.Title level={2} style={{ textAlign: 'center' }}>
-          <SmileTwoTone /> Ant Design Pro <HeartTwoTone twoToneColor="#eb2f96" /> You
-        </Typography.Title>
       </Card>
-      <p style={{ textAlign: 'center', marginTop: 24 }}>
-        Want to add more pages? Please refer to{' '}
-        <a href="https://pro.ant.design/docs/block-cn" target="_blank" rel="noopener noreferrer">
-          use block
-        </a>
-        。
-      </p>
     </PageHeaderWrapper>
   );
 };
