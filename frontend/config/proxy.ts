@@ -17,6 +17,11 @@ export default {
       changeOrigin: true,
       pathRewrite: { '^': '' },
     },
+    '/dashboard/api/v2/': {
+      target: 'http://localhost:5000',
+      changeOrigin: true,
+      pathRewrite: { '^': '' },
+    },
     '/main/api/v1/': {
       target: 'http://localhost:5000',
       changeOrigin: true,
