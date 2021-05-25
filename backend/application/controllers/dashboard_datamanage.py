@@ -11,6 +11,7 @@
 import importlib
 
 from application.controllers.common_model_opt import data_query_particular, query_data_from_models
+from application.utils.generic_form_schema import get_field_comment_mapper
 
 
 def query_data_controller(data):
@@ -130,5 +131,6 @@ def get_model_data_of_json_schema(model, id_):
 
     """
     mod = importlib.import_module("application.models", model)
+    field_comment_mapper = get_field_comment_mapper(getattr(mod, model))
     query_res = getattr(mod, model).query.get(id_)
-    return query_res.json_schema()
+    return query_res.json_schema(field_comment_mapper)

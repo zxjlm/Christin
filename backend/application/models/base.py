@@ -1,13 +1,15 @@
 # -*- coding:utf-8 -*-
 import datetime
-import time
 
-from sqlalchemy import Column, SmallInteger, DateTime, Integer
+from flask import request
+from sqlalchemy import Column, SmallInteger, DateTime
 
 __author__ = "harumonia"
 
 from application.extensions import db
 from sqlalchemy.sql import func
+
+from application.utils.generic_form_schema import string_item
 
 
 class BaseModel(db.Model):
@@ -63,7 +65,11 @@ class BaseModel(db.Model):
 
     @staticmethod
     def lock_field_output():
-        return ["dt_create_datetime", "dt_update_datetime", "i_status"]
+        return [
+            "dt_create_datetime",
+            "dt_update_datetime",
+            "i_status"
+        ]
 
     @staticmethod
     def data_table_fields() -> list:
@@ -99,3 +105,18 @@ class BaseModel(db.Model):
             'ellipsis': True,
             'copyable': True
         }]
+
+    def json_schema(self, mapper: dict):
+        """
+        转为json表单
+        Returns:
+
+        """
+        res = []
+        for k, v in mapper.items():
+            if v in self.lock_field():
+                continue
+
+            if k.startswith('s_'):
+                res.append(string_item(v, k, getattr(self, k), required=True, readonly=request.method == 'GET'))
+        return res

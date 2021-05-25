@@ -21,7 +21,7 @@ from application.utils.normal import gen_id
 class Herb(BaseModel):
     __tablename__ = "tb_herb"
     bin_hid = db.Column(String(32), primary_key=True)
-    s_name = db.Column(String(10), unique=True, nullable=False)
+    s_name = db.Column(String(10), unique=True, nullable=False, comment='药名')
     s_en_name = db.Column(String(100), comment="英文名", default="")
 
     fk_alias = db.relationship(
@@ -259,15 +259,3 @@ class Herb(BaseModel):
         }
         return {k: v for k, v in extract_data.items() if v}
 
-    def json_schema(self):
-        """
-        转为json表单
-        Returns:
-
-        """
-        return [{"title": "标题",
-                 "dataIndex": "title",
-                 "formItemProps":
-                     {"rules": [{"required": True, "message": "此项为必填项"}]},
-                 "width": "m",
-                 "initialValue": self.s_name}]
