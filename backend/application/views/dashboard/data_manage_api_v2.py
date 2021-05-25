@@ -10,7 +10,8 @@
 """
 from flask import Blueprint, jsonify, request
 
-from application.controllers.dashboard_datamanage import get_model_columns, get_model_paginated_data
+from application.controllers.dashboard_datamanage import get_model_columns, get_model_paginated_data, \
+    get_model_data_of_json_schema
 
 dm_v2_bp = Blueprint("data_manage_api_v2", __name__, url_prefix="/dashboard/api/v2")
 
@@ -23,3 +24,8 @@ def get_columns(model):
 @dm_v2_bp.post('/get_table_data')
 def get_table_data():
     return jsonify(get_model_paginated_data(**request.json))
+
+
+@dm_v2_bp.get('/get_form_data/<model>/<id_>')
+def get_form_data(model, id_):
+    return jsonify(get_model_data_of_json_schema(model, id_))

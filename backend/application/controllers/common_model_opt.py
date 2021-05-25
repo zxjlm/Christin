@@ -232,17 +232,3 @@ def get_website_basic_info_dict() -> dict:
         "pro_c": protein_count,
         "other_c": other_count,
     }
-
-#
-# def get_website_basic_info() -> list:
-#     user_count = User.query.filter_by().count()
-#     herb_count = Herb.query.filter_by().count()
-#     prescription_count = Prescription.query.filter_by().count()
-#     gene_count = Target.query.filter_by().count()
-#     protein_count = Ingredient.query.filter_by().count()
-#     other_count = 1742 + 956
-#     count = herb_count + protein_count + prescription_count + gene_count
-#
-#     return [
-#         {''}
-#     ]

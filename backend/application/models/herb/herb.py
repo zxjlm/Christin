@@ -258,3 +258,16 @@ class Herb(BaseModel):
             "s_application": json_req.get("application", ""),
         }
         return {k: v for k, v in extract_data.items() if v}
+
+    def json_schema(self):
+        """
+        转为json表单
+        Returns:
+
+        """
+        return [{"title": "标题",
+                 "dataIndex": "title",
+                 "formItemProps":
+                     {"rules": [{"required": True, "message": "此项为必填项"}]},
+                 "width": "m",
+                 "initialValue": self.s_name}]
