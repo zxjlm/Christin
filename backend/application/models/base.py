@@ -118,5 +118,6 @@ class BaseModel(db.Model):
                 continue
 
             if k.startswith('s_'):
-                res.append(string_item(v, k, getattr(self, k), required=True, readonly=request.method == 'GET'))
+                res.append(
+                    string_item(v, k, getattr(self, k), required=k == 's_name', readonly=request.method == 'GET'))
         return res

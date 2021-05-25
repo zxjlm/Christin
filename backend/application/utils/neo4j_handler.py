@@ -16,6 +16,7 @@ from loguru import logger
 from py2neo import Node, Relationship, Graph, Subgraph, NodeMatcher
 
 from application.utils.custom_exceptions import Neo4jUpdateFailedException
+from config.settings import NEO_HOST
 
 
 def get_neo4j_version():
@@ -104,7 +105,7 @@ def neo_data_update_trigger(type_: str, data: dict):
     """
     try:
         # cypher = "MATCH a=({s_name:'{}'}) return a".format(data['s_name'])
-        graph = Graph("bolt://39.99.178.69:7687", password="zxjzxj233")
+        graph = Graph(f"bolt://{NEO_HOST}:7687", password="zxjzxj233")
         node_match = NodeMatcher(graph)
         node_iter = node_match.match(type_, s_name=data["s_name"])
         node = list(node_iter)
@@ -131,7 +132,7 @@ def neo_data_create_trigger(type_: str, data: dict):
     """
     try:
         # cypher = "MATCH a=({s_name:'{}'}) return a".format(data['s_name'])
-        graph = Graph("bolt://39.99.178.69:7687", password="zxjzxj233")
+        graph = Graph(f"bolt://{NEO_HOST}:7687", password="zxjzxj233")
         node = Node(type_, **data)
         graph.create(node)
         return True
