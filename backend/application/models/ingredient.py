@@ -48,12 +48,12 @@ class Ingredient(BaseModel):
     """
 
     __tablename__ = "tb_ingredient"
-    bin_id = Column(String(32), primary_key=True)
-    s_name = Column(String(500), default="")
-    s_molecule_formula = Column(String(255), default="")
-    f_molecule_weight = Column(Float, default=-1.0)
-    f_ob_score = Column(Float, default=-1.0)
-    s_alias = Column(Text, default="")
+    bin_id = Column(String(32), primary_key=True, comment='id')
+    s_name = Column(String(500), default="", comment='成分名称')
+    s_molecule_formula = Column(String(255), default="", comment='分子式')
+    f_molecule_weight = Column(Float, default=-1.0, comment='分子权重')
+    f_ob_score = Column(Float, default=-1.0, comment='每种成分的口服生物利用度得分')
+    s_alias = Column(Text, default="", comment='别名')
 
     fk_target = db.relationship(
         "Target",
