@@ -3,7 +3,7 @@ import ProTable from "@ant-design/pro-table";
 import type {TableListItem} from "@/pages/Admin";
 import {useEffect, useState} from "react";
 import JSONForm from '@/components/JSONForm'
-import {Modal} from "antd";
+import {Button, Modal} from "antd";
 
 interface propsType {
   modelName: string
@@ -69,5 +69,23 @@ export default ({modelName}: propsType) => {
       title: '高级表格',
       tooltip: '这是一个标题提示',
     }}
+    toolBarRender={() => [
+      <Button
+        key="3"
+        type="primary"
+        onClick={() => {
+          Modal.info({
+            title: '查看',
+            content: <JSONForm model={modelName} id_={'$$9527$$'} getData={postFormDataJson} isSubmitVisible={true}/>,
+            width: 600,
+            maskClosable: true,
+            okButtonProps: {hidden: true},
+            closable: true,
+          })
+        }}
+      >
+        添加数据
+      </Button>,
+    ]}
   />
 }
