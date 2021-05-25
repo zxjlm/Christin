@@ -44,9 +44,9 @@ class Disease(BaseModel):
     """
 
     __tablename__ = "tb_disease"
-    bin_id = Column(String(32), primary_key=True)
-    s_name = Column(String(500), default="")
-    s_disease_definition = Column(String(1000), default="")
+    bin_id = Column(String(32), primary_key=True, comment='id')
+    s_name = Column(String(500), default="", comment='疾病名称')
+    s_disease_definition = Column(String(1000), default="", comment='疾病定义')
 
     def __init__(self):
         self.bin_id = gen_id()
