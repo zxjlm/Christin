@@ -142,7 +142,10 @@ def get_model_data_of_json_schema(model, id_):
 
     mod = importlib.import_module("application.models", model)
     field_comment_mapper = get_field_comment_mapper(getattr(mod, model))
-    query_res = getattr(mod, model).query.get(id_)
+    if id_ == '$$9527$$':
+        query_res = getattr(mod, model)()
+    else:
+        query_res = getattr(mod, model).query.get(id_)
     return query_res.json_schema(field_comment_mapper)
 
 
@@ -161,6 +164,10 @@ def edit_model_data_via_post_form(data, model, id_):
         return {"msg": "invalid model"}
 
     mod = importlib.import_module("application.models", model)
-    query_res = getattr(mod, model).query.get(id_)
-    query_res.update(data)
+    if id_ == '$$9527$$':
+        query_res = getattr(mod, model)()
+        query_res.add(data)
+    else:
+        query_res = getattr(mod, model).query.get(id_)
+        query_res.update(data)
     return {"msg": "success"}

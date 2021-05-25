@@ -34,3 +34,8 @@ def get_form_data(model, id_):
 @dm_v2_bp.put('/edit_form_data')
 def edit_form_data():
     return jsonify(edit_model_data_via_post_form(**request.json))
+
+
+@dm_v2_bp.put('/create_form_data')
+def create_form_data():
+    return jsonify(edit_model_data_via_post_form(**request.json))
