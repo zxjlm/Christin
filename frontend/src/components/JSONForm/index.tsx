@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import {BetaSchemaForm} from '@ant-design/pro-form';
-import {getFormDataJson} from "@/services/data-management/api";
+import {postEditedFormData} from "@/services/data-management/api";
+import {message, Modal} from "antd";
 
 // const valueEnum = {
 //   all: {text: '全部', status: 'Default'},
@@ -148,29 +149,47 @@ type DataItem = {
 interface propsType {
   id_: string
   model: string
+  isSubmitVisible: any
+  getData: (model: string, id_: string) => Promise<any>
 }
 
-export default ({id_, model}: propsType) => {
+export default ({id_, model, getData, isSubmitVisible}: propsType) => {
   const [columns, setColumns] = useState([]);
 
   useEffect(() => {
-    getFormDataJson(model, id_).then(response => {
+    getData(model, id_).then(response => {
       setColumns(response)
     })
     return () => {
     };
   }, []);
 
+  const finishHandler = async (formData: DataItem) => {
+    postEditedFormData(model, id_, formData).then(response => {
+      if (response.msg === 'success') {
+        message.success('操作成功')
+        Modal.destroyAll()
+        return true
+      }
+      message.error(`操作失败, ${response.msg}`)
+      return false
+    })
+
+  }
+
+  if (!isSubmitVisible) {
+    return <BetaSchemaForm<DataItem>
+      layoutType='Form'
+      columns={columns}
+      submitter={isSubmitVisible}
+    />
+  }
+
   return (
-    <>
-      <BetaSchemaForm<DataItem>
-        trigger={<a>点击我</a>}
-        layoutType='Form'
-        onFinish={async (values) => {
-          console.log(values);
-        }}
-        columns={columns}
-      />
-    </>
+    <BetaSchemaForm<DataItem>
+      layoutType='Form'
+      columns={columns}
+      onFinish={finishHandler}
+    />
   );
-};
+}

@@ -1,4 +1,4 @@
-import {getColumnsList, getTableData} from "@/services/data-management/api";
+import {getColumnsList, getFormDataJson, getTableData, postFormDataJson} from "@/services/data-management/api";
 import ProTable from "@ant-design/pro-table";
 import type {TableListItem} from "@/pages/Admin";
 import {useEffect, useState} from "react";
@@ -17,15 +17,25 @@ export default ({modelName}: propsType) => {
     valueType: 'option',
     render: (text: string, record: any) => [
       <a key="link" onClick={() => {
-        return Modal.info({
+        Modal.info({
           title: '查看',
-          content: <JSONForm model={modelName} id_={record.id}/>,
+          content: <JSONForm model={modelName} id_={record.id} getData={getFormDataJson} isSubmitVisible={false}/>,
           width: 600,
-          maskClosable: true
+          maskClosable: true,
+          okButtonProps: {hidden: true}
         })
       }}>查看</a>,
-      <a key="link2">编辑</a>,
-      <a key="link3">删除</a>,
+      <a key="link2" onClick={() => {
+        Modal.info({
+          title: '查看',
+          content: <JSONForm model={modelName} id_={record.id} getData={postFormDataJson} isSubmitVisible={true}/>,
+          width: 600,
+          maskClosable: true,
+          okButtonProps: {hidden: true},
+          closable: true,
+        })
+      }}>编辑</a>,
+      <a key={'link3'}>删除</a>,
     ],
   }
 
@@ -49,19 +59,11 @@ export default ({modelName}: propsType) => {
       return getTableData(modelName, params).then(response => {
         return response
       })
-      // return Promise.resolve({
-      //   data: tableListDataSource,
-      //   success: true,
-      // });
     }}
     rowKey="key"
     pagination={{
       showQuickJumper: true,
     }}
-    // search={{
-    //   layout: 'vertical',
-    //   defaultCollapsed: false,
-    // }}
     dateFormatter="string"
     toolbar={{
       title: '高级表格',
