@@ -2,23 +2,36 @@ import {getColumnsList, getTableData} from "@/services/data-management/api";
 import ProTable from "@ant-design/pro-table";
 import type {TableListItem} from "@/pages/Admin";
 import {useEffect, useState} from "react";
+import JSONForm from '@/components/JSONForm'
+import {Modal} from "antd";
 
-const optionColumn = {
-  title: '操作',
-  width: 180,
-  key: 'option',
-  valueType: 'option',
-  render: (text: string, record: string, _: any, action: any) => [
-    <a key="link" onClick={() => {
-      console.log(text, record, action)
-    }}>查看</a>,
-    <a key="link2">编辑</a>,
-    <a key="link3">删除</a>,
-  ],
+interface propsType {
+  modelName: string
 }
 
-export default ({modelName}: { modelName: string }) => {
+export default ({modelName}: propsType) => {
+  const optionColumn = {
+    title: '操作',
+    width: 180,
+    key: 'option',
+    valueType: 'option',
+    render: (text: string, record: any) => [
+      <a key="link" onClick={() => {
+        return Modal.info({
+          title: '查看',
+          content: <JSONForm model={modelName} id_={record.id}/>,
+          width: 600,
+          maskClosable: true
+        })
+      }}>查看</a>,
+      <a key="link2">编辑</a>,
+      <a key="link3">删除</a>,
+    ],
+  }
+
   const [columns, setColumns] = useState<any[]>([]);
+
+
   useEffect(() => {
     getColumnsList(modelName).then(response => {
       setColumns([...response, optionColumn])
@@ -26,6 +39,7 @@ export default ({modelName}: { modelName: string }) => {
     return () => {
     };
   }, []);
+
 
   return <ProTable<TableListItem>
     columns={columns}

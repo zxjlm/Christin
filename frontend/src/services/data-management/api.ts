@@ -5,6 +5,11 @@ export const getColumnsList = async (modelName: string) =>
     method: 'GET',
   });
 
+export const getFormDataJson = async (modelName: string, id_: string) =>
+  request(`/dashboard/api/v2/get_form_data/${modelName}/${id_}`, {
+    method: 'GET',
+  });
+
 export const getTableData = async (modelName: string, body: any) =>
   request(`/dashboard/api/v2/get_table_data`, {
     method: 'POST',
