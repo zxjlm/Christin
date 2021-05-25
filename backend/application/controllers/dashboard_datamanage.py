@@ -11,6 +11,7 @@
 import importlib
 
 from application.controllers.common_model_opt import data_query_particular, query_data_from_models
+from application.utils.data_management_reducer import check_model_name
 from application.utils.generic_form_schema import get_field_comment_mapper
 
 
@@ -105,11 +106,17 @@ def get_data_table_fields(type_):
 
 
 def get_model_columns(model):
+    if not check_model_name(model):
+        return {"msg": "invalid model"}
+
     mod = importlib.import_module("application.models", model)
     return getattr(mod, model).normal_columns()
 
 
 def get_model_paginated_data(model, current, **kwargs):
+    if not check_model_name(model):
+        return {"msg": "invalid model"}
+
     condition = {}
     mod = importlib.import_module("application.models", model)
     tmp = getattr(mod, model)
@@ -130,7 +137,30 @@ def get_model_data_of_json_schema(model, id_):
     Returns:
 
     """
+    if not check_model_name(model):
+        return {"msg": "invalid model"}
+
     mod = importlib.import_module("application.models", model)
     field_comment_mapper = get_field_comment_mapper(getattr(mod, model))
     query_res = getattr(mod, model).query.get(id_)
     return query_res.json_schema(field_comment_mapper)
+
+
+def edit_model_data_via_post_form(data, model, id_):
+    """
+    修改数据模型内容
+    Args:
+        data:
+        model:
+        id_:
+
+    Returns:
+
+    """
+    if not check_model_name(model):
+        return {"msg": "invalid model"}
+
+    mod = importlib.import_module("application.models", model)
+    query_res = getattr(mod, model).query.get(id_)
+    query_res.update(data)
+    return {"msg": "success"}
