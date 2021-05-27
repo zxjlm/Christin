@@ -231,7 +231,6 @@ def exited_project(task_id):
 
 
 @main_api_v2_bp.route("/knowledge_extract_from_database", methods=["POST"])
-@normal_api_wrapper
 def knowledge_extract_from_database():
     """
     结构化数据知识抽取的第二步
@@ -245,7 +244,6 @@ def knowledge_extract_from_database():
 
 
 @main_api_v2_bp.route("/knowledge_extract_from_json", methods=["POST"])
-@normal_api_wrapper
 def knowledge_extract_from_json():
     """
     半结构化数据知识抽取的第二步

@@ -45,7 +45,7 @@ def create_task(task_type):
 
 @celery.task(bind=True)
 def long_task(
-    self, data_list: dict, project_name: str, need_email: str, email_address: str
+        self, data_list: dict, project_name: str, need_email: str, email_address: str
 ):
     """
 
@@ -192,7 +192,7 @@ def long_task(
 
 @celery.task(bind=True)
 def long_task_for_test(
-    self, data_list: dict, project_name: str, need_email: str, email_address: str
+        self, data_list: dict, project_name: str, need_email: str, email_address: str
 ):
     """
     测试用的task
