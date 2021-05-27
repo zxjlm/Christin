@@ -10,6 +10,11 @@ export const getFormDataJson = async (modelName: string, id_: string) =>
     method: 'GET',
   });
 
+export const deleteFormData = async (modelName: string, id_: string) =>
+  request(`/dashboard/api/v2/delete_form_data/${modelName}/${id_}`, {
+    method: 'DELETE',
+  });
+
 export const postFormDataJson = async (modelName: string, id_: string) =>
   request(`/dashboard/api/v2/get_form_data/${modelName}/${id_}`, {
     method: 'POST',

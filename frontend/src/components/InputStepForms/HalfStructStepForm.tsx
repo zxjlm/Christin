@@ -76,7 +76,7 @@ export default () => {
     e.preventDefault();
 
     confirm({
-      title: 'Do you Want to delete these items?',
+      title: '确定要删除这一项吗?',
       icon: <ExclamationCircleOutlined />,
       onOk() {
         setEntsData(entsData.filter((item) => item.s_name !== name));
@@ -121,7 +121,7 @@ export default () => {
         }}
       >
         <Title level={2}>
-          半结构化数据录入说明(<Text type={'danger'}> 开发中</Text>)
+          半结构化数据录入说明
         </Title>
         <Paragraph>
           半结构化数据录入目前主要针对的是JSON类型的数据,总共分为<Text mark>三步</Text>.
