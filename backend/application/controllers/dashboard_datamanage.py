@@ -151,7 +151,7 @@ def get_model_data_of_json_schema(model, id_):
 
 def edit_model_data_via_post_form(data, model, id_):
     """
-    修改数据模型内容
+    创建/修改数据模型内容
     Args:
         data:
         model:
@@ -165,9 +165,32 @@ def edit_model_data_via_post_form(data, model, id_):
 
     mod = importlib.import_module("application.models", model)
     if id_ == '$$9527$$':
+        if 's_name' in data.keys():
+            query_res = getattr(mod, model).query.filter_by(s_name=data['s_name']).first()
+            if query_res:
+                return {'msg': '已存在同名数据'}
         query_res = getattr(mod, model)()
         query_res.add(data)
     else:
         query_res = getattr(mod, model).query.get(id_)
         query_res.update(data)
+    return {"msg": "success"}
+
+
+def delete_modal_data(model: str, id_: str):
+    """
+
+    Args:
+        model:
+        id_:
+
+    Returns:
+
+    """
+    if not check_model_name(model):
+        return {"msg": "invalid model"}
+
+    mod = importlib.import_module("application.models", model)
+    query_res = getattr(mod, model).query.get(id_)
+    query_res.fake_delete()
     return {"msg": "success"}

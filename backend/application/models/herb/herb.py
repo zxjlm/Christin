@@ -237,6 +237,8 @@ class Herb(BaseModel):
         property_dict = self.fk_processor_input(fk_dic)
         data.update(**property_dict)
         db.session.add(self)
+        if 's_name' not in data.keys():
+            data['s_name'] = self.s_name
         neo_data_update_trigger("Herb", data)
         db.session.commit()
 

@@ -11,7 +11,7 @@
 from flask import Blueprint, jsonify, request
 
 from application.controllers.dashboard_datamanage import get_model_columns, get_model_paginated_data, \
-    get_model_data_of_json_schema, edit_model_data_via_post_form
+    get_model_data_of_json_schema, edit_model_data_via_post_form, delete_modal_data
 
 dm_v2_bp = Blueprint("data_manage_api_v2", __name__, url_prefix="/dashboard/api/v2")
 
@@ -39,3 +39,8 @@ def edit_form_data():
 @dm_v2_bp.put('/create_form_data')
 def create_form_data():
     return jsonify(edit_model_data_via_post_form(**request.json))
+
+
+@dm_v2_bp.delete('/delete_form_data/<model>/<id_>')
+def delete_form_data(model, id_):
+    return jsonify(delete_modal_data(model, id_))
