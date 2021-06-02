@@ -14,10 +14,7 @@ services:
       - /usr/bin/docker:/usr/bin/docker
     environment:
       - FLASK_DEBUG=0
-      - CHRISTIN_MYSQL_HOST=39.108.229.166
-      - CHRISTIN_MYSQL_PWD=NKKMCDWJFW3CFRwJcA
-      - CHRISTIN_MYSQL_PORT=6622
-      - CHRISTIN_MYSQL_USER=root
+      - CHRISTIN_MYSQL_HOST=host.docker.internal
       - APP_SETTINGS=config.production.ProductionConfig
       - CELERY_BROKER_URL=redis://redis:6379/0
       - CELERY_RESULT_BACKEND=redis://redis:6379/0
@@ -40,10 +37,7 @@ services:
       - /usr/bin/docker:/usr/bin/docker
     environment:
       - FLASK_DEBUG=0
-      - CHRISTIN_MYSQL_HOST=39.108.229.166
-      - CHRISTIN_MYSQL_PWD=NKKMCDWJFW3CFRwJcA
-      - CHRISTIN_MYSQL_PORT=6622
-      - CHRISTIN_MYSQL_USER=root
+      - CHRISTIN_MYSQL_HOST=host.docker.internal
       - APP_SETTINGS=config.production.ProductionConfig
       - CELERY_BROKER_URL=redis://redis:6379/0
       - CELERY_RESULT_BACKEND=redis://redis:6379/0
@@ -71,7 +65,7 @@ services:
   nginx:
     build:
       context: .
-      dockerfile: nginx/Dockerfile
+      dockerfile: nginx/Dockerfile.dev
     environment:
       API_URL: "http://backend:5000"
       GOOGLE_TRACKING_ID: ""
