@@ -30,7 +30,7 @@ services:
     build:
       context: .
       dockerfile: backend/Dockerfile
-    command: celery worker --app=application.server.tasks.celery --loglevel=info --logfile=logs/celery.log
+    command: celery -A application.server.tasks.celery worker --loglevel=INFO --logfile=logs/celery.log
     volumes:
       - ./backend:/usr/src/app
       - /var/run/docker.sock:/var/run/docker.sock
