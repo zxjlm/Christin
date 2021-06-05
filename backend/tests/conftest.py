@@ -12,7 +12,7 @@ import json
 import pytest
 
 from application import create_app, db
-from application.models import User, Labels
+from application.models import User, Labels, Role
 
 
 @pytest.fixture
@@ -24,9 +24,18 @@ def client():
         with app.app_context():
             db.create_all()
 
-            user = User(name='zxj', sex='M', email='test@me.com', password='test', active=True,
-                        fs_uniquifier='e67fa8573c2d42198aeed56d019a2032')
-            db.session.add(user)
+            role1 = Role(name='admin', description='管理员')
+            role2 = Role(name='user', description='用户')
+            db.session.add(role1)
+            db.session.add(role2)
+            user1 = User(name='zxj', sex='M', email='test@me.com', password='test', active=True,
+                         fs_uniquifier='e67fa8573c2d42198aeed56d019a2032')
+            user2 = User(name='normal_user', sex='M', email='user@me.com', password='test', active=True,
+                         fs_uniquifier='e67fa8573c2d42198aeed56d019a2032')
+            user1.roles = [role1]
+            user2.roles = [role2]
+            db.session.add(user1)
+            db.session.add(user2)
             label1 = Labels(s_label='ZZ', s_name='ZZ')
             label2 = Labels(s_label='CD', s_name='CD')
             db.session.add(label1)
