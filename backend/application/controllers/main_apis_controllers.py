@@ -176,11 +176,10 @@ def package_data_for_sandbox_v2(data_list: list) -> dict:
         for annotation in data["annotations"]:
             label = Labels.query.get(annotation["label"])
             if label:
+                name = data["text"][annotation["startOffset"]: annotation["endOffset"]]
                 result["nodes"].append(
                     {
-                        "name": data["text"][
-                                annotation["startOffset"]: annotation["endOffset"]
-                                ],
+                        "name": name,
                         "type": label.s_name,
                     }
                 )
