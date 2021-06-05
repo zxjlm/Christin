@@ -1,57 +1,41 @@
-# Ant Design Pro
+# frontend
 
-This project is initialized with [Ant Design Pro](https://pro.ant.design). Follow is the quick guide for how to use.
+## 概述
 
-## Environment Prepare
+前端采用 AntD Pro 开发, 共计存在 3 个主要页面.
 
-Install `node_modules`:
+### 登录页面
 
-```bash
-npm install
+登录页面在原始的 AntD 的页面上进行修改, 其界面如下图所示.
+
+![截屏2021-06-05 上午9.05.08.png](https://i.loli.net/2021/06/05/xp8MD62KPcRQSTI.png)
+
+### 主页面
+
+主页面采用经典的 AntD Pro 布局, 共分为四个子模块.
+
+- 欢迎
+- 项目创建
+- 项目管理
+- 基础数据管理
+
+![截屏2021-06-05 上午9.06.06.png](https://i.loli.net/2021/06/05/Seq7YpgLORPx1uD.png)
+
+### 图数据库可视化页面
+
+![截屏2021-06-05 上午9.12.59.png](https://i.loli.net/2021/06/05/85pS3TM1hP6BvE2.png)
+
+## 使用
+
+前端本身并没有 mock 数据, 需要开启后端程序搭配使用.
+
+```shell
+# 安装依赖
+yarn install
+
+# 运行项目
+cross-env REACT_APP_ENV=dev MOCK=none UMI_ENV=dev umi dev
+
+# 构建项目
+yarn build
 ```
-
-or
-
-```bash
-yarn
-```
-
-## Provided Scripts
-
-Ant Design Pro provides some useful script to help you quick start and build with web project, code style check and test.
-
-Scripts provided in `package.json`. It's safe to modify or add additional script:
-
-### Start project
-
-```bash
-npm start
-```
-
-### Build project
-
-```bash
-npm run build
-```
-
-### Check code style
-
-```bash
-npm run lint
-```
-
-You can also use script to auto fix some lint error:
-
-```bash
-npm run lint:fix
-```
-
-### Test code
-
-```bash
-npm test
-```
-
-## More
-
-You can view full document on our [official website](https://pro.ant.design). And welcome any feedback in our [github](https://github.com/ant-design/ant-design-pro).
