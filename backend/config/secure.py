@@ -7,7 +7,7 @@
 @time: 2020/8/10 21:54
 @desc:
 """
-from config.settings import MYSQL_HOST, MYSQL_PWD, MYSQL_PORT, MYSQL_USER
+from config.settings import MYSQL_HOST, MYSQL_PWD, MYSQL_PORT, MYSQL_USER, NEO_PWD, NEO_PORT, MAIL_USER, MAIL_PWD
 
 
 class SecureInfo:
@@ -33,11 +33,11 @@ class SecureInfo:
 
     @staticmethod
     def get_mail_passwd():
-        return "WEYBIIWFZOJCKWOA"
+        return MAIL_PWD
 
     @staticmethod
     def get_mail_user():
-        return "zxjlm233@163.com"
+        return MAIL_USER
 
     @staticmethod
     def get_neo4j_config():
@@ -54,8 +54,8 @@ class SecureInfo:
 
     @staticmethod
     def get_neo4j_password():
-        return "zxjzxj233"
+        return NEO_PWD
 
     @staticmethod
     def get_neo4j_port():
-        return "7687"
+        return NEO_PORT
