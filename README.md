@@ -101,7 +101,9 @@ docker-compose up --build
 
 #### backend
 
-backend，即后端， 首先参照 [包管理](#包管理) 的内容，安装好之后， 通过如下命令使用。
+backend，即后端. 其详细说明可见于 [backend](https://github.com/zxjlm/Christin/tree/main/backend)
+
+首先参照 [包管理](#包管理) 的内容，安装好之后， 通过如下命令使用。
 
 ```shell
 flask run
@@ -113,7 +115,9 @@ flask run
 
 #### frontend
 
-frontend, 即前端。 安装好 `yarn` 之后通过如下命令使用。
+frontend, 即前端。 其详细说明可见于 [frontend](https://github.com/zxjlm/Christin/tree/main/frontend)
+
+安装好 `yarn` 之后通过如下命令使用。
 
 ```shell
 yarn install

@@ -4,6 +4,8 @@
 
 前端使用 React 技术,采用 AntD Pro 框架开发, 共计存在 3 个主要页面. 根据前后端分离的设计理念, 前端完全依靠 api 进行交互, 过程中不存在 SSR 的环节.
 
+另外, 在 `config/proxy.ts` 中配置了路由代理, 所以在调试阶段可以直接进行前后端的交互访问, 而如果使用了 `yarn build` 构建静态文件, 那就需要使用 [nginx](https://github.com/zxjlm/Christin/tree/main/nginx) 来进行任务的调度.
+
 ### 登录页面
 
 登录页面在原始的 AntD 的页面上进行修改, 其界面如下图所示.
