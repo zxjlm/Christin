@@ -1,34 +1,43 @@
 ARG PYTHON_VERSION="3.8.5"
-ARG NODE_VERSION="15.3.0"
+ARG NODE_VERSION="15.3.9"
 FROM node:${NODE_VERSION}-alpine AS frontend-builder
 
-COPY frontend/ /frontend/
-WORKDIR /frontend
+COPY frontend/ /app/
+WORKDIR /app
 
-# hadolint ignore=DL3018
 RUN apk add -U --no-cache git python3 make g++ \
+    && npm install -g yarn \
     && yarn install \
     && yarn build \
     && apk del --no-cache git make g++
+# pull official base image
+FROM python:${PYTHON_VERSION}
 
-FROM python:${PYTHON_VERSION}-slim-buster AS backend-builder
+WORKDIR /Christin
+USER root
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-    netcat=1.* \
-    libpq-dev=11.* \
-    unixodbc-dev=2.* \
-    g++=4:* \
-    libssl-dev=1.* \
-    && apt-get clean
+# set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+ENV POETRY_VERSION=1.1.4
 
-WORKDIR /tmp
-COPY Pipfile* /tmp/
+# install dependencies
+RUN pip install "poetry==$POETRY_VERSION"
+COPY ./backend/poetry.lock ./backend/pyproject.toml /Christin/
+RUN poetry config virtualenvs.create false && poetry install --no-interaction --no-ansi
 
-# hadolint ignore=DL3013
-RUN pip install --no-cache-dir -U pip pipenv==2020.11.15 \
-    && pipenv lock -r > /requirements.txt \
-    && echo "psycopg2-binary==2.8.6" >> /requirements.txt \
-    && echo "django-heroku==0.3.1" >> /requirements.txt \
-    && pip install --no-cache-dir -r /requirements.txt \
-    && pip wheel --no-cache-dir -r /requirements.txt -w /deps
+# copy project
+COPY ./backend/ /Christin/
+
+ENV DATABASE_URL="sqlite:////data/doccano.db"
+
+ENV DEBUG="True"
+ENV SECRET_KEY="change-me-in-production"
+ENV PORT="8000"
+ENV WORKERS="2"
+ENV CELERY_WORKERS="2"
+
+VOLUME /data
+EXPOSE ${PORT}
+
+CMD ["flask", "run"]
