@@ -7,4 +7,5 @@ exclude_dirs:
   - 'normal.py'
   - 'mysql_handler.py'
   - 'tasks.py'
+  - 'test.py'
   - 'neo4j_handler.py'
