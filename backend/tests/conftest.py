@@ -31,7 +31,7 @@ def client():
             user1 = User(name='zxj', sex='M', email='test@me.com', password='test', active=True,
                          fs_uniquifier='e67fa8573c2d42198aeed56d019a2032')
             user2 = User(name='normal_user', sex='M', email='user@me.com', password='test', active=True,
-                         fs_uniquifier='e67fa8573c2d42198aeed56d019a2032')
+                         fs_uniquifier='e67fa8573c2d42198aeed56d019a2031')
             user1.roles = [role1]
             user2.roles = [role2]
             db.session.add(user1)
