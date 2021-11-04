@@ -1,0 +1,21 @@
+{% from "ner/ent.html" import render_ent %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<p style="line-height: 3">
+    {% for render in render_list %}
+        {% if render.label != '%%' %}
+            {{ render_ent(render['text'], render['label'], render['background']) }}
+        {% else %}
+            <scan>{{ render['text'] }}</scan>
+        {% endif %}
+    {% endfor %}
+</p>
+
+</body>
+</html>
