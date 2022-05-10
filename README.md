@@ -1,4 +1,6 @@
 # Christin
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fzxjlm%2FChristin.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fzxjlm%2FChristin?ref=badge_shield)
+
 
 ## 项目简介
 
@@ -174,3 +176,7 @@ cross-env REACT_APP_ENV=dev MOCK=none UMI_ENV=dev umi dev
 
 QQ: 1391440047 (需要注明身份信息)
 Mail: zxjlm233@gmail.com (标注为 _毕设问题_)
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fzxjlm%2FChristin.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fzxjlm%2FChristin?ref=badge_large)
