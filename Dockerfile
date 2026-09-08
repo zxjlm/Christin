@@ -19,7 +19,7 @@ USER root
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
-ENV POETRY_VERSION=1.1.4
+ENV POETRY_VERSION=1.8.3
 
 # install dependencies
 RUN pip install "poetry==$POETRY_VERSION"

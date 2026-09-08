@@ -134,7 +134,7 @@ cross-env REACT_APP_ENV=dev MOCK=none UMI_ENV=dev umi dev
 
 ### 包管理
 
-本项目的包管理使用 [poetry](https://python-poetry.org/) . 版本为 _1.1.4_.
+本项目的包管理使用 [poetry](https://python-poetry.org/) . 版本为 _1.8.3_.
 
 安装完毕之后,在 _backend_ 目录下使用 `poetry install` 命令直接运行， 推荐创建一个新的虚拟环境.
 
