@@ -41,8 +41,9 @@ Mako = ">=1.2.2"
 certifi = ">=2022.12.07"
 cryptography = ">=50.0.1"
 Pillow = ">=12.3.0"
-# flask-security-too 5.x no longer needs pkg_resources; 83+ closes remaining High alerts
-setuptools = ">=83"
+# passlib (flask-security-too 5.5) still imports pkg_resources; setuptools 81
+# warns it will drop that API. 78.1.1+ fixes CVE-2025-47273.
+setuptools = ">=78.1.1,<81"
 # 3.0.3+ CVE-2024-34069 (debugger RCE); 3.0.6+ CVE-2024-49767 (multipart DoS);
 # 3.1.6+ Windows device-name path issues (CVE-2025-66221 / CVE-2026-27199).
 Werkzeug = ">=3.1.6"

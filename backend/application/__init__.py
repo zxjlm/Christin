@@ -23,7 +23,10 @@ from config.settings import LANGUAGES
 
 def create_app(config_name=None):
     if config_name is None:
-        config_name = os.getenv("FLASK_CONFIG", "development")
+        # Flask 3 removed app.env / FLASK_ENV. Keep the Flask 2 default of
+        # "production" when neither override is set so Docker/Gunicorn
+        # deployments stay on ProductionConfig.
+        config_name = os.getenv("FLASK_CONFIG") or os.getenv("FLASK_ENV", "production")
 
     app = Flask("application")
     config = import_config(config_name)

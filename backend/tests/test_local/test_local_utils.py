@@ -8,8 +8,15 @@
 @time: 2021/5/22 8:36 下午
 @desc:
 """
+from docker.errors import DockerException
+import pytest
+
 from application.utils.docker_handler import get_all_container_and_classify
 
 
 def test_get_all_container_and_classify():
-    assert list(get_all_container_and_classify().keys()) == ['running', 'exited']
+    try:
+        result = get_all_container_and_classify()
+    except DockerException:
+        pytest.skip("Docker daemon is not available")
+    assert list(result.keys()) == ['running', 'exited']
