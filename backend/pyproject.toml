@@ -5,9 +5,9 @@ description = ""
 authors = ["harumonia <zxjlm233@gmail.com>"]
 
 [tool.poetry.dependencies]
-# Project targets Python 3.8 (Dockerfile / CI). Keep the range narrow so
-# security upgrades (e.g. cryptography) resolve cleanly for this runtime.
-python = ">=3.8,<3.9"
+# Python 3.10+ is required for patched Pillow (>=12.3), cryptography (>=50),
+# and setuptools (>=83) releases that close current Dependabot High alerts.
+python = ">=3.10,<3.11"
 Flask = "^2.2.5"
 Flask-Login = "^0.6.2"
 Flask-SQLAlchemy = "^2.4.4"
@@ -33,11 +33,14 @@ pycryptodome = "^3.10.1"
 bcrypt = "^3.2.0"
 docker = "^7.0.0"
 chardet = "^5.0.0"
-# Security pins for transitive dependencies (GitHub Dependabot alerts)
+# Security pins (GitHub Dependabot alerts)
 Babel = ">=2.9.1"
 Mako = ">=1.2.2"
 certifi = ">=2022.12.07"
-cryptography = ">=46.0.5,<47"
+cryptography = ">=50.0.1"
+Pillow = ">=12.3.0"
+# <82 keeps pkg_resources for flask-security-too 4.x; 78.1.1+ fixes CVE-2025-47273
+setuptools = ">=78.1.1,<82"
 Werkzeug = ">=2.2.3,<3.0"
 requests = ">=2.31.0"
 pywin32 = {version = ">=304", markers = "sys_platform == 'win32'"}

@@ -7,7 +7,17 @@
 @time: 2020/8/10 21:54
 @desc:
 """
-from config.settings import MYSQL_HOST, MYSQL_PWD, MYSQL_PORT, MYSQL_USER, NEO_PWD, NEO_PORT, MAIL_USER, MAIL_PWD
+from config.settings import (
+    MAIL_PWD,
+    MAIL_USER,
+    MYSQL_HOST,
+    MYSQL_PORT,
+    MYSQL_PWD,
+    MYSQL_USER,
+    NEO_HOST,
+    NEO_PORT,
+    NEO_PWD,
+)
 
 
 class SecureInfo:
@@ -42,15 +52,14 @@ class SecureInfo:
     @staticmethod
     def get_neo4j_config():
         return {
-            "profile": "bolt://39.99.178.69:7687",
+            "profile": f"bolt://{NEO_HOST}:{NEO_PORT}",
             "name": "neo4j",
-            "password": "zxjzxj233",
+            "password": NEO_PWD,
         }
 
     @staticmethod
     def get_neo4j_blot():
-        # return 'bolt://39.99.178.69:7687'
-        return "bolt://localhost:7687"
+        return f"bolt://{NEO_HOST}:{NEO_PORT}"
 
     @staticmethod
     def get_neo4j_password():
