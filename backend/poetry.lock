@@ -1111,20 +1111,22 @@ six = ">=1.10.0"
 
 [[package]]
 name = "flask"
-version = "2.2.5"
+version = "3.1.3"
 description = "A simple framework for building complex web applications."
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.9"
 files = [
-    {file = "Flask-2.2.5-py3-none-any.whl", hash = "sha256:58107ed83443e86067e41eff4631b058178191a355886f8e479e347fa1285fdf"},
-    {file = "Flask-2.2.5.tar.gz", hash = "sha256:edee9b0a7ff26621bd5a8c10ff484ae28737a2410d99b0bb9a6850c7fb977aa0"},
+    {file = "flask-3.1.3-py3-none-any.whl", hash = "sha256:f4bcbefc124291925f1a26446da31a5178f9483862233b23c0c96a20701f670c"},
+    {file = "flask-3.1.3.tar.gz", hash = "sha256:0ef0e52b8a9cd932855379197dd8f94047b359ca0a78695144304cb45f87c9eb"},
 ]
 
 [package.dependencies]
-click = ">=8.0"
-itsdangerous = ">=2.0"
-Jinja2 = ">=3.0"
-Werkzeug = ">=2.2.2"
+blinker = ">=1.9.0"
+click = ">=8.1.3"
+itsdangerous = ">=2.2.0"
+jinja2 = ">=3.1.2"
+markupsafe = ">=2.1.1"
+werkzeug = ">=3.1.0"
 
 [package.extras]
 async = ["asgiref (>=3.2)"]
@@ -1132,23 +1134,20 @@ dotenv = ["python-dotenv"]
 
 [[package]]
 name = "flask-babel"
-version = "2.0.0"
-description = "Adds i18n/l10n support to Flask applications"
+version = "4.0.0"
+description = "Adds i18n/l10n support for Flask applications."
 optional = false
-python-versions = "*"
+python-versions = ">=3.8,<4.0"
 files = [
-    {file = "Flask-Babel-2.0.0.tar.gz", hash = "sha256:f9faf45cdb2e1a32ea2ec14403587d4295108f35017a7821a2b1acb8cfd9257d"},
-    {file = "Flask_Babel-2.0.0-py3-none-any.whl", hash = "sha256:e6820a052a8d344e178cdd36dd4bb8aea09b4bda3d5f9fa9f008df2c7f2f5468"},
+    {file = "flask_babel-4.0.0-py3-none-any.whl", hash = "sha256:638194cf91f8b301380f36d70e2034c77ee25b98cb5d80a1626820df9a6d4625"},
+    {file = "flask_babel-4.0.0.tar.gz", hash = "sha256:dbeab4027a3f4a87678a11686496e98e1492eb793cbdd77ab50f4e9a2602a593"},
 ]
 
 [package.dependencies]
-Babel = ">=2.3"
-Flask = "*"
-Jinja2 = ">=2.5"
-pytz = "*"
-
-[package.extras]
-dev = ["Pallets-Sphinx-Themes", "bumpversion", "ghp-import", "pytest", "pytest-mock", "sphinx"]
+Babel = ">=2.12"
+Flask = ">=2.0"
+Jinja2 = ">=3.1"
+pytz = ">=2022.7"
 
 [[package]]
 name = "flask-login"
@@ -1167,33 +1166,38 @@ Werkzeug = ">=1.0.1"
 
 [[package]]
 name = "flask-mail"
-version = "0.9.1"
+version = "0.10.0"
 description = "Flask extension for sending email"
 optional = false
-python-versions = "*"
+python-versions = ">=3.8"
 files = [
-    {file = "Flask-Mail-0.9.1.tar.gz", hash = "sha256:22e5eb9a940bf407bcf30410ecc3708f3c56cc44b29c34e1726fe85006935f41"},
+    {file = "flask_mail-0.10.0-py3-none-any.whl", hash = "sha256:a451e490931bb3441d9b11ebab6812a16bfa81855792ae1bf9c1e1e22c4e51e7"},
+    {file = "flask_mail-0.10.0.tar.gz", hash = "sha256:44083e7b02bbcce792209c06252f8569dd5a325a7aaa76afe7330422bd97881d"},
 ]
 
 [package.dependencies]
 blinker = "*"
-Flask = "*"
+flask = "*"
 
 [[package]]
 name = "flask-migrate"
-version = "2.7.0"
-description = "SQLAlchemy database migrations for Flask applications using Alembic"
+version = "4.1.0"
+description = "SQLAlchemy database migrations for Flask applications using Alembic."
 optional = false
-python-versions = "*"
+python-versions = ">=3.6"
 files = [
-    {file = "Flask-Migrate-2.7.0.tar.gz", hash = "sha256:ae2f05671588762dd83a21d8b18c51fe355e86783e24594995ff8d7380dffe38"},
-    {file = "Flask_Migrate-2.7.0-py2.py3-none-any.whl", hash = "sha256:26871836a4e46d2d590cf8e558c6d60039e1c003079b240689d845726b6b57c0"},
+    {file = "Flask_Migrate-4.1.0-py3-none-any.whl", hash = "sha256:24d8051af161782e0743af1b04a152d007bad9772b2bca67b7ec1e8ceeb3910d"},
+    {file = "flask_migrate-4.1.0.tar.gz", hash = "sha256:1a336b06eb2c3ace005f5f2ded8641d534c18798d64061f6ff11f79e1434126d"},
 ]
 
 [package.dependencies]
-alembic = ">=0.7"
+alembic = ">=1.9.0"
 Flask = ">=0.9"
 Flask-SQLAlchemy = ">=1.0"
+
+[package.extras]
+dev = ["flake8", "pytest", "tox"]
+docs = ["sphinx"]
 
 [[package]]
 name = "flask-principal"
@@ -1211,45 +1215,47 @@ Flask = "*"
 
 [[package]]
 name = "flask-security-too"
-version = "4.1.6"
-description = "Simple security for Flask apps."
+version = "5.5.2"
+description = "Quickly add security features to your Flask application."
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.9"
 files = [
-    {file = "Flask-Security-Too-4.1.6.tar.gz", hash = "sha256:56895ee5de2f4f7bc995e7246527e3d769bfa9590d2a96b41dacd85be1eec6ce"},
-    {file = "Flask_Security_Too-4.1.6-py2.py3-none-any.whl", hash = "sha256:817ec9a86b11cc9b10a2c43a03adb06cc508f39e9367511eba5579f821c7780d"},
+    {file = "flask_security_too-5.5.2-py3-none-any.whl", hash = "sha256:393fb9b5c03ebc14f8c3500af4691c881ba34599a74ccbc8a2b2dc4f51071585"},
+    {file = "flask_security_too-5.5.2.tar.gz", hash = "sha256:c697289fee71efb16223ee4d2632e113c311840fe32fe51e38f7a02ddc8637c3"},
 ]
 
 [package.dependencies]
-blinker = ">=1.4"
-email-validator = ">=1.1.1"
-Flask = ">=1.1.1,<2.3"
-Flask-Login = ">=0.4.1"
+email-validator = ">=2.0.0"
+Flask = ">=3.0.0"
+Flask-Login = ">=0.6.3"
 Flask-Principal = ">=0.4.0"
-Flask-WTF = ">=0.14.3"
-itsdangerous = ">=1.1.0"
-passlib = ">=1.7.2"
+Flask-WTF = ">=1.1.2"
+importlib_resources = ">=5.10.0"
+markupsafe = ">=2.1.0"
+passlib = ">=1.7.4"
+wtforms = ">=3.0.0"
 
 [package.extras]
-babel = ["babel (>=2.7.0)", "flask-babel (>=2.0.0)"]
-common = ["bcrypt (>=3.1.5)", "bleach (>=3.3.1)", "flask-mail (>=0.9.1)"]
-fsqla = ["flask-sqlalchemy (>=2.4.4)", "sqlalchemy (>=1.3.6)", "sqlalchemy-utils (>=0.34.1)"]
-mfa = ["cryptography (>=3.0.0)", "phonenumberslite (>=8.11.1)", "pyqrcode (>=1.2)"]
+babel = ["babel (>=2.12.1)", "flask_babel (>=3.1.0)"]
+common = ["argon2_cffi (>=21.3.0)", "bcrypt (>=4.0.1)", "bleach (>=6.0.0)", "flask_mailman (>=0.3.0)"]
+fsqla = ["flask_sqlalchemy (>=3.1.0)", "sqlalchemy (>=2.0.18)", "sqlalchemy-utils (>=0.41.1)"]
+low = ["Flask (==3.0.0)", "Flask-Babel (==3.1.0)", "Flask-Login (==0.6.3)", "Flask-Mailman (==0.3.0)", "Flask-SQLAlchemy (==3.1.0)", "Flask-SQLAlchemy-Lite (==0.1.0)", "Flask-WTF (==1.1.2)", "argon2_cffi (==21.3.0)", "authlib (==1.2.0)", "babel (==2.12.1)", "bcrypt (==4.0.1)", "bleach (==6.0.0)", "freezegun", "itsdangerous (==2.1.2)", "jinja2 (==3.1.2)", "markupsafe (==2.1.2)", "mongoengine (==0.27.0)", "mongomock (==4.1.2)", "peewee (==3.16.2)", "phonenumberslite (==8.13.11)", "pony (==0.7.16)", "qrcode (==7.4.2)", "requests", "setuptools", "sqlalchemy (==2.0.18)", "sqlalchemy-utils (==0.41.1)", "webauthn (==2.0.0)", "werkzeug (==3.0.1)", "zxcvbn (==4.4.28)"]
+mfa = ["cryptography (>=40.0.2)", "phonenumberslite (>=8.13.11)", "qrcode (>=7.4.2)", "webauthn (>=2.0.0)"]
 
 [[package]]
 name = "flask-sqlalchemy"
-version = "2.5.1"
-description = "Adds SQLAlchemy support to your Flask application."
+version = "3.0.5"
+description = "Add SQLAlchemy support to your Flask application."
 optional = false
-python-versions = ">= 2.7, != 3.0.*, != 3.1.*, != 3.2.*, != 3.3.*"
+python-versions = ">=3.7"
 files = [
-    {file = "Flask-SQLAlchemy-2.5.1.tar.gz", hash = "sha256:2bda44b43e7cacb15d4e05ff3cc1f8bc97936cc464623424102bfc2c35e95912"},
-    {file = "Flask_SQLAlchemy-2.5.1-py2.py3-none-any.whl", hash = "sha256:f12c3d4cc5cc7fdcc148b9527ea05671718c3ea45d50c7e732cceb33f574b390"},
+    {file = "flask_sqlalchemy-3.0.5-py3-none-any.whl", hash = "sha256:cabb6600ddd819a9f859f36515bb1bd8e7dbf30206cc679d2b081dff9e383283"},
+    {file = "flask_sqlalchemy-3.0.5.tar.gz", hash = "sha256:c5765e58ca145401b52106c0f46178569243c5da25556be2c231ecc60867c5b1"},
 ]
 
 [package.dependencies]
-Flask = ">=0.10"
-SQLAlchemy = ">=0.8.0"
+flask = ">=2.2.5"
+sqlalchemy = ">=1.4.18"
 
 [[package]]
 name = "flask-wtf"
@@ -1421,6 +1427,25 @@ files = [
 
 [package.extras]
 all = ["coverage (>=7.10.0)", "hypothesis (>=6.141.1)", "mypy (>=1.11.2)", "pytest (>=8.3.2)", "ruff (>=0.16.0)", "ty (>=0.0.37)"]
+
+[[package]]
+name = "importlib-resources"
+version = "7.1.0"
+description = "Read resources from Python packages"
+optional = false
+python-versions = ">=3.10"
+files = [
+    {file = "importlib_resources-7.1.0-py3-none-any.whl", hash = "sha256:1bd7b48b4088eddb2cd16382150bb515af0bd2c70128194392725f82ad2c96a1"},
+    {file = "importlib_resources-7.1.0.tar.gz", hash = "sha256:0722d4c6212489c530f2a145a34c0a7a3b4721bc96a15fada5930e2a0b760708"},
+]
+
+[package.extras]
+check = ["pytest-checkdocs (>=2.14)", "pytest-ruff (>=0.2.1)"]
+cover = ["pytest-cov"]
+doc = ["furo", "jaraco.packaging (>=9.3)", "jaraco.tidelift (>=1.4)", "rst.linker (>=1.9)", "sphinx (>=3.5)", "sphinx-lint"]
+enabler = ["pytest-enabler (>=3.4)"]
+test = ["jaraco.test (>=5.4)", "pytest (>=6,!=8.1.*)", "zipp (>=3.17)"]
+type = ["pytest-mypy (>=1.0.1)"]
 
 [[package]]
 name = "iniconfig"
@@ -2927,23 +2952,23 @@ files = [
 
 [[package]]
 name = "setuptools"
-version = "81.0.0"
-description = "Easily download, build, install, upgrade, and uninstall Python packages"
+version = "84.0.0"
+description = "Most extensible Python build backend with support for C/C++ extension modules"
 optional = false
-python-versions = ">=3.9"
+python-versions = ">=3.10"
 files = [
-    {file = "setuptools-81.0.0-py3-none-any.whl", hash = "sha256:fdd925d5c5d9f62e4b74b30d6dd7828ce236fd6ed998a08d81de62ce5a6310d6"},
-    {file = "setuptools-81.0.0.tar.gz", hash = "sha256:487b53915f52501f0a79ccfd0c02c165ffe06631443a886740b91af4b7a5845a"},
+    {file = "setuptools-84.0.0-py3-none-any.whl", hash = "sha256:51a52592b3b99e102b609654876bd65f19f999935166d1352678931132b0c670"},
+    {file = "setuptools-84.0.0.tar.gz", hash = "sha256:f4695c21257f0d9b537ec2692c941d02ee143b7cc1276941349a546573b2ef73"},
 ]
 
 [package.extras]
-check = ["pytest-checkdocs (>=2.4)", "pytest-ruff (>=0.2.1)", "ruff (>=0.13.0)"]
-core = ["importlib_metadata (>=6)", "jaraco.functools (>=4)", "jaraco.text (>=3.7)", "more_itertools", "more_itertools (>=8.8)", "packaging (>=24.2)", "platformdirs (>=4.2.2)", "tomli (>=2.0.1)", "wheel (>=0.43.0)"]
+check = ["pytest-checkdocs (>=2.14)", "pytest-ruff (>=0.2.1)", "ruff (>=0.13.0)"]
+core = ["importlib_metadata (>=6)", "jaraco.functools (>=4)", "jaraco.text (>=3.7)", "more_itertools", "more_itertools (>=8.8)", "packaging (>=24.2)", "tomli (>=2.0.1)", "wheel (>=0.43.0)"]
 cover = ["pytest-cov"]
 doc = ["furo", "jaraco.packaging (>=9.3)", "jaraco.tidelift (>=1.4)", "pygments-github-lexers (==0.0.5)", "pyproject-hooks (!=1.1)", "rst.linker (>=1.9)", "sphinx (>=3.5)", "sphinx-favicon", "sphinx-inline-tabs", "sphinx-lint", "sphinx-notfound-page (>=1,<2)", "sphinx-reredirects", "sphinxcontrib-towncrier", "towncrier (<24.7)"]
-enabler = ["pytest-enabler (>=2.2)"]
+enabler = ["pytest-enabler (>=3.4)"]
 test = ["build[virtualenv] (>=1.0.3)", "filelock (>=3.4.0)", "ini2toml[lite] (>=0.14)", "jaraco.develop (>=7.21)", "jaraco.envs (>=2.2)", "jaraco.path (>=3.7.2)", "jaraco.test (>=5.5)", "packaging (>=24.2)", "pip (>=19.1)", "pyproject-hooks (!=1.1)", "pytest (>=6,!=8.1.*)", "pytest-home (>=0.5)", "pytest-perf", "pytest-subprocess", "pytest-timeout", "pytest-xdist (>=3)", "tomli-w (>=1.0.0)", "virtualenv (>=13.0.0)", "wheel (>=0.44.0)"]
-type = ["importlib_metadata (>=7.0.2)", "jaraco.develop (>=7.21)", "mypy (==1.18.*)", "pytest-mypy"]
+type = ["importlib_metadata (>=7.0.2)", "jaraco.develop (>=7.21)", "mypy (==1.18.*)", "pytest-mypy (>=1.0.1)"]
 
 [[package]]
 name = "six"
@@ -3468,17 +3493,17 @@ files = [
 
 [[package]]
 name = "werkzeug"
-version = "2.3.8"
+version = "3.1.8"
 description = "The comprehensive WSGI web application library."
 optional = false
-python-versions = ">=3.8"
+python-versions = ">=3.9"
 files = [
-    {file = "werkzeug-2.3.8-py3-none-any.whl", hash = "sha256:bba1f19f8ec89d4d607a3bd62f1904bd2e609472d93cd85e9d4e178f472c3748"},
-    {file = "werkzeug-2.3.8.tar.gz", hash = "sha256:554b257c74bbeb7a0d254160a4f8ffe185243f52a52035060b761ca62d977f03"},
+    {file = "werkzeug-3.1.8-py3-none-any.whl", hash = "sha256:63a77fb8892bf28ebc3178683445222aa500e48ebad5ec77b0ad80f8726b1f50"},
+    {file = "werkzeug-3.1.8.tar.gz", hash = "sha256:9bad61a4268dac112f1c5cd4630a56ede601b6ed420300677a869083d70a4c44"},
 ]
 
 [package.dependencies]
-MarkupSafe = ">=2.1.1"
+markupsafe = ">=2.1.1"
 
 [package.extras]
 watchdog = ["watchdog (>=2.3)"]
@@ -3533,4 +3558,4 @@ test = ["pytest", "pytest-cov"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.11"
-content-hash = "9cec50d0fa8f10e6a8409b2bfbc4d0fb2e75b3cb0e1819a8ce67870dc4aa11db"
+content-hash = "9c45ed6a596a914e72f90ebc2b8bd675b3c468a48987518267b4fc7c86c4e6eb"

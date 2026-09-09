@@ -26,11 +26,11 @@ def create_app(config_name=None):
         config_name = os.getenv("FLASK_CONFIG", "development")
 
     app = Flask("application")
-
-    if config_name == "test":
-        app.env = "test"
-    config = import_config(app.env)
+    config = import_config(config_name)
     app.config.from_object(config)  # 加载配置模块
+    # Flask 3 reads these from the JSON provider, not JSON_AS_ASCII / JSON_SORT_KEYS.
+    app.json.ensure_ascii = False
+    app.json.sort_keys = False
 
     register_extensions(app)
     register_blueprints(app)
@@ -41,10 +41,14 @@ def create_app(config_name=None):
     return app
 
 
+def get_locale():
+    return request.accept_languages.best_match(LANGUAGES.keys())
+
+
 def register_extensions(app):
     db.init_app(app)
     migrate.init_app(app, db)
-    babel.init_app(app)
+    babel.init_app(app, locale_selector=get_locale)
     swagger.init_app(app)
     flask_wtf.CSRFProtect(app)
     # Setup Flask-Security
@@ -70,8 +74,3 @@ def register_api_code(app):
     from application.extensions import apicode
 
     apicode.init_app(app.config)
-
-
-@babel.localeselector
-def get_locale():
-    return request.accept_languages.best_match(LANGUAGES.keys())

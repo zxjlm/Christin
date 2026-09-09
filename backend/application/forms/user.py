@@ -11,7 +11,7 @@ from flask_babel import lazy_gettext
 from flask_security import RegisterForm, LoginForm
 from flask_security.forms import password_required, email_required
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
-from wtforms.fields.html5 import EmailField
+from wtforms.fields import EmailField
 from wtforms.validators import DataRequired
 
 from application.models.authbase import User
