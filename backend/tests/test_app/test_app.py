@@ -60,9 +60,13 @@ def test_login_logout(client):
     """
     rv = login(client, 'test@me.com', 'test')
     assert rv.status_code == 200 and rv.json['meta']['code'] == 200
-    # 重复登录
+    # 重复登录 (flask-security-too 5.x returns response.errors as a list)
     rv = login(client, 'test@me.com', 'test')
-    assert rv.json['response']['error'] == 'You can only access this endpoint when not logged in.'
+    response = rv.json['response']
+    error = response.get('error') or response.get('errors')
+    if isinstance(error, list):
+        error = error[0]
+    assert error == 'You can only access this endpoint when not logged in.'
     # 登出
     rv = logout(client)
     assert rv.status_code == 302

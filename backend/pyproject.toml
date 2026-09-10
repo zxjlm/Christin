@@ -8,25 +8,27 @@ authors = ["harumonia <zxjlm233@gmail.com>"]
 # Python 3.10+ is required for patched Pillow (>=12.3), cryptography (>=50),
 # and setuptools (>=83) releases that close current Dependabot High alerts.
 python = ">=3.10,<3.11"
-Flask = "^2.2.5"
-Flask-Login = "^0.6.2"
-Flask-SQLAlchemy = "^2.4.4"
-Flask-Migrate = "^2.5.3"
+Flask = "^3.0.3"
+Flask-Login = "^0.6.3"
+# 3.0.x stays on SQLAlchemy 1.4; 3.1+ requires SQLAlchemy 2.0.
+Flask-SQLAlchemy = ">=3.0.5,<3.1"
+Flask-Migrate = "^4.0.0"
 jieba = "^0.42.1"
 spacy = "^2.3.5"
 loguru = "^0.5.3"
 numpy = "^1.21.0"
 py2neo = "^2021.2.3"
 celery = "^5.2.2"
-SQLAlchemy = "^1.3.22"
+SQLAlchemy = "^1.4.18"
 cymysql = "^0.9.15"
-flask-security-too = "^4.1.0"
+# 4.x requires Flask<2.3, which cannot use Werkzeug 3.x (High CVEs).
+flask-security-too = ">=5.4.3,<5.6"
 redis = "^3.5.3"
-flask-mail = "^0.9.1"
+flask-mail = "^0.10.0"
 pandas = "^1.2.2"
 xlrd = "^2.0.1"
 openpyxl = "^3.0.6"
-flask-babel = "^2.0.0"
+flask-babel = "^4.0.0"
 flasgger = "^0.9.5"
 PyQRCode = "^1.2.1"
 pycryptodome = "^3.10.1"
@@ -39,9 +41,12 @@ Mako = ">=1.2.2"
 certifi = ">=2022.12.07"
 cryptography = ">=50.0.1"
 Pillow = ">=12.3.0"
-# <82 keeps pkg_resources for flask-security-too 4.x; 78.1.1+ fixes CVE-2025-47273
-setuptools = ">=78.1.1,<82"
-Werkzeug = ">=2.2.3,<3.0"
+# passlib (flask-security-too 5.5) still imports pkg_resources; setuptools 81
+# warns it will drop that API. 78.1.1+ fixes CVE-2025-47273.
+setuptools = ">=78.1.1,<81"
+# 3.0.3+ CVE-2024-34069 (debugger RCE); 3.0.6+ CVE-2024-49767 (multipart DoS);
+# 3.1.6+ Windows device-name path issues (CVE-2025-66221 / CVE-2026-27199).
+Werkzeug = ">=3.1.6"
 requests = ">=2.31.0"
 pywin32 = {version = ">=304", markers = "sys_platform == 'win32'"}
 

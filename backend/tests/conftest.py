@@ -19,30 +19,32 @@ from application.models import User, Labels, Role
 def client():
     app = create_app('test')
 
-    # app.config["TESTING"] = True
+    # Seed while an app context is pushed, then drop it before using the
+    # test client. Flask 3 / Werkzeug 3.1 ignore session cookies if a request
+    # is issued while an extra app context is still on the stack.
+    with app.app_context():
+        db.create_all()
+
+        role1 = Role(name='admin', description='管理员')
+        role2 = Role(name='user', description='用户')
+        db.session.add(role1)
+        db.session.add(role2)
+        user1 = User(name='zxj', sex='M', email='test@me.com', password='test', active=True,
+                     fs_uniquifier='e67fa8573c2d42198aeed56d019a2032')
+        user2 = User(name='normal_user', sex='M', email='user@me.com', password='test', active=True,
+                     fs_uniquifier='e67fa8573c2d42198aeed56d019a2031')
+        user1.roles = [role1]
+        user2.roles = [role2]
+        db.session.add(user1)
+        db.session.add(user2)
+        label1 = Labels(s_label='ZZ', s_name='ZZ')
+        label2 = Labels(s_label='CD', s_name='CD')
+        db.session.add(label1)
+        db.session.add(label2)
+        db.session.commit()
+
     with app.test_client() as client:
-        with app.app_context():
-            db.create_all()
-
-            role1 = Role(name='admin', description='管理员')
-            role2 = Role(name='user', description='用户')
-            db.session.add(role1)
-            db.session.add(role2)
-            user1 = User(name='zxj', sex='M', email='test@me.com', password='test', active=True,
-                         fs_uniquifier='e67fa8573c2d42198aeed56d019a2032')
-            user2 = User(name='normal_user', sex='M', email='user@me.com', password='test', active=True,
-                         fs_uniquifier='e67fa8573c2d42198aeed56d019a2031')
-            user1.roles = [role1]
-            user2.roles = [role2]
-            db.session.add(user1)
-            db.session.add(user2)
-            label1 = Labels(s_label='ZZ', s_name='ZZ')
-            label2 = Labels(s_label='CD', s_name='CD')
-            db.session.add(label1)
-            db.session.add(label2)
-            db.session.commit()
-
-            yield client
+        yield client
 
 
 class AuthActions:

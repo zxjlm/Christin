@@ -11,7 +11,7 @@
 # from application.models import *
 import importlib
 
-from flask_sqlalchemy import Pagination
+from flask_sqlalchemy.pagination import Pagination
 
 from application.models.herb import Herb
 from application.models.prescription import Prescription
@@ -51,10 +51,12 @@ def query_data_from_models(
         condition = {}
     if need_status:
         res = cls.query.filter_by(i_status=1, **condition).paginate(
-            page, int(per_page), error_out=False
+            page=page, per_page=int(per_page), error_out=False
         )
     else:
-        res = cls.query.paginate(page, int(per_page), error_out=False)
+        res = cls.query.paginate(
+            page=page, per_page=int(per_page), error_out=False
+        )
     return res
 
 
@@ -87,7 +89,7 @@ def data_query(post_data: dict):
             )
         else:
             res = cls.query.filter_by(s_name=search, i_status=1).paginate(
-                int(page), int(per_page), error_out=False
+                page=int(page), per_page=int(per_page), error_out=False
             )
         ret = {
             "draw": int(draw),
